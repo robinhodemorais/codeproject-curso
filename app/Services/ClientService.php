@@ -47,7 +47,7 @@ class ClientService {
     public function update(array $data, $id){
 
         try{
-            $this->validator->with($data->passesOrFail());
+            $this->validator->with($data)->passesOrFail();
             return $this->repository->update($data, $id);
         } catch (ValidationException $e) {
 
