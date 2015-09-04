@@ -49,11 +49,11 @@ class ClientService {
         try{
             $this->validator->with($data)->passesOrFail();
             return $this->repository->update($data, $id);
-        } catch (ValidationException $e) {
+        } catch (ValidatorException $e) {
 
             return [
                 'error' => true,
-                'message' => $e->geMessageBag()
+                'message' => $e->getMessageBag()
             ];
         }
 

@@ -47,7 +47,7 @@ class ProjectNoteService {
         try{
             $this->validator->with($data)->passesOrFail();
             return $this->repository->update($data, $id);
-        } catch (ValidationException $e) {
+        } catch (ValidatorException $e) {
 
             return [
                 'error' => true,
