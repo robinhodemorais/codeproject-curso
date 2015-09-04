@@ -12,5 +12,6 @@ class UserTableSeeder extends Seeder
     public function run()
     {
         factory(\CodeProject\Entities\User::class,10)->create();
+        factory(\CodeProject\Entities\User::class,10)->create();
     }
 }
