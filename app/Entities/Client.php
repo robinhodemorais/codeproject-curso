@@ -11,6 +11,7 @@ class Client extends Model
         'responsible',
         'email',
         'phone',
+        'address',
         'obs'
     ];
 }

@@ -8,10 +8,7 @@
 
 namespace CodeProject\Services;
 
-
-use CodeProject\Repositories\ClientRepository;
 use CodeProject\Repositories\ProjectRepository;
-use CodeProject\Validators\ClientValidator;
 use CodeProject\Validators\ProjectValidator;
 use Prettus\Validator\Exceptions\ValidatorException;
 
@@ -55,9 +52,19 @@ class ProjectService {
 
             return [
                 'error' => true,
-                'message' => $e->geMessageBag()
+                'message' => $e->getMessageBag()
             ];
         }
 
+
     }
+
+   // public function show(){
+
+        //return $this->repository->with(['owner_id', 'client'])->all();
+      //  return $this->repository->with(['owner_id', 'client_id'])->all();
+
+
+
+  //  }
 }

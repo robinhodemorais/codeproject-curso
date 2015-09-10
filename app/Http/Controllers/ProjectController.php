@@ -10,17 +10,17 @@ class ProjectController extends Controller
 {
 
     /**
-     * @var ClientRepository
+     * @var ProjectRepository
      */
     private $repository;
     /**
-     * @var ClientService
+     * @var ProjectService
      */
     private $service;
 
     /**
-     * @param ClientRepository $repository
-     * @param ClientService $service
+     * @param ProjectRepository $repository
+     * @param ProjectService $service
      */
     public function __construct(ProjectRepository $repository, ProjectService $service){
         $this->repository = $repository;
@@ -31,10 +31,10 @@ class ProjectController extends Controller
      *
      * @return Response
      */
-    public function index(ProjectRepository $repository)
+    public function index(Request $request)
     {
-        return $this->repository->all();
-    }
+       return $this->repository->all();
+}
 
 
     /**
@@ -46,7 +46,8 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
 
-        return $this->service->create($request->all());
+       // return $this->service->create($request->all());
+        return $this->repository->with(['owner_id', 'client_id'])->all();
     }
 
     /**
@@ -58,6 +59,8 @@ class ProjectController extends Controller
     public function show($id)
     {
         return $this->repository->find($id);
+        //return $this->repository->with(['owner_id', 'client_id'])->find($id);
+
 
     }
 
@@ -72,7 +75,7 @@ class ProjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //Client::find($id)->update($request->all());
+
         return $this->service->update($request->all(),$id);
     }
 
