@@ -31,10 +31,10 @@ class ProjectController extends Controller
      *
      * @return Response
      */
-    public function index(Request $request)
-    {
-       return $this->repository->all();
-}
+    public function index(Request $request)    {
+      // return $this->repository->all();
+        return $this->service->all();
+    }
 
 
     /**
@@ -46,8 +46,8 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
 
-       // return $this->service->create($request->all());
-        return $this->repository->with(['owner_id', 'client_id'])->all();
+        return $this->service->create($request->all());
+      //  return $this->repository->with(['owner_id', 'client_id'])->all();
     }
 
     /**
@@ -58,7 +58,8 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        return $this->repository->find($id);
+        return $this->service->read($id);
+        //return $this->repository->find($id);
         //return $this->repository->with(['owner_id', 'client_id'])->find($id);
 
 

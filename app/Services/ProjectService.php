@@ -67,4 +67,18 @@ class ProjectService {
 
 
   //  }
+
+    public function all()
+    {
+        return response()->json($this->repository->with(['owner_id', 'client_id'])->all());
+    }
+
+    public function read($id)
+    {
+        try {
+            return response()->json($this->repository->with(['owner_id', 'client_id'])->find($id));
+        } catch(ModelNotFoundException $ex) {
+            return $this->notFound($id);
+        }
+    }
 }
