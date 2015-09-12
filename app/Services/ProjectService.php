@@ -8,6 +8,7 @@
 
 namespace CodeProject\Services;
 
+
 use CodeProject\Repositories\ProjectRepository;
 use CodeProject\Validators\ProjectValidator;
 use Prettus\Validator\Exceptions\ValidatorException;
@@ -56,29 +57,7 @@ class ProjectService {
             ];
         }
 
-
     }
 
-   // public function show(){
 
-        //return $this->repository->with(['owner_id', 'client'])->all();
-      //  return $this->repository->with(['owner_id', 'client_id'])->all();
-
-
-
-  //  }
-
-    public function all()
-    {
-        return response()->json($this->repository->with(['owner_id', 'client_id'])->all());
-    }
-
-    public function read($id)
-    {
-        try {
-            return response()->json($this->repository->with(['owner_id', 'client_id'])->find($id));
-        } catch(ModelNotFoundException $ex) {
-            return $this->notFound($id);
-        }
-    }
 }

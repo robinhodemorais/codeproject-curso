@@ -26,9 +26,11 @@ class ClientController extends Controller
         $this->repository = $repository;
         $this->service = $service;
     }
+
     /**
      * Display a listing of the resource.
      *
+     * @param ClientRepository $repository
      * @return Response
      */
     public function index(ClientRepository $repository)
