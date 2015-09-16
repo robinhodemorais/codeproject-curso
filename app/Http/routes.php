@@ -23,13 +23,13 @@ Route::post('oauth/access_token', function(){
 
     Route::resource('client','ClientController', ['except' => ['create','edit']]);
 
-    /*
+
     Route::get('client', ['middleware'=>'oauth','uses'=>'ClientController@index']);
     Route::post('client', 'ClientController@store');
     Route::get('client/{id}', 'ClientController@show');
     Route::delete('client/{id}', 'ClientController@destroy');
     Route::put('client/{id}', 'ClientController@update');
-    */
+
 /*
     Route::group(['prefix','project'], function () {
 
@@ -42,8 +42,8 @@ Route::post('oauth/access_token', function(){
         Route::delete('note/{id}', 'ProjectNoteController@destroy');
     });
 
-*/
 
+*/
 
     Route::get('project', 'ProjectController@index');
     Route::post('project', 'ProjectController@store');
