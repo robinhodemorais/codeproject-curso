@@ -28,17 +28,17 @@ class ProjectService {
 
 
     public function all(){
-        //return response()->json($this->repository->with(['owner', 'client'])->all());
-        return $this->repository->with(['owner', 'client'])->all();
+        return response()->json($this->repository->with(['owner', 'client'])->all());
+        //return $this->repository->with(['owner', 'client'])->all();
     }
 
     public function read($id) {
-        try {
-           // return response()->json($this->repository->with(['owner', 'client'])->find($id));
-            return $this->repository->with(['owner', 'client'])->find($id);
-        } catch(ModelNotFoundException $ex) {
-            return $this->notFound($id);
-        }
+       //try {
+           return response()->json($this->repository->with(['owner', 'client'])->find($id));
+          //  return $this->repository->with(['owner', 'client'])->find($id);
+       /* } catch(ModelNotFoundException $ex) {
+            return response()->json($this->notFound($id));
+        }*/
     }
 
 
@@ -74,6 +74,24 @@ class ProjectService {
         }
 
     }
+
+
+    public function delete($id){
+
+        try{
+            return response()->json($this->repository->delete($id));
+        } catch (ValidatorException $e) {
+
+           /* return [
+                'error' => true,
+                'message' => $e->getMessageBag()
+            ];
+*/
+            return response()->json($e->getMessageBag());
+        }
+
+    }
+
 
 
 }

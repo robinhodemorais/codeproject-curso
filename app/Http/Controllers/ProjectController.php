@@ -4,6 +4,7 @@ namespace CodeProject\Http\Controllers;
 
 use CodeProject\Repositories\ProjectRepository;
 use CodeProject\Services\ProjectService;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -59,7 +60,11 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        return $this->service->read($id);
+        try {
+            return $this->service->read($id);
+        } catch (ModelNotFoundException $e) {
+            return response()->json($e->getMessage());
+        }
 
     }
 
@@ -74,8 +79,11 @@ class ProjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //Client::find($id)->update($request->all());
-        return $this->service->update($request->all(),$id);
+        try {
+            return $this->service->update($request->all(),$id);
+        } catch (ModelNotFoundException $e) {
+            return response()->json($e->getMessage());
+        }
     }
 
     /**
@@ -86,7 +94,19 @@ class ProjectController extends Controller
      */
     public function destroy($id)
     {
-       // Client::find($id)->delete();
-       return $this->service->delete($id);
+
+        //return $this->service->delete($id);
+
+        try {
+            $this->service->delete($id);
+            return response()->json(['error' => false,
+                                     'message' => [
+                                         'removeMember' => "Projeto removido{$id}"
+                                     ]]);
+        } catch (ModelNotFoundException $e) {
+            return response()->json($this->noFound($id));
+        }
+
+
     }
 }
