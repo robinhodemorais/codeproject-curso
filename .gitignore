@@ -2,4 +2,7 @@
 /node_modules
 Homestead.yaml
 Homestead.json
+VagrantFile
+./idea
+./vagrant
 .env
