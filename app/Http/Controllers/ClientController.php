@@ -33,9 +33,9 @@ class ClientController extends Controller
      * @param ClientRepository $repository
      * @return Response
      */
-    public function index(ClientRepository $repository)
+    public function index()
     {
-        return $this->repository->all();
+        return $this->service->all();
     }
 
 
@@ -59,7 +59,7 @@ class ClientController extends Controller
      */
     public function show($id)
     {
-        return $this->repository->find($id);
+        return $this->service->read($id);
 
     }
 
@@ -87,6 +87,6 @@ class ClientController extends Controller
     public function destroy($id)
     {
        // Client::find($id)->delete();
-       return $this->repository->delete($id);
+       return $this->service->delete($id);
     }
 }

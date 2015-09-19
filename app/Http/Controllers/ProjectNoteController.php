@@ -35,7 +35,9 @@ class ProjectNoteController extends Controller
      */
     public function index($id)
     {
-        return $this->repository->findWhere(['project_id' => $id]);
+        //return $this->repository->findWhere(['project_id' => $id]);
+
+        return $this->service->all($id);
     }
 
 
@@ -54,12 +56,14 @@ class ProjectNoteController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
+     * @param $noteid
      * @return Response
      */
     public function show($id, $noteid)
     {
-        return $this->repository->findWhere(['project_id'=>$id, 'id'=>$noteid]);
+        //return $this->repository->findWhere(['project_id'=>$id, 'id'=>$noteid]);
+        return $this->service->read($id,$noteid);
 
     }
 
@@ -85,6 +89,6 @@ class ProjectNoteController extends Controller
      */
     public function destroy($id)
     {
-       return $this->repository->delete($id);
+       return $this->service->delete($id);
     }
 }

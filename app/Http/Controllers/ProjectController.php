@@ -4,7 +4,6 @@ namespace CodeProject\Http\Controllers;
 
 use CodeProject\Repositories\ProjectRepository;
 use CodeProject\Services\ProjectService;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -46,9 +45,7 @@ class ProjectController extends Controller
      * @param  Request  $request
      * @return Response
      */
-    public function store(Request $request)
-    {
-
+    public function store(Request $request) {
         return $this->service->create($request->all());
     }
 
@@ -58,14 +55,8 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function show($id)
-    {
-        try {
-            return $this->service->read($id);
-        } catch (ModelNotFoundException $e) {
-            return response()->json($e->getMessage());
-        }
-
+    public function show($id) {
+         return $this->service->read($id);
     }
 
 
@@ -77,13 +68,8 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update(Request $request, $id)
-    {
-        try {
+    public function update(Request $request, $id){
             return $this->service->update($request->all(),$id);
-        } catch (ModelNotFoundException $e) {
-            return response()->json($e->getMessage());
-        }
     }
 
     /**
@@ -92,21 +78,9 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id)  {
 
-        //return $this->service->delete($id);
-
-        try {
-            $this->service->delete($id);
-            return response()->json(['error' => false,
-                                     'message' => [
-                                         'removeMember' => "Projeto removido{$id}"
-                                     ]]);
-        } catch (ModelNotFoundException $e) {
-            return response()->json($this->noFound($id));
-        }
-
+        return $this->service->delete($id);
 
     }
 }
