@@ -32,5 +32,8 @@ class Project extends Model implements Transformable
     public function notes(){
         return $this->hasMany(ProjectNote::class);
     }
-
+/*
+    public function tasks(){
+        return $this->belongsTo(ProjectTask::class);
+    }*/
 }
