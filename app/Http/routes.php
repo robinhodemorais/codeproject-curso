@@ -1,30 +1,27 @@
-<?php
+ <?php
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the controller to call when that URI is requested.
-|
-*/
+    /*
+    |--------------------------------------------------------------------------
+    | Application Routes
+    |--------------------------------------------------------------------------
+    |
+    | Here is where you can register all of the routes for an application.
+    | It's a breeze. Simply tell Laravel the URIs it should respond to
+    | and give it the controller to call when that URI is requested.
+    |
+    */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+    Route::get('/', function () {
+        return view('welcome');
+    });
 
-Route::post('oauth/access_token', function(){
-   return Response::json(Authorizer::issueAccessToken());
-});
-
-//Route::group(['middleware'=>'oauth'], function(){
+    Route::post('oauth/access_token', function(){
+        return Response::json(Authorizer::issueAccessToken());
+    });
 
     Route::resource('client','ClientController', ['except' => ['create','edit']]);
 
 
-   // Route::get('client', ['middleware'=>'oauth','uses'=>'ClientController@index']);
     Route::get('client', 'ClientController@index');
     Route::post('client', 'ClientController@store');
     Route::get('client/{id}', 'ClientController@show');
@@ -32,16 +29,17 @@ Route::post('oauth/access_token', function(){
     Route::put('client/{id}', 'ClientController@update');
 
 
-    //Route::group(['prefix','project'], function () {
+    Route::get('project/{id}/note', 'ProjectNoteController@index');
+    Route::post('project/{id}/note', 'ProjectNoteController@store');
+    Route::get('project/{id}/note/{noteId}', 'ProjectNoteController@show');
+    Route::put('project/{id}/note/{noteId}', 'ProjectNoteController@update');
+    Route::delete('project/{id}/note/{noteId}', 'ProjectNoteController@destroy');
 
-     //   Route::resource('','ProjectNoteController', ['except' => ['create','edit']]);
-
-        Route::get('project/{id}/note', 'ProjectNoteController@index');
-        Route::post('project/{id}/note', 'ProjectNoteController@store');
-        Route::get('project/{id}/note/{noteId}', 'ProjectNoteController@show');
-        Route::put('project/{id}/note/{noteId}', 'ProjectNoteController@update');
-        Route::delete('project/{id}/note/{noteId}', 'ProjectNoteController@destroy');
-   // });
+    Route::get('project/{id}/tasks', 'ProjectTasksController@index');
+    Route::post('project/{id}/tasks', 'ProjectTasksController@store');
+    Route::get('project/{id}/tasks/{tasksId}', 'ProjectTasksController@show');
+    Route::put('project/{id}/tasks/{tasksId}', 'ProjectTasksController@update');
+    Route::delete('project/{id}/tasks/{tasksId}', 'ProjectTasksController@destroy');
 
     Route::get('project', 'ProjectController@index');
     Route::post('project', 'ProjectController@store');
@@ -50,8 +48,4 @@ Route::post('oauth/access_token', function(){
     Route::put('project/{id}', 'ProjectController@update');
 
 
-
-
-
-//});
 

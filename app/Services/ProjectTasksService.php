@@ -9,75 +9,64 @@
 namespace CodeProject\Services;
 
 
-use CodeProject\Repositories\ProjectRepository;
-use CodeProject\Validators\ProjectValidator;
+use CodeProject\Repositories\ProjectTasksRepository;
+use CodeProject\Validators\ProjectTasksValidator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Prettus\Validator\Exceptions\ValidatorException;
 
 
-class ProjectService
-{
-    /**
-     * @var ProjectRepository
-     */
+class ProjectTasksService {
     protected $repository;
     /**
-     * @var ProjectValidator
+     * @var
      */
     private $validator;
 
-    /**
-     * @param ProjectRepository $repository
-     * @param ProjectValidator $validator
-     */
-    public function __construct(ProjectRepository $repository, ProjectValidator $validator)
-    {
+    public function __construct(ProjectTasksRepository $repository, ProjectTasksValidator $validator){
         $this->repository = $repository;
         $this->validator = $validator;
     }
 
-
-    public function all()
-    {
-        return response()->json($this->repository->with(['owner', 'client'])->all());
+    public function all($id){
+        return response()->json($this->repository->findWhere(['project_id' => $id]));
     }
 
 
-    public function read($id) {
+    public function read($id,$taskid) {
         try {
-            return response()->json($this->repository->with(['owner', 'client'])->find($id));
+            return response()->json($this->repository->findWhere(['project_id'=>$id, 'id'=>$taskid]));
         } catch(ModelNotFoundException $ex) {
             return response()->json([
                 'error' => true,
-                'message' => "Project id {$id} not found"
+                'message' => "ProjectTasks id {$id} not found"
             ]);
         }
     }
 
 
-    public function create(array $data)
-    {
+    public function create(array $data){
 
-        try {
+        try{
             $this->validator->with($data)->passesOrFail();
             return $this->repository->create($data);
         } catch (ValidatorException $e) {
-
             return response()->json([
                 'error' => true,
                 'message' => $e->getMessageBag()
             ]);
         }
 
+
     }
 
-    public function update(array $data, $id)
-    {
-        try {
+
+
+    public function update(array $data, $id){
+
+        try{
             $this->validator->with($data)->passesOrFail();
             return $this->repository->update($data, $id);
         } catch (ValidatorException $e) {
-
             return response()->json([
                 'error' => true,
                 'message' => $e->getMessageBag()
@@ -85,30 +74,29 @@ class ProjectService
         } catch (ModelNotFoundException $e) {
             return response()->json([
                 'error' => true,
-                'message' => "Project id {$id} not found"
+                'message' => "ProjectTasks id {$id} not found"
+            ]);
+        }
+
+
+
+    }
+
+
+
+    public function delete($id){
+
+        try {
+            $this->repository->delete($id);
+            return response()->json(['error' => false,'message' => "ProjectTasks {$id} deleted"]);
+        } catch (ModelNotFoundException $e) {
+            return response()->json([
+                'error' => false,
+                'message' => "ProjectTasks id {$id} not found"
             ]);
         }
 
     }
 
-
-    public function delete($id)
-    {
-        try {
-            $this->repository->delete($id);
-        } catch (ModelNotFoundException $e) {
-
-            try {
-                $this->repository->delete($id);
-                return response()->json(['error' => false,'message' => "Project {$id} deleted"]);
-            } catch (ModelNotFoundException $e) {
-               return response()->json([
-                    'error' => true,
-                    'message' => "Project id {$id} not found"
-                ]);
-            }
-
-        }
-    }
 
 }
