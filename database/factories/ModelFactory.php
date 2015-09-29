@@ -63,10 +63,11 @@ $factory->define(CodeProject\Entities\ProjectTasks::class, function (Faker\Gener
 
     ];
 });
-/*
+
+
 $factory->define(CodeProject\Entities\ProjectMembers::class, function (Faker\Generator $faker) {
     return [
         'project_id' => rand(1,10),
         'user_id' => rand(1,10),
     ];
-});*/
+});

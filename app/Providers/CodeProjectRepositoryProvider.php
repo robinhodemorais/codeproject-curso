@@ -39,9 +39,9 @@ class CodeProjectRepositoryProvider extends ServiceProvider
         $this->app->bind(
             \CodeProject\Repositories\ProjectTasksRepository::class,
             \CodeProject\Repositories\ProjectTasksRepositoryEloquent::class);
-/*
+
         $this->app->bind(
             \CodeProject\Repositories\ProjectMembersRepository::class,
-            \CodeProject\Repositories\ProjectMembersRepositoryEloquent::class);*/
+            \CodeProject\Repositories\ProjectMembersRepositoryEloquent::class);
     }
 }
