@@ -19,7 +19,7 @@ class ProjectTasks extends Model implements Transformable
     ];
 
     public function project(){
-        return $this->hasMany('project');
+        return $this->belongsTo('project');
     }
 
 }

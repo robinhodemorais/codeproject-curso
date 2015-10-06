@@ -17,7 +17,7 @@ class ProjectMembers extends Model implements Transformable
 
 
     public function project(){
-        return $this->hasMany(Project::class);
+        return $this->belongsTo(Project::class);
     }
 
     public function owner(){

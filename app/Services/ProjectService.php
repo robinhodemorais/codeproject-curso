@@ -39,13 +39,13 @@ class ProjectService
 
     public function all()
     {
-        return response()->json($this->repository->with(['owner', 'client'])->all());
+        return response()->json($this->repository->with(['owner', 'client', 'notes', 'members', 'tasks'])->all());
     }
 
 
     public function read($id) {
         try {
-            return response()->json($this->repository->with(['owner', 'client'])->find($id));
+            return response()->json($this->repository->with(['owner', 'client', 'notes', 'members', 'tasks'])->find($id));
         } catch(ModelNotFoundException $ex) {
             return response()->json([
                 'error' => true,
@@ -108,6 +108,81 @@ class ProjectService
                 ]);
             }
 
+        }
+    }
+
+    public function showNotes($id)
+    {
+        try {
+            return response()->json($this->repository->find($id)->notes->all());
+        } catch(ModelNotFoundException $ex) {
+            return $this->notFound($id);
+        }
+    }
+    public function showMembers($id)
+    {
+        try {
+            return response()->json($this->repository->find($id)->members->all());
+        } catch(ModelNotFoundException $ex) {
+            return $this->notFound($id);
+        }
+    }
+    public function addMember($id, $memberId)
+    {
+        try {
+            $this->repository->find($id)->members()->attach($memberId);
+            return response()->json([
+                'error' => false,
+                'message' => [
+                    'addMember' => "Member ID {$memberId} added"
+                ]
+            ]);
+        } catch(ModelNotFoundException $ex) {
+            return $this->notFound($id);
+        }
+    }
+    public function removeMember($id, $memberId)
+    {
+        try {
+            $this->repository->find($id)->members()->detach($memberId);
+            return response()->json([
+                'error' => false,
+                'message' => [
+                    'removeMember' => "Member ID {$memberId} removed"
+                ]
+            ]);
+        } catch(ModelNotFoundException $ex) {
+            return $this->notFound($id);
+        }
+    }
+    public function isMember($id, $memberId)
+    {
+        try {
+            $member = $this->repository->find($id)->members()->find($memberId);
+            if(!$member) {
+                return response()->json([
+                    'error' => true,
+                    'message' => [
+                        'isMember' => "Member ID {$memberId} is not a member in this project"
+                    ]
+                ]);
+            }
+            return response()->json([
+                'error' => false,
+                'message' => [
+                    'isMember' => "{$member->name} is a member in this project"
+                ]
+            ]);
+        } catch(ModelNotFoundException $ex) {
+            return $this->notFound($id);
+        }
+    }
+    public function showTasks($id)
+    {
+        try {
+            return response()->json($this->repository->find($id)->tasks->all());
+        } catch(ModelNotFoundException $ex) {
+            return $this->notFound($id);
         }
     }
 

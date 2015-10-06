@@ -28,6 +28,11 @@
     Route::delete('client/{id}', 'ClientController@destroy');
     Route::put('client/{id}', 'ClientController@update');
 
+    Route::get('tasks/{id}', 'ProjectTasksController@index');
+    Route::post('tasks/{id}', 'ProjectTasksController@store');
+    Route::get('tasks/{id}', 'ProjectTasksController@show');
+    Route::put('tasks/{id}', 'ProjectTasksController@update');
+    Route::delete('tasks/{id}', 'ProjectTasksController@destroy');
 
     Route::get('project/{id}/note', 'ProjectNoteController@index');
     Route::post('project/{id}/note', 'ProjectNoteController@store');
@@ -46,6 +51,13 @@
     Route::get('project/{id}', 'ProjectController@show');
     Route::delete('project/{id}', 'ProjectController@destroy');
     Route::put('project/{id}', 'ProjectController@update');
+
+    Route::get('project/notes', ['as' => 'project.show.notes', 'uses' => 'ProjectController@showNotes']);
+    Route::get('project/members', ['as' => 'project.show.members', 'uses' => 'ProjectController@showMembers']);
+    Route::get('project/member/add/{memberId}', ['as' => 'project.member.add', 'uses' => 'ProjectController@addMember']);
+    Route::get('project/member/remove/{memberId}',['as' => 'project.member.remove','uses' => 'ProjectController@removeMember']);
+    Route::get('project/tasks', ['as' => 'project.tasks.show', 'uses' => 'ProjectController@showTasks']);
+
 
 
 

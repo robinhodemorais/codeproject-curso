@@ -38,7 +38,7 @@ class ProjectTasksService {
         } catch(ModelNotFoundException $ex) {
             return response()->json([
                 'error' => true,
-                'message' => "ProjectTasks id {$id} not found"
+                'message' => "ProjectTask id {$id} not found"
             ]);
         }
     }
@@ -74,7 +74,7 @@ class ProjectTasksService {
         } catch (ModelNotFoundException $e) {
             return response()->json([
                 'error' => true,
-                'message' => "ProjectTasks id {$id} not found"
+                'message' => "ProjectTask id {$id} not found"
             ]);
         }
 
@@ -88,11 +88,11 @@ class ProjectTasksService {
 
         try {
             $this->repository->delete($id);
-            return response()->json(['error' => false,'message' => "ProjectTasks {$id} deleted"]);
+            return response()->json(['error' => false,'message' => "ProjectTask {$id} deleted"]);
         } catch (ModelNotFoundException $e) {
             return response()->json([
                 'error' => false,
-                'message' => "ProjectTasks id {$id} not found"
+                'message' => "ProjectTask id {$id} not found"
             ]);
         }
 

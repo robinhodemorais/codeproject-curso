@@ -2,9 +2,7 @@
 
 namespace CodeProject\Http\Controllers;
 
-use CodeProject\Repositories\ProjectNoteRepository;
 use CodeProject\Repositories\ProjectTasksRepository;
-use CodeProject\Services\ProjectNoteService;
 use CodeProject\Services\ProjectTasksService;
 use Illuminate\Http\Request;
 
@@ -12,15 +10,15 @@ class ProjectTasksController extends Controller
 {
 
     /**
-     * @var ProjectNoteRepository
-     */
+     * @var ProjectTasksRepository
+
     private $repository;
     /**
-     * @var ProjectNoteService
+     * @var ProjectTasksService
      */
     private $service;
 
-    /**
+    /***
      * @param ProjectTasksRepository $repository
      * @param ProjectTasksService $service
      */

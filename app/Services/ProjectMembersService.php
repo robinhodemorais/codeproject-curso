@@ -11,8 +11,6 @@ namespace CodeProject\Services;
 
 use CodeProject\Repositories\ProjectMembersRepository;
 use CodeProject\Validators\ProjectMembersValidator;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Prettus\Validator\Exceptions\ValidatorException;
 
 
 class ProjectMembersService {

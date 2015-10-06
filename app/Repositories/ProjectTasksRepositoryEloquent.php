@@ -4,11 +4,11 @@ namespace CodeProject\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use CodeProject\Repositories\ProjectTasksRepository;
 use CodeProject\Entities\ProjectTasks;
 
+
 /**
- * Class ProjectTasksRepositoryEloquent
+ * Class ProjectTaskRepositoryEloquent
  * @package namespace CodeProject\Repositories;
  */
 class ProjectTasksRepositoryEloquent extends BaseRepository implements ProjectTasksRepository

@@ -83,4 +83,33 @@ class ProjectController extends Controller
         return $this->service->delete($id);
 
     }
+
+
+    /**
+     * @param $id
+     * @param $memberId
+     * @return Response
+     */
+    public function addMember($id, $memberId)
+    {
+        return $this->service->addMember($id, $memberId);
+    }
+    /**
+     * @param $id
+     * @param $memberId
+     * @return Response
+     */
+    public function removeMember($id, $memberId)
+    {
+        return $this->service->removeMember($id, $memberId);
+    }
+    /**
+     * @param $id
+     * @param $memberId
+     * @return Response
+     */
+    public function isMember($id, $memberId)
+    {
+        return $this->service->isMember($id, $memberId);
+    }
 }
