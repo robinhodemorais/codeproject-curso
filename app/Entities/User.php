@@ -36,12 +36,13 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function projects()
     {
-        return $this->hasMany(Project::class);
-    }
-
-    public function members(){
+       // return $this->hasMany(Project::class);
         return$this->belongsToMany(Project::class,'project_members');
     }
+
+   /* public function members(){
+        return$this->belongsToMany(Project::class,'project_members');
+    }*/
 }
 
 

@@ -38,6 +38,7 @@ class Project extends Model implements Transformable
     }
 
     public function members(){
+        //belongsToMany pertence há muitos, passa a tabelas que faz o relacionamento
         return $this->belongsToMany(User::class,'project_members');
     }
 }

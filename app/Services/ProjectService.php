@@ -39,7 +39,9 @@ class ProjectService
 
     public function all()
     {
-        return response()->json($this->repository->with(['owner', 'client', 'notes', 'members', 'tasks'])->all());
+        //return response()->json($this->repository->with(['owner', 'client', 'notes', 'members', 'tasks'])->all());
+        //passa o Authorizer para verificar se o usuário tem acesso a ver
+        return response()->json($this->repository->with(['owner', 'client', 'notes', 'members', 'tasks'])->findWhere(['owner_id' => \Authorizer::getResourceOwnerId()]));
     }
 
 
@@ -115,6 +117,7 @@ class ProjectService
     {
         try {
             return response()->json($this->repository->find($id)->notes->all());
+
         } catch(ModelNotFoundException $ex) {
             return $this->notFound($id);
         }
@@ -123,6 +126,7 @@ class ProjectService
     {
         try {
             return response()->json($this->repository->find($id)->members->all());
+           // return response()->json($this->repository->with(['members'])->find($id));
         } catch(ModelNotFoundException $ex) {
             return $this->notFound($id);
         }
