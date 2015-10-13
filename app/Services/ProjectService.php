@@ -14,6 +14,10 @@ use CodeProject\Validators\ProjectValidator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Prettus\Validator\Exceptions\ValidatorException;
 
+use \Illuminate\Filesystem\Filesystem;
+use \Illuminate\Contracts\Filesystem\Factory as Storage;
+
+
 
 class ProjectService
 {
@@ -25,15 +29,25 @@ class ProjectService
      * @var ProjectValidator
      */
     private $validator;
+    /**
+     * @var Filesystem
+     */
+    private $filesystem;
+    /**
+     * @var Storage
+     */
+    private $storage;
 
     /**
      * @param ProjectRepository $repository
      * @param ProjectValidator $validator
      */
-    public function __construct(ProjectRepository $repository, ProjectValidator $validator)
+    public function __construct(ProjectRepository $repository, ProjectValidator $validator, Filesystem $filesystem, Storage $storage)
     {
         $this->repository = $repository;
         $this->validator = $validator;
+        $this->filesystem = $filesystem;
+        $this->storage = $storage;
     }
 
 
@@ -116,8 +130,8 @@ class ProjectService
     public function showNotes($id)
     {
         try {
-            return response()->json($this->repository->find($id)->notes->all());
-
+           // return response()->json($this->repository->find($id)->notes->all());
+            return response()->json($this->repository->with(['notes'])->find($id));
         } catch(ModelNotFoundException $ex) {
             return $this->notFound($id);
         }
@@ -125,8 +139,7 @@ class ProjectService
     public function showMembers($id)
     {
         try {
-            return response()->json($this->repository->find($id)->members->all());
-           // return response()->json($this->repository->with(['members'])->find($id));
+            return response()->json($this->repository->with(['members'])->find($id));
         } catch(ModelNotFoundException $ex) {
             return $this->notFound($id);
         }
@@ -187,6 +200,42 @@ class ProjectService
             return response()->json($this->repository->find($id)->tasks->all());
         } catch(ModelNotFoundException $ex) {
             return $this->notFound($id);
+        }
+    }
+
+    /*
+     * Cria o novo arquivo no sistema
+     */
+    public function createFile(array $data){
+        try {
+            //utilizando o skipPresenter ele retorna o array
+            $project = $this->repository->skipPresenter()->find($data['project_id']);
+            // dd($project);
+            $projecFile = $project->files()->create($data);
+
+            //Storeage facede que executa o metodo put, cria o arquivo com o nome e extensiion
+            //File face que faz upload
+            $this->storage->put($projecFile->id. "." . $data['extension'], $this->filesystem->get($data['file']));
+
+            return response()->json($projecFile->name." up success !!");
+
+        } catch(ValidatorException $e) {
+            return response()->json([
+                'error' => true,
+                'message' => $e->getMessageBag()
+            ]);
+        }
+
+    }
+
+    public function deleteFile($file)
+    {
+        try {
+
+            return response()->json($this->filesystem->delete($file));
+
+        } catch(ModelNotFoundException $ex) {
+            return $this->notFound($file);
         }
     }
 

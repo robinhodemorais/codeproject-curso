@@ -61,6 +61,7 @@ class ProjectTasksController extends Controller
      */
     public function show($id, $tasksid)
     {
+
         return $this->service->read($id,$tasksid);
 
     }
@@ -76,6 +77,7 @@ class ProjectTasksController extends Controller
      */
     public function update(Request $request, $id, $tasksid)
     {
+
         return $this->service->update($request->all(),$tasksid);
     }
 
@@ -87,6 +89,9 @@ class ProjectTasksController extends Controller
      */
     public function destroy($id)
     {
+
        return $this->service->delete($id);
     }
+
+
 }

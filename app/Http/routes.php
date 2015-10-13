@@ -16,7 +16,7 @@
     });
 
     Route::post('oauth/access_token', function(){
-        return Response::json(Authorizer::issueAccessToken());
+       return Response::json(Authorizer::issueAccessToken());
     });
 
 
@@ -35,7 +35,6 @@
 
 
        Route::group(['prefix'=>'project'], function() {
-
 
           /* Route::get('', 'ProjectController@index');
            Route::post('', 'ProjectController@store');
@@ -60,6 +59,15 @@
           Route::get('member/add/{memberId}', ['as' => 'project.member.add', 'uses' => 'ProjectController@addMember']);
           Route::get('member/remove/{memberId}',['as' => 'project.member.remove','uses' => 'ProjectController@removeMember']);
           Route::get('tasks/{id}', ['as' => 'project.tasks.show', 'uses' => 'ProjectController@showTasks']);
+/*
+           Route::get('tasks/{id}', 'ProjectTasksController@index');
+           Route::post('tasks/{id}', 'ProjectTasksController@store');
+           Route::get('tasks/{id}', 'ProjectTasksController@show');
+           Route::put('tasks/{id}', 'ProjectTasksController@update');
+           Route::delete('tasks/{id}', 'ProjectTasksController@destroy');
+*/
+           Route::post('{id}/file','ProjectFileController@store');
+           Route::post('{id}/file/{fileId}/remove','ProjectFileController@destroy');
 
 
        });
@@ -73,11 +81,6 @@
        Route::put('client/{id}', 'ClientController@update');
       */
 
-       Route::get('tasks/{id}', 'ProjectTasksController@index');
-       Route::post('tasks/{id}', 'ProjectTasksController@store');
-       Route::get('tasks/{id}', 'ProjectTasksController@show');
-       Route::put('tasks/{id}', 'ProjectTasksController@update');
-       Route::delete('tasks/{id}', 'ProjectTasksController@destroy');
 /*
        Route::get('project/{id}/note', 'ProjectNoteController@index');
        Route::post('project/{id}/note', 'ProjectNoteController@store');

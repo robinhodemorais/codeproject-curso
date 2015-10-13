@@ -6,6 +6,7 @@ use CodeProject\Repositories\ProjectRepository;
 use CodeProject\Services\ProjectService;
 use Illuminate\Http\Request;
 
+
 class ProjectController extends Controller
 {
 
@@ -104,6 +105,10 @@ class ProjectController extends Controller
      */
     public function addMember($id, $memberId)
     {
+        if ($this->checkProjectPermissions($id)==false){
+            return ['error' => 'Access forbidden'];
+        }
+
         return $this->service->addMember($id, $memberId);
     }
     /**
@@ -113,6 +118,10 @@ class ProjectController extends Controller
      */
     public function removeMember($id, $memberId)
     {
+        if ($this->checkProjectPermissions($id)==false){
+            return ['error' => 'Access forbidden'];
+        }
+
         return $this->service->removeMember($id, $memberId);
     }
     /**
@@ -122,18 +131,37 @@ class ProjectController extends Controller
      */
     public function isMember($id, $memberId)
     {
+        if ($this->checkProjectPermissions($id)==false){
+            return ['error' => 'Access forbidden'];
+        }
+
         return $this->service->isMember($id, $memberId);
     }
 
     public function showMembers($id){
+
+        if ($this->checkProjectPermissions($id)==false){
+            return ['error' => 'Access forbidden'];
+        }
+
         return $this->service->showMembers($id);
     }
 
     public function showNotes($id){
+
+        if ($this->checkProjectPermissions($id)==false){
+            return ['error' => 'Access forbidden'];
+        }
+
         return $this->service->showNotes($id);
     }
 
     public function showTasks($id){
+
+        if ($this->checkProjectPermissions($id)==false){
+            return ['error' => 'Access forbidden'];
+        }
+
         return $this->service->showTasks($id);
     }
 
@@ -161,4 +189,6 @@ class ProjectController extends Controller
 
         return false;
     }
+
+
 }

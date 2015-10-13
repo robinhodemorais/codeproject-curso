@@ -43,9 +43,7 @@ class ProjectMembersController extends Controller
      * @param  Request  $request
      * @return Response
      */
-    public function store(Request $request)
-    {
-
+    public function store(Request $request){
         return $this->service->create($request->all());
     }
 
