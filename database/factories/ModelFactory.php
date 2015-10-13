@@ -71,3 +71,12 @@ $factory->define(CodeProject\Entities\ProjectMembers::class, function (Faker\Gen
         'user_id' => rand(1,10),
     ];
 });
+
+
+$factory->define(CodeProject\Entities\OauthClients::class, function (Faker\Generator $faker) {
+    return [
+        'id' => rand(1,10),
+        'secret' => $faker->word,
+        'name' => $faker->name
+    ];
+});
