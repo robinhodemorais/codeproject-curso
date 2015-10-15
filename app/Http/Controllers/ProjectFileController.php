@@ -4,9 +4,10 @@ namespace CodeProject\Http\Controllers;
 
 use CodeProject\Repositories\ProjectRepository;
 use CodeProject\Services\ProjectService;
+use CodeProject\Validators\ProjectFileValidator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class ProjectFileController extends Controller
 {
@@ -19,14 +20,19 @@ class ProjectFileController extends Controller
      * @var ProjectService
      */
     private $service;
+    /**
+     * @var ProjectFileValidator
+     */
+    private $fileValidator;
 
     /**
      * @param ProjectRepository $repository
      * @param ProjectService $service
      */
-    public function __construct(ProjectRepository $repository, ProjectService $service){
+    public function __construct(ProjectRepository $repository, ProjectService $service, ProjectFileValidator $fileValidator){
         $this->repository = $repository;
         $this->service = $service;
+        $this->fileValidator = $fileValidator;
     }
 
     /**
@@ -53,16 +59,48 @@ class ProjectFileController extends Controller
      *
      */
     public function store(Request $request) {
+
+
+            $rules = array(
+                'name' => 'required',
+                'file' => 'required',
+                'description' => 'required',
+                'extension' => 'required',
+                'project_id' => 'project_id'
+              );
+
             $file = $request->file('file');
-            $extension = $file->getClientOriginalExtension();
 
-            $data['file'] = $file;
-            $data['extension'] = $extension;
-            $data['name'] = $request->name;
-            $data['project_id'] = $request->project_id;
-            $data['description'] = $request->description;
+            $validator = Validator::make( array('file'=> $file,
+                                                'name' =>$request->name,
+                                                'description'=> $request->description) , $rules);
 
-           return $this->service->createFile($data);
+        // $this->validator->with($data)->passesOrFail();
+
+        if ($validator->fails()) {
+            return response()->json([
+                'error' => true,
+                'message' => "Erro ao enviar arquivo"
+            ]);
+        } elseif($validator->passes())
+            {
+
+                $extension = $file->getClientOriginalExtension();
+
+                $data['file'] = $file;
+                $data['extension'] = $extension;
+                $data['name'] = $request->name;
+                $data['project_id'] = $request->project_id;
+                $data['description'] = $request->description;
+
+
+
+                return $this->service->createFile($data);
+
+
+            }
+
+
     }
 
 

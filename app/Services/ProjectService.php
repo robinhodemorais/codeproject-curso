@@ -9,7 +9,9 @@
 namespace CodeProject\Services;
 
 
+use CodeProject\Repositories\ProjectFileRepository;
 use CodeProject\Repositories\ProjectRepository;
+use CodeProject\Validators\ProjectFileValidator;
 use CodeProject\Validators\ProjectValidator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Prettus\Validator\Exceptions\ValidatorException;
@@ -118,7 +120,7 @@ class ProjectService
                 $this->repository->delete($id);
                 return response()->json(['error' => false,'message' => "Project {$id} deleted"]);
             } catch (ModelNotFoundException $e) {
-               return response()->json([
+                return response()->json([
                     'error' => true,
                     'message' => "Project id {$id} not found"
                 ]);
@@ -130,7 +132,7 @@ class ProjectService
     public function showNotes($id)
     {
         try {
-           // return response()->json($this->repository->find($id)->notes->all());
+            // return response()->json($this->repository->find($id)->notes->all());
             return response()->json($this->repository->with(['notes'])->find($id));
         } catch(ModelNotFoundException $ex) {
             return $this->notFound($id);
@@ -207,24 +209,17 @@ class ProjectService
      * Cria o novo arquivo no sistema
      */
     public function createFile(array $data){
-        try {
+
             //utilizando o skipPresenter ele retorna o array
             $project = $this->repository->skipPresenter()->find($data['project_id']);
             // dd($project);
-            $projecFile = $project->files()->create($data);
+            $projectFile = $project->files()->create($data);
 
             //Storeage facede que executa o metodo put, cria o arquivo com o nome e extensiion
             //File face que faz upload
-            $this->storage->put($projecFile->id. "." . $data['extension'], $this->filesystem->get($data['file']));
+            $this->storage->put($projectFile->id. "." . $data['extension'], $this->filesystem->get($data['file']));
 
-            return response()->json($projecFile->name." up success !!");
-
-        } catch(ValidatorException $e) {
-            return response()->json([
-                'error' => true,
-                'message' => $e->getMessageBag()
-            ]);
-        }
+            return response()->json($projectFile->name." up success !!");
 
     }
 
