@@ -2,43 +2,36 @@
 
 namespace CodeProject\Http\Controllers;
 
-use CodeProject\Repositories\ProjectRepository;
+use CodeProject\Repositories\ProjectFileRepository;
+use CodeProject\Services\ProjectFileService;
 use CodeProject\Services\ProjectService;
-use CodeProject\Validators\ProjectFileValidator;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Validator;
 
 class ProjectFileController extends Controller
 {
 
     /**
-     * @var ProjectRepository
+     * @var ProjectFileRepository
      */
     private $repository;
     /**
-     * @var ProjectService
+     * @var ProjectFileService
      */
     private $service;
-    /**
-     * @var ProjectFileValidator
-     */
-    private $fileValidator;
 
     /**
-     * @param ProjectRepository $repository
-     * @param ProjectService $service
+     * @param ProjectFileRepository $repository
+     * @param ProjectFileService $service
      */
-    public function __construct(ProjectRepository $repository, ProjectService $service, ProjectFileValidator $fileValidator){
+    public function __construct(ProjectFileRepository $repository, ProjectFileService $service){
         $this->repository = $repository;
         $this->service = $service;
-        $this->fileValidator = $fileValidator;
     }
 
     /**
      * Display a listing of the resource.
      *
-     * @param ProjectRepository $repository
+     * @param ProjectFileRepository $repository
      * @return Response
      */
     public function index()
@@ -60,7 +53,7 @@ class ProjectFileController extends Controller
      */
     public function store(Request $request) {
 
-
+/*
             $rules = array(
                 'name' => 'required',
                 'file' => 'required',
@@ -84,6 +77,8 @@ class ProjectFileController extends Controller
             ]);
         } elseif($validator->passes())
             {
+*/
+                $file = $request->file('file');
 
                 $extension = $file->getClientOriginalExtension();
 
@@ -95,10 +90,12 @@ class ProjectFileController extends Controller
 
 
 
+
+
                 return $this->service->createFile($data);
 
 
-            }
+           // }
 
 
     }

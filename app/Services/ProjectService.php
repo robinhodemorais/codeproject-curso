@@ -208,7 +208,7 @@ class ProjectService
     /*
      * Cria o novo arquivo no sistema
      */
-    public function createFile(array $data){
+/*    public function createFile(array $data){
 
             //utilizando o skipPresenter ele retorna o array
             $project = $this->repository->skipPresenter()->find($data['project_id']);
@@ -219,7 +219,11 @@ class ProjectService
             //File face que faz upload
             $this->storage->put($projectFile->id. "." . $data['extension'], $this->filesystem->get($data['file']));
 
+        if ($this->storage->exists($projectFile->id. "." . $data['extension'])) {
             return response()->json($projectFile->name." up success !!");
+        }
+
+
 
     }
 
@@ -232,6 +236,6 @@ class ProjectService
         } catch(ModelNotFoundException $ex) {
             return $this->notFound($file);
         }
-    }
+    }*/
 
 }
