@@ -2,36 +2,45 @@
 
 namespace CodeProject\Http\Controllers;
 
-use CodeProject\Repositories\ProjectFileRepository;
-use CodeProject\Services\ProjectFileService;
+use CodeProject\Repositories\ProjectRepository;
 use CodeProject\Services\ProjectService;
+use CodeProject\Validators\ProjectFileValidator;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
+use Prettus\Validator\Exceptions\ValidatorException;
 
 class ProjectFileController extends Controller
 {
 
     /**
-     * @var ProjectFileRepository
+     * @var ProjectRepository
      */
     private $repository;
     /**
-     * @var ProjectFileService
+     * @var ProjectService
      */
     private $service;
+    /**
+     * @var ProjectFileValidator
+     */
+    private $validator;
 
     /**
-     * @param ProjectFileRepository $repository
-     * @param ProjectFileService $service
+     * @param ProjectRepository $repository
+     * @param ProjectService $service
      */
-    public function __construct(ProjectFileRepository $repository, ProjectFileService $service){
+    public function __construct(ProjectRepository $repository, ProjectService $service, ProjectFileValidator $validator, Filesystem $filesystem, Storage $storage){
         $this->repository = $repository;
         $this->service = $service;
+        $this->validator = $validator;
     }
 
     /**
      * Display a listing of the resource.
      *
-     * @param ProjectFileRepository $repository
+     * @param ProjectRepository $repository
      * @return Response
      */
     public function index()
@@ -48,54 +57,48 @@ class ProjectFileController extends Controller
      */
 
     /*
-     * Vai armazer o arquivo no banco de dados e o upload
+     * Vai armazer o arquivo no banco de dados e fazer o upload
      *
      */
     public function store(Request $request) {
 
-/*
-            $rules = array(
-                'name' => 'required',
-                'file' => 'required',
-                'description' => 'required',
-                'extension' => 'required',
-                'project_id' => 'project_id'
-              );
+            $rules = array('file' => 'required');
 
             $file = $request->file('file');
 
-            $validator = Validator::make( array('file'=> $file,
-                                                'name' =>$request->name,
-                                                'description'=> $request->description) , $rules);
-
-        // $this->validator->with($data)->passesOrFail();
+            $validator = Validator::make( array('file'=> $file) , $rules);
 
         if ($validator->fails()) {
             return response()->json([
                 'error' => true,
-                'message' => "Erro ao enviar arquivo"
+                'message' => "Arquivo não selecionado"
             ]);
-        } elseif($validator->passes())
-            {
-*/
-                $file = $request->file('file');
-
-                $extension = $file->getClientOriginalExtension();
-
-                $data['file'] = $file;
-                $data['extension'] = $extension;
-                $data['name'] = $request->name;
-                $data['project_id'] = $request->project_id;
-                $data['description'] = $request->description;
+        } elseif($validator->passes()) {
 
 
+            $extension = $file->getClientOriginalExtension();
+
+            $data['file'] = $file;
+            $data['extension'] = $extension;
+            $data['name'] = $request->name;
+            $data['project_id'] = $request->project_id;
+            $data['description'] = $request->description;
 
 
+            try {
+                $this->validator->with($data)->passesOrFail();
 
-                return $this->service->createFile($data);
+                $this->service->createFile($data);
 
+            }  catch (ValidatorException $e) {
 
-           // }
+            return response()->json([
+                'error' => true,
+                'message' => $e->getMessageBag()
+            ]);
+        }
+
+        }
 
 
     }

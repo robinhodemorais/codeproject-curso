@@ -39,17 +39,22 @@ class ProjectService
      * @var Storage
      */
     private $storage;
+    /**
+     * @var ProjectFileValidator
+     */
+    private $fileValidator;
 
     /**
      * @param ProjectRepository $repository
      * @param ProjectValidator $validator
      */
-    public function __construct(ProjectRepository $repository, ProjectValidator $validator, Filesystem $filesystem, Storage $storage)
+    public function __construct(ProjectRepository $repository, ProjectValidator $validator, ProjectFileValidator $fileValidator, Filesystem $filesystem, Storage $storage)
     {
         $this->repository = $repository;
         $this->validator = $validator;
         $this->filesystem = $filesystem;
         $this->storage = $storage;
+        $this->fileValidator = $fileValidator;
     }
 
 
@@ -208,19 +213,33 @@ class ProjectService
     /*
      * Cria o novo arquivo no sistema
      */
-/*    public function createFile(array $data){
+    public function createFile(array $data){
 
+        try {
+
+            //$this->fileValidator->with($data)->passesOrFail();
+
+            //utilizando o mesmo repository do project
             //utilizando o skipPresenter ele retorna o array
             $project = $this->repository->skipPresenter()->find($data['project_id']);
             // dd($project);
             $projectFile = $project->files()->create($data);
 
+
             //Storeage facede que executa o metodo put, cria o arquivo com o nome e extensiion
             //File face que faz upload
-            $this->storage->put($projectFile->id. "." . $data['extension'], $this->filesystem->get($data['file']));
+            $this->storage->put($projectFile->id . "." . $data['extension'], $this->filesystem->get($data['file']));
 
-        if ($this->storage->exists($projectFile->id. "." . $data['extension'])) {
-            return response()->json($projectFile->name." up success !!");
+            if ($this->storage->exists($projectFile->id . "." . $data['extension'])) {
+                return response()->json($projectFile->name . " up success !!");
+            }
+
+        } catch (ValidatorException $e) {
+
+            return response()->json([
+                'error' => true,
+                'message' => $e->getMessageBag()
+            ]);
         }
 
 
@@ -236,6 +255,6 @@ class ProjectService
         } catch(ModelNotFoundException $ex) {
             return $this->notFound($file);
         }
-    }*/
+    }
 
 }

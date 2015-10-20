@@ -77,23 +77,8 @@ class ProjectFileService
             ]);
         }
 
-       /* if ($this->storage->exists($projectFile->id. "." . $data['extension'])) {
-            return response()->json($projectFile->name." up success !!");
-        }
 
-        /*
-         *  try {
-            $this->validator->with($data)->passesOrFail();
-            return $this->repository->create($data);
-        } catch (ValidatorException $e) {
 
-            return response()->json([
-                'error' => true,
-                'message' => $e->getMessageBag()
-            ]);
-        }
-         *
-         */
 
 
 
@@ -102,11 +87,21 @@ class ProjectFileService
     public function deleteFile($file)
     {
         try {
+            $this->filesystem->delete($file);
 
-            return response()->json($this->filesystem->delete($file));
+            dd($file);
+        } catch (ModelNotFoundException $e) {
 
-        } catch(ModelNotFoundException $ex) {
-            return $this->notFound($file);
+            try {
+                $this->filesystem->delete($file);
+                return response()->json(['error' => false,'message' => "Project {$file} deleted"]);
+            } catch (ModelNotFoundException $e) {
+                return response()->json([
+                    'error' => true,
+                    'message' => "Project id {$file} not found"
+                ]);
+            }
+
         }
     }
 
