@@ -104,9 +104,9 @@ class ProjectFileController extends Controller
     }
 
 
-    public function destroy($file)  {
+    public function destroy($idProject,$idFile)  {
 
-        return $this->service->deleteFile($file);
+        return $this->service->deleteFile($idProject,$idFile);
 
     }
 

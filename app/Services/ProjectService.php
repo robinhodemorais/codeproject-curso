@@ -48,7 +48,9 @@ class ProjectService
      * @param ProjectRepository $repository
      * @param ProjectValidator $validator
      */
-    public function __construct(ProjectRepository $repository, ProjectValidator $validator, ProjectFileValidator $fileValidator, Filesystem $filesystem, Storage $storage)
+    public function __construct(ProjectRepository $repository, ProjectValidator $validator,
+                                ProjectFileValidator $fileValidator, Filesystem $filesystem,
+                                Storage $storage)
     {
         $this->repository = $repository;
         $this->validator = $validator;
@@ -246,15 +248,49 @@ class ProjectService
 
     }
 
-    public function deleteFile($file)
+    public function deleteFile($idProject,$idFile)
     {
         try {
 
-            return response()->json($this->filesystem->delete($file));
+
+           // $projectFile = $this->repository->skipPresenter()->with(['files'])->find($idFile);
+
+            /*
+             * Busco o File do project e acesso o files que está relacionando no Project buscando o file
+             */
+            $projectFile = $this->repository->skipPresenter()->find($idProject)->files()->find($idFile);
+
+            //pega no nome do arquivo e extensão para deletar da pasta
+            $nomeFile = $idFile.".".$projectFile->extension;
+
+            //deleta da pasta
+            $this->filesystem->delete($nomeFile);
+
+            //return response()->json(['error' => false,'message' => "ProjectFile {$idFile} deleted"]);
 
         } catch(ModelNotFoundException $ex) {
-            return $this->notFound($file);
+            return $this->notFound($idFile);
         }
+
+
+        //deleta o file da tabela
+        try {
+            $this->repository->skipPresenter()->find($idProject)->files()->detach($idFile);
+        } catch (ModelNotFoundException $e) {
+
+            try {
+                $this->repository->skipPresenter()->find($idProject)->files()->detach($idFile);
+                return response()->json(['error' => false,'message' => "ProjectFile {$idFile} deleted"]);
+            } catch (ModelNotFoundException $e) {
+                return response()->json([
+                    'error' => true,
+                    'message' => "ProjectFile {$idFile} not found"
+                ]);
+            }
+
+        }
+
+
     }
 
 }
