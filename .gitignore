@@ -7,3 +7,4 @@ VagrantFile
 ./idea
 ./vagrant
 .env
+resources/bower_components
