@@ -5,6 +5,9 @@
     "Robinho <robinhodemorais@gmail.com>"
   ],
   "description": "Frontend de Gerenciador de Projetos",
+  "moduleType": [
+    "amd"
+  ],
   "license": "MIT",
   "homepage": "https://github.com/robinhodemorais/codeproject-curso",
   "ignore": [

@@ -1,0 +1,53 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'rebuild',
+1 verbose cli   'node-sass' ]
+2 info using npm@2.14.7
+3 info using node@v4.2.1
+4 info readInstalled object
+5 verbose rebuild path, id [ '/home/vagrant/Code/codeproject-curso/node_modules/laravel-elixir/node_modules/gulp-sass/node_modules/node-sass',
+5 verbose rebuild   'node-sass@3.3.3' ]
+6 silly rebuild set [ '/home/vagrant/Code/codeproject-curso/node_modules/laravel-elixir/node_modules/gulp-sass/node_modules/node-sass' ]
+7 info build /home/vagrant/Code/codeproject-curso/node_modules/laravel-elixir/node_modules/gulp-sass/node_modules/node-sass
+8 info preinstall node-sass@3.3.3
+9 info linkStuff node-sass@3.3.3
+10 silly linkStuff node-sass@3.3.3 has /home/vagrant/Code/codeproject-curso/node_modules/laravel-elixir/node_modules/gulp-sass/node_modules as its parent node_modules
+11 verbose linkBins node-sass@3.3.3
+12 verbose link bins [ { 'node-sass': 'bin/node-sass' },
+12 verbose link bins   '/home/vagrant/Code/codeproject-curso/node_modules/laravel-elixir/node_modules/gulp-sass/node_modules/.bin',
+12 verbose link bins   false ]
+13 verbose linkMans node-sass@3.3.3
+14 verbose rebuildBundles node-sass@3.3.3
+15 verbose rebuildBundles [ '.bin',
+15 verbose rebuildBundles   'async-foreach',
+15 verbose rebuildBundles   'chalk',
+15 verbose rebuildBundles   'cross-spawn',
+15 verbose rebuildBundles   'gaze',
+15 verbose rebuildBundles   'get-stdin',
+15 verbose rebuildBundles   'meow',
+15 verbose rebuildBundles   'mkdirp',
+15 verbose rebuildBundles   'nan',
+15 verbose rebuildBundles   'node-gyp',
+15 verbose rebuildBundles   'npmconf',
+15 verbose rebuildBundles   'request',
+15 verbose rebuildBundles   'sass-graph' ]
+16 silly gentlyRm /home/vagrant/Code/codeproject-curso/node_modules/laravel-elixir/node_modules/gulp-sass/node_modules/.bin/node-sass is being purged
+17 verbose gentlyRm don't care about contents; nuking /home/vagrant/Code/codeproject-curso/node_modules/laravel-elixir/node_modules/gulp-sass/node_modules/.bin/node-sass
+18 silly vacuum-fs purging /home/vagrant/Code/codeproject-curso/node_modules/laravel-elixir/node_modules/gulp-sass/node_modules/.bin/node-sass
+19 silly vacuum-fs quitting because other entries in /home/vagrant/Code/codeproject-curso/node_modules/laravel-elixir/node_modules/gulp-sass/node_modules/.bin
+20 verbose stack Error: EPROTO: protocol error, symlink '../node-sass/bin/node-sass' -> '/home/vagrant/Code/codeproject-curso/node_modules/laravel-elixir/node_modules/gulp-sass/node_modules/.bin/node-sass'
+20 verbose stack     at Error (native)
+21 verbose cwd /home/vagrant/Code/codeproject-curso
+22 error Linux 3.13.0-24-generic
+23 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "rebuild" "node-sass"
+24 error node v4.2.1
+25 error npm  v2.14.7
+26 error path ../node-sass/bin/node-sass
+27 error code EPROTO
+28 error errno -71
+29 error syscall symlink
+30 error EPROTO: protocol error, symlink '../node-sass/bin/node-sass' -> '/home/vagrant/Code/codeproject-curso/node_modules/laravel-elixir/node_modules/gulp-sass/node_modules/.bin/node-sass'
+31 error If you need help, you may report this error at:
+31 error     <https://github.com/npm/npm/issues>
+32 verbose exit [ -71, true ]
