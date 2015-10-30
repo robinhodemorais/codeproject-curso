@@ -1,6 +1,6 @@
 var elixir = require('laravel-elixir'),
     liveReload = require('gulp-livereload'),
-    clean = require('gulp-clean'),
+    clean = require('rimraf'),
     gulp = require('gulp');
 
 /*
@@ -31,8 +31,8 @@ config.vendor_path_js = [
 config.build_path_css = config.build_path + '/css';
 config.build_vendor_path_css = config.build_path_css + '/vendor';
 config.vendor_path_css = [
-     config.bower_path + '/bootstrap/dist/css/bootstrap.min.js',
-     config.bower_path + '/bootstrap/dist/css/bootstrap-theme.min.js'
+     config.bower_path + '/bootstrap/dist/css/bootstrap.min.css',
+     config.bower_path + '/bootstrap/dist/css/bootstrap-theme.min.css'
 ];
 
 gulp.task('copy-styles', function () {
@@ -60,11 +60,17 @@ gulp.task('copy-scripts', function () {
         .pipe(liveReload());
 });
 
-gulp.task('watch-dev', function(){
+gulp.task('clear-build-folder', function(){
+    clean.sync(config.build_path);
+});
+
+gulp.task('watch-dev',['clear-build-folder'], function(){
     liveReload.listen();
    gulp.start('copy-styles','copy-scripts');
    gulp.watch(config.assets_path + '/**',['copy-styles','copy-scripts']);
 });
+
+
 /*
  |--------------------------------------------------------------------------
  | Elixir Asset Management
