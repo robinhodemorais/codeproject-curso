@@ -10,7 +10,7 @@
 	assim conseguimos saber se a aplicação está em modo debug e ect -->
 	@if(Config::get('app.debug'))
 		<link href="{{asset('build/css/vendor/bootstrap.min.css')}}" rel="stylesheet"/>
-		<link href="{{asset('build/css/vendor/bootstrap.theme.css')}}" rel="stylesheet"/>
+		<link href="{{asset('build/css/vendor/bootstrap-theme.min.css')}}" rel="stylesheet"/>
 	@else
 		<!-- caso não seja debug pega o css/all.css e utiliza o Elixir para realizar versionamento
 		-->
@@ -82,12 +82,19 @@
 		<script src="{{asset('build/js/vendor/ui-bootstrap.min.js')}}"></script>
 		<script src="{{asset('build/js/vendor/navbar.min.js')}}"></script>
 		<script src="{{asset('build/js/vendor/angular-cookies.min.js')}}"></script>
-		<script src="{{asset('build/js/vendor/query-string.min.js')}}"></script>
+		<script src="{{asset('build/js/vendor/query-string.js')}}"></script>
 		<script src="{{asset('build/js/vendor/angular-oauth2.min.js')}}"></script>
 
 		<script src="{{asset('build/js/app.js')}}"></script>
+
+		<!-- Controller -->
 		<script src="{{asset('build/js/controllers/login.js')}}"></script>
 		<script src="{{asset('build/js/controllers/home.js')}}"></script>
+		<script src="{{asset('build/js/controllers/client/clientList.js')}}"></script>
+
+		<!-- Services -->
+		<script src="{{asset('build/js/services/client.js')}}"></script>
+
 	@else
 		<script src="{{elixir('js/all.js')}}"></script>
 	@endif

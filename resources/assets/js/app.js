@@ -1,8 +1,25 @@
-var app = angular.module('app',['ngRoute','angular-oauth2','app.controller']);
+var app = angular.module('app',['ngRoute','angular-oauth2','app.controllers','app.services']);
 
-angular.module('app.controller',['angular-oauth2']);
+//Ativa o ngMessages nos controllers porque somente eles que vão utilizar
+angular.module('app.controllers',['ngMessages','angular-oauth2']);
+//modulo para servicos
+angular.module('app.services',['ngResource']);
 
-app.config(['$routProvider','OAuthProvider',function($routeProvider,OAuthProvider){
+app.provider('appConfig', function(){
+    var config = {
+        baseUrl: 'http://codeproject.dev:8000'
+    };
+
+    return {
+        config: config,
+        $get: function () {
+          return config;
+        }
+    }
+});
+
+app.config(['$routeProvider','OAuthProvider', 'OAuthTokenProvider', 'appConfigProvider',
+    function($routeProvider,OAuthProvider, OAuthTokenProvider, appConfigProvider){
    $routeProvider
        .when('/login', {
        templateUrl: 'build/views/login.html',
@@ -12,12 +29,24 @@ app.config(['$routProvider','OAuthProvider',function($routeProvider,OAuthProvide
        templateUrl: 'build/views/home.html',
        controller: 'HomeController'
        })
+        .when('/clients', {
+            templateUrl: 'build/views/client/list.html',
+            controller: 'ClientListController'
+        });
+
        OAuthProvider.configure({
-                baseUrl: 'http://codeproject.dev:8000',
+                baseUrl: appConfigProvider.config.baseUrl,
                 clientId: 'appid1',
                 clientSecret: 'secret',
                 grantPath: 'oauth/access_token'
        });
+
+       OAuthTokenProvider.configure({
+            name: 'token',
+            options: {
+                secure: false
+            }
+        })
 
 }]);
 
