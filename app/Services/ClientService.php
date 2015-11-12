@@ -29,7 +29,7 @@ class ClientService {
 
 
     public function all(){
-        return response()->json($this->repository->all());
+        return response()->json($this->repository->skipPresenter()->all());
     }
 
     public function read($id) {

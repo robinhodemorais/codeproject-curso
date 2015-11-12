@@ -36,6 +36,7 @@ class ClientController extends Controller
     public function index()
     {
         return $this->service->all();
+        //$projectFile = $this->repository->skipPresenter()->find($idProject)->files()->find($idFile);
     }
 
 
@@ -49,6 +50,9 @@ class ClientController extends Controller
     {
 
         return $this->service->create($request->all());
+
+
+
     }
 
     /**
