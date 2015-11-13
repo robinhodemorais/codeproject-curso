@@ -1,7 +1,7 @@
 angular.module('app.controllers')
     .controller('ClientEditController',
-    ['$scope', '$location','$routParams', 'Client',
-        function($scope, $routParams, $location, Client){
+    ['$scope', '$location','$routeParams', 'Client',
+        function($scope, $routeParams, $location, Client){
 
         $scope.client = new Client.get({id: $routeParams.id});
 
@@ -9,7 +9,7 @@ angular.module('app.controllers')
             if($scope.form.$valid) {
                 Client.update({id: $scope.client.id}, $scope.client, function(){
                     $location.path('/clients');
-                    });
+                });
             }
 
         }

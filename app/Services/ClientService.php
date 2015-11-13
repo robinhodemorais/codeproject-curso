@@ -34,7 +34,7 @@ class ClientService {
 
     public function read($id) {
         try {
-            return response()->json($this->repository->find($id));
+            return response()->json($this->repository->skipPresenter()->find($id));
         } catch(ModelNotFoundException $ex) {
             return response()->json([
                 'error' => true,
