@@ -1,0 +1,36 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-primary">
+
+                <div class="panel-heading">Notes</div>
+
+                <div class="panel-body">
+
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Project</th>
+                            <th>Title</th>
+                            <th>Note</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="o in projectNotes">
+                                <td>{{o.project_id}}</td>
+                                <td>{{o.title}}</td>
+                                <td>{{o.note}}</td>
+                                <td>
+                                    <a class="btn btn-info" href="">Editar</a> |
+                                    <a class="btn btn-danger" href="">Excluir</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Laravel</title>
+	<title>Code Project</title>
 
 	<!--Verifica as configurações, atraves da facade do laravel config
 	assim conseguimos saber se a aplicação está em modo debug e ect -->
@@ -28,7 +28,7 @@
 	<![endif]-->
 </head>
 <body>
-	<nav class="navbar navbar-default">
+	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
@@ -95,8 +95,11 @@
 		<script src="{{asset('build/js/controllers/client/clientEdit.js')}}"></script>
 		<script src="{{asset('build/js/controllers/client/clientRemove.js')}}"></script>
 
+		<script src="{{asset('build/js/controllers/project/notes/projectNoteList.js')}}"></script>
+
 		<!-- Services -->
 		<script src="{{asset('build/js/services/client.js')}}"></script>
+		<script src="{{asset('build/js/services/projectNote.js')}}"></script>
 
 	@else
 		<script src="{{elixir('js/all.js')}}"></script>

@@ -1,7 +1,7 @@
 angular.module('app.controllers')
     .controller('ClientEditController',
     ['$scope', '$location','$routeParams', 'Client',
-        function($scope, $routeParams, $location, Client){
+        function($scope, $location, $routeParams, Client){
 
         $scope.client = new Client.get({id: $routeParams.id});
 
