@@ -136,6 +136,7 @@ class ProjectService
         }
     }
 
+    /*
     public function showNotes($id)
     {
         try {
@@ -145,6 +146,8 @@ class ProjectService
             return $this->notFound($id);
         }
     }
+    */
+
     public function showMembers($id)
     {
         try {

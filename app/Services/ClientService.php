@@ -29,12 +29,14 @@ class ClientService {
 
 
     public function all(){
-        return response()->json($this->repository->skipPresenter()->all());
+       // return response()->json($this->repository->skipPresenter()->all());
+        return response()->json($this->repository->all());
     }
 
     public function read($id) {
         try {
-            return response()->json($this->repository->skipPresenter()->find($id));
+           // return response()->json($this->repository->skipPresenter()->find($id));
+            return response()->json($this->repository->find($id));
         } catch(ModelNotFoundException $ex) {
             return response()->json([
                 'error' => true,

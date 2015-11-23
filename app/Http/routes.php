@@ -42,7 +42,7 @@
            Route::delete('{id}', 'ProjectController@destroy');
            Route::put('{id}', 'ProjectController@update');*/
 
-          Route::get('{id}/note', 'ProjectNoteController@index');
+          Route::get('{id}/notes', 'ProjectNoteController@index');
           Route::post('{id}/note', 'ProjectNoteController@store');
           Route::get('{id}/note/{noteId}', 'ProjectNoteController@show');
           Route::put('{id}/note/{noteId}', 'ProjectNoteController@update');
@@ -54,7 +54,7 @@
           Route::put('{id}/tasks/{tasksId}', 'ProjectTasksController@update');
           Route::delete('{id}/tasks/{tasksId}', 'ProjectTasksController@destroy');
 
-          Route::get('{id}/notes', ['as' => 'project.show.notes', 'uses' => 'ProjectController@showNotes']);
+         // Route::get('{id}/notes', ['as' => 'project.show.notes', 'uses' => 'ProjectController@showNotes']);
           Route::get('{id}/members', 'ProjectController@showMembers');
           Route::get('member/add/{memberId}', ['as' => 'project.member.add', 'uses' => 'ProjectController@addMember']);
           Route::get('member/remove/{memberId}',['as' => 'project.member.remove','uses' => 'ProjectController@removeMember']);

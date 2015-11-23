@@ -146,7 +146,7 @@ class ProjectController extends Controller
 
         return $this->service->showMembers($id);
     }
-
+/*
     public function showNotes($id){
 
         if ($this->checkProjectPermissions($id)==false){
@@ -155,7 +155,7 @@ class ProjectController extends Controller
 
         return $this->service->showNotes($id);
     }
-
+*/
     public function showTasks($id){
 
         if ($this->checkProjectPermissions($id)==false){

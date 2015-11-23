@@ -9,8 +9,10 @@
 	<!--Verifica as configurações, atraves da facade do laravel config
 	assim conseguimos saber se a aplicação está em modo debug e ect -->
 	@if(Config::get('app.debug'))
-		<link href="{{asset('build/css/vendor/bootstrap.min.css')}}" rel="stylesheet"/>
-		<link href="{{asset('build/css/vendor/bootstrap-theme.min.css')}}" rel="stylesheet"/>
+		<link href="{{asset('build/css/app.css')}}" rel="stylesheet"/>
+		<link href="{{asset('build/css/components.css')}}" rel="stylesheet"/>
+		<link href="{{asset('build/css/flaticon.css')}}" rel="stylesheet"/>
+		<link href="{{asset('build/css/font-awesome.css')}}" rel="stylesheet"/>
 	@else
 		<!-- caso não seja debug pega o css/all.css e utiliza o Elixir para realizar versionamento
 		-->
@@ -95,7 +97,11 @@
 		<script src="{{asset('build/js/controllers/client/clientEdit.js')}}"></script>
 		<script src="{{asset('build/js/controllers/client/clientRemove.js')}}"></script>
 
-		<script src="{{asset('build/js/controllers/project/notes/projectNoteList.js')}}"></script>
+		<script src="{{asset('build/js/controllers/project-note/projectNoteShow.js')}}"></script>
+		<script src="{{asset('build/js/controllers/project-note/projectNoteList.js')}}"></script>
+		<script src="{{asset('build/js/controllers/project-note/projectNoteNew.js')}}"></script>
+		<script src="{{asset('build/js/controllers/project-note/projectNoteEdit.js')}}"></script>
+		<script src="{{asset('build/js/controllers/project-note/projectNoteRemove.js')}}"></script>
 
 		<!-- Services -->
 		<script src="{{asset('build/js/services/client.js')}}"></script>

@@ -29,7 +29,7 @@ class ProjectNoteService {
 
     public function all($id){
         return response()->json($this->repository->skipPresenter()->findWhere(['project_id' => $id]));
-        //return $this->repository->findWhere(['project_id' => $id]);
+       // return $this->repository->findWhere(['project_id' => $id]);
     }
 
 
