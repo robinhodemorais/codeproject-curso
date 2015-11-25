@@ -17,18 +17,18 @@
                         </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="o in projectNotes">
-                                <td>{{o.title}}</td>
-                                <td>{{o.note}}</td>
-                                <td>
-                                    <a class="btn btn-info" href="#/project/{{o.project_id}}/notes/{{o.id}}/edit">
-                                        Editar
-                                    </a> |
-                                    <a class="btn btn-danger" href="#/project/{{o.project_id}}/notes/{{o.id}}/remove">
-                                        Excluir
-                                    </a>
-                                </td>
-                            </tr>
+                        <tr ng-repeat="o in projectNotes">
+                            <td>{{o.title}}</td>
+                            <td>{{o.note | limitTo: 25}}</td> <!-- Limita a quantidade de caracteres-->
+                            <td>
+                                <a class="btn btn-info" href="#/project/{{o.project_id}}/notes/{{o.id}}/edit">
+                                    Editar
+                                </a> |
+                                <a class="btn btn-danger" href="#/project/{{o.project_id}}/notes/{{o.id}}/remove">
+                                    Excluir
+                                </a>
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
 
