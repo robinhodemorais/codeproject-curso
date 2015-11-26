@@ -19,7 +19,7 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository {
         return User::class;
     }
 
-   
+
 
 
 
