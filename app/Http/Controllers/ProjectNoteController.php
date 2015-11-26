@@ -66,6 +66,7 @@ class ProjectNoteController extends Controller
 
         return $this->service->read($id,$noteid);
 
+
     }
 
 

@@ -37,7 +37,22 @@ class ProjectNoteService {
 
     public function read($id,$noteid) {
         try {
-            return $this->repository->skipPresenter()->findWhere(['project_id'=>$id, 'id'=>$noteid]);
+
+           // return $this->repository->skipPresenter()->findWhere(['project_id'=>$id, 'id'=>$noteid]);
+
+            //$result = $this->repository->skipPresenter()->findWhere(['project_id'=>$id, 'id'=>$noteid]);
+
+           $result = $this->repository->findWhere(['project_id'=>$id, 'id'=>$noteid]);
+
+
+            if (isset($result['data']) && count($result['data']) == 1){
+                $result = [
+                    'data' => $result['data'][0]
+                ];
+            }
+
+            return $result;
+
             //return response()->json($this->repository->skipPresenter()->findWhere(['project_id'=>$id, 'id'=>$noteid]));
             //return response()->json($this->repository->findWhere(['project_id'=>$id, 'id'=>$noteid]));
         } catch(ModelNotFoundException $ex) {
