@@ -1,8 +1,8 @@
 angular.module('app.services')
     .service('ProjectNote',['$resource','appConfig', function($resource,appConfig){
-        return $resource(appConfig.baseUrl + '/project/:id/notes/:note_id',{
+        return $resource(appConfig.baseUrl + '/project/:id/notes/:noteId',{
             id: '@id',
-            note_id: '@note_id'
+            noteId: '@noteId'
         },{
             update: {
                 method: 'PUT'

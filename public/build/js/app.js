@@ -65,7 +65,7 @@ app.config(['$routeProvider','$httpProvider','OAuthProvider', 'OAuthTokenProvide
                 templateUrl: 'build/views/project-note/list.html',
                 controller: 'ProjectNoteListController'
             })
-            .when('/project/:id/notes/:idNote/show', {
+            .when('/project/:id/notes/:noteId/show', {
                 templateUrl: 'build/views/project-note/show.html',
                 controller: 'ProjectNoteShowController'
             })
@@ -73,12 +73,12 @@ app.config(['$routeProvider','$httpProvider','OAuthProvider', 'OAuthTokenProvide
                 templateUrl: 'build/views/project-note/new.html',
                 controller: 'ProjectNoteNewController'
             })
-            .when('/project/:id/notes/:idNote/edit', {
+            .when('/project/:id/notes/:noteId/edit', {
                 templateUrl: 'build/views/project-note/edit.html',
                 controller: 'ProjectNoteEditController'
                 //{id}/notes/{idNote}/edit
             })
-            .when('/project/:id/notes/:idNote/remove', {
+            .when('/project/:id/notes/:noteId/remove', {
                 templateUrl: 'build/views/project-note/remove.html',
                 controller: 'ProjectNoteRemoveController'
             })
