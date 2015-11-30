@@ -11,8 +11,8 @@ angular.module('app.controllers')
                 if($scope.form.$valid) {
                     ProjectNote.update({
                         id: null,
-                        noteId: $scope.projectNote.noteId}, $scope.projectNote, function(){
-                        $location.path('/project/' + $routeParams.noteId + '/notes');
+                        noteId: $scope.projectNote.note_id}, $scope.projectNote, function(){
+                        $location.path('/project/' + $routeParams.id + '/notes');
                     });
                 }
 

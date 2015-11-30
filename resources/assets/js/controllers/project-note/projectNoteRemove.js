@@ -4,12 +4,12 @@ angular.module('app.controllers')
         function($scope, $location, $routeParams, ProjectNote){
             $scope.projectNote = ProjectNote.get({
                 id: $routeParams.id,
-                idNote: $routeParams.idNote
+                noteId: $routeParams.noteId
             });
 
         $scope.remove = function(){
             $scope.projectNote.$delete({
-                id: null, idNote: $scope.projectNote.id
+                id: null, noteId: $scope.projectNote.note_id
             }).then(function (){
                 $location.path('/project/' + $routeParams.id + '/notes');
             });
