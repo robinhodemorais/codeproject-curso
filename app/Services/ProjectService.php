@@ -64,8 +64,8 @@ class ProjectService
     {
         //return response()->json($this->repository->with(['owner', 'client', 'notes', 'members', 'tasks'])->all());
         //passa o Authorizer para verificar se o usuário tem acesso a ver
-        //return $this->repository->skipPresenter()->with(['owner', 'client', 'notes', 'members', 'tasks'])->findWhere(['owner_id' => \Authorizer::getResourceOwnerId()]);
-        return $this->repository->with(['owner', 'client', 'notes', 'members', 'tasks'])->findWhere(['owner_id' => \Authorizer::getResourceOwnerId()]);
+        return $this->repository->skipPresenter()->with(['owner', 'client', 'notes', 'members', 'tasks'])->findWhere(['owner_id' => \Authorizer::getResourceOwnerId()]);
+        //return $this->repository->with(['owner', 'client', 'notes', 'members', 'tasks'])->findWhere(['owner_id' => \Authorizer::getResourceOwnerId()]);
     }
 
 

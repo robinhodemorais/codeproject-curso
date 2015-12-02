@@ -24,13 +24,13 @@
                         </thead>
                         <tbody>
                             <tr ng-repeat="o in clients">
-                                <td>{{o.client_id}}</td>
+                                <td>{{o.id}}</td>
                                 <td>{{o.name}}</td>
                                 <td>{{o.responsible}}</td>
                                 <td>{{o.email}}</td>
                                 <td>{{o.phone}}</td>
                                 <td>
-                                    <a class="btn btn-info" href="#/clients/{{o.client_id}}/edit">Editar</a> |
+                                    <a class="btn btn-info" href="#/clients/{{o.id}}/edit">Editar</a> |
                                     <a class="btn btn-danger" href="#/clients/{{o.id}}/remove">Excluir</a>
                                 </td>
                             </tr>

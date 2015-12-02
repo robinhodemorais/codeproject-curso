@@ -1,8 +1,11 @@
-var app = angular.module('app',['ngRoute','angular-oauth2','app.controllers','app.services']);
+var app = angular.module('app',[
+    'ngRoute','angular-oauth2','app.controllers','app.services','app.filters'
+]);
 
 //Ativa o ngMessages nos controllers porque somente eles que vão utilizar
 angular.module('app.controllers',['ngMessages','angular-oauth2']);
 //modulo para servicos
+angular.module('app.filters',[]);
 angular.module('app.services',['ngResource']);
 
 app.provider('appConfig', function(){
