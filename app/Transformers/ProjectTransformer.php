@@ -21,7 +21,7 @@ class ProjectTransformer extends TransformerAbstract
 
     //atributo protegido que fala para apresentar os membros de acordo
     //com o includeMembers
-    protected $defaultIncludes = ['members'];
+    protected $defaultIncludes = ['members','clients'];
 
 
     public function transform(Project $project){
@@ -45,5 +45,11 @@ class ProjectTransformer extends TransformerAbstract
         return  $this->collection($project->members, new ProjectMemberTransformer());
     }
 
+    public function includeClients(Project $project){
+        //na hora de exibir os membros, receber o transformer dos membros para apresentar,
+        //porém para mostrar tem que utilizar o atributo protegido $defaultIncludes para
+        //poder mostrar
+        return  $this->collection($project->client, new ClientTransformer());
+    }
 
 }
