@@ -26,7 +26,7 @@ class Project extends Model implements Transformable
     }
     public function client()
     {
-        return $this->belongsTo(Client::class,'clients');
+        return $this->belongsTo(Client::class);
     }
 
     public function notes(){
