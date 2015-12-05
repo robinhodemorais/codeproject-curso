@@ -71,7 +71,8 @@ class ProjectService
 
     public function read($id) {
         try {
-            return $this->repository->skipPresenter()->with(['owner', 'client', 'notes', 'members', 'tasks'])->find($id);
+            //return $this->repository->skipPresenter()->with(['owner', 'client', 'notes', 'members', 'tasks'])->find($id);
+            return $this->repository->with(['owner', 'client', 'notes', 'members', 'tasks'])->find($id);
         } catch(ModelNotFoundException $ex) {
             return response()->json([
                 'error' => true,

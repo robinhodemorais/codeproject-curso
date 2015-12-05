@@ -26,8 +26,8 @@ class ProjectTransformer extends TransformerAbstract
 
     public function transform(Project $project){
         return [
-            'project_id' => $project->id,
-           // 'client_id' => $project->client_id,
+            'id' => $project->id,
+            'client_id' => $project->client_id,
             'owner_id' => $project->owner_id,
             //'members' => $project->members,
             'name' => $project->name,
