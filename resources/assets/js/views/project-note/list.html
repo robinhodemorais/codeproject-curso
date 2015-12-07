@@ -11,20 +11,24 @@
                     <table class="table table-bordered">
                         <thead>
                         <tr>
+                            <th>ProjectID</th>
                             <th>Title</th>
+                            <th>Note ID</th>
                             <th>Note</th>
                             <th>Acao</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr ng-repeat="o in projectNotes">
+                            <td>{{o.project_id}}</td>
                             <td>{{o.title}}</td>
+                            <td>{{o.noteId}}</td>
                             <td>{{o.note | limitTo: 25}}</td> <!-- Limita a quantidade de caracteres-->
                             <td>
-                                <a class="btn btn-info" href="#/project/{{o.project_id}}/notes/{{o.id}}/edit">
+                                <a class="btn btn-info" href="#/project/{{o.project_id}}/notes/{{o.noteId}}/edit">
                                     Editar
                                 </a> |
-                                <a class="btn btn-danger" href="#/project/{{o.project_id}}/notes/{{o.id}}/remove">
+                                <a class="btn btn-danger" href="#/project/{{o.project_id}}/notes/{{o.noteId}}/remove">
                                     Excluir
                                 </a>
                             </td>

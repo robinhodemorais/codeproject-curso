@@ -7,11 +7,13 @@ angular.module('app.controllers')
                 noteId: $routeParams.noteId
             });
 
+           // console.log($scope.projectNote);
+
             $scope.save = function(){
                 if($scope.form.$valid) {
                     ProjectNote.update({
                         id: null,
-                        noteId: $scope.projectNote.note_id}, $scope.projectNote, function(){
+                        noteId: $scope.projectNote.noteId}, $scope.projectNote, function(){
                         $location.path('/project/' + $routeParams.id + '/notes');
                     });
                 }

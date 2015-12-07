@@ -7,6 +7,28 @@
                 <div class="panel-body">
 
                     <form class="form-horizontal" name="form" role="form" method="POST" ng-submit="save()">
+
+                        <div class="form-group" ng-class="{'has-error':!form.id.$valid && form.project_id.$touched}">
+                            <label class="col-md-4 control-label">Project</label>
+
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="project_id" ng-model="projectNote.project_id" required>
+                                <div ng-messages="form.project_id.$error" class="help-block" ng-show="form.project_id.$touched">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group" ng-class="{'has-error':!form.noteId.$valid && form.noteId.$touched}">
+                            <label class="col-md-4 control-label">Nota</label>
+
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="noteId" ng-model="projectNote.noteId" required>
+                                <div ng-messages="form.noteId.$error" class="help-block" ng-show="form.noteId.$touched">
+                                </div>
+                            </div>
+                        </div>
+
+
                         <div class="form-group" ng-class="{'has-error':!form.title.$valid && form.title.$touched}">
                             <label class="col-md-4 control-label">Title</label>
 
@@ -22,7 +44,11 @@
                         <div class="form-group" ng-class="{'has-error':!form.note.$valid && form.note.$touched}">
                             <label class="col-md-4 control-label">Note</label>
                             <div class="col-md-6">
-                                <textarea name="note" ng-model="projectNote.note"></textarea>
+                                <textarea class="form-control" name="note" ng-model="projectNote.note" required></textarea>
+                                <div ng-messages="form.note.$error" class="help-block" ng-show="form.note.$touched">
+                                    <div ng-message="required">Nota é Obrigatória</div>
+
+                                </div>
                             </div>
                         </div>
 

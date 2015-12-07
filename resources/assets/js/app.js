@@ -31,11 +31,15 @@ app.provider('appConfig', function(){
 app.config(['$routeProvider','$httpProvider','OAuthProvider', 'OAuthTokenProvider', 'appConfigProvider',
     function($routeProvider,$httpProvider,
              OAuthProvider, OAuthTokenProvider, appConfigProvider){
+        //Adicionamos no cabeçalho padrão o metodo post que pode ter um form url econder, para enviar os dados
+        //
+        $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
+        $httpProvider.defaults.headers.put['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
         $httpProvider.defaults.transformResponse = function(data,headers) {
             var headersGetter = headers();
 
             if(headersGetter['content-type'] == 'application/json' ||
-                headersGetter['content-type'] == 'text/json') {
+               headersGetter['content-type'] == 'text/json') {
 
                 var dataJson = JSON.parse(data);
 
