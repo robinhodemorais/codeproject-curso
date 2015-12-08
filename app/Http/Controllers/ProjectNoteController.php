@@ -64,7 +64,18 @@ class ProjectNoteController extends Controller
     {
 
 
-        return $this->service->read($id,$noteid);
+       // return $this->service->read($id,$noteid);
+
+        $result = $this->repository->findWhere(['project_id'=>$id, 'id'=>$noteid]);
+
+
+        if (isset($result['data']) && count($result['data']) == 1){
+            $result = [
+                'data' => $result['data'][0]
+            ];
+        }
+
+        return $result;
 
 
     }
