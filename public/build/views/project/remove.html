@@ -2,20 +2,20 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-primary">
-                <div class="panel-heading">Exclusão de nota de projeto</div>
+                <div class="panel-heading">Exclusão de projeto</div>
                 <div class="panel-body">
 
-                    <p>Deseja excluir esta nota de projeto ?</p>
+                    <p>Deseja excluir este projeto ?</p>
 
                     <ul>
-                        <li><strong>Title:</strong>{{projectNote.title}}</li>
-                        <li><strong>Note:</strong>{{projectNote.note}}</li>
+                        <li><strong>Name:</strong>{{project.name}}</li>
+                        <li><strong>Client:</strong>{{project.client.data.name}}</li>
                     </ul>
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="button" class="btn btn-warning" ng-click="remove()">Excluir</button>
-                                <a href="#/project/{projectNote.id}/notes" class="btn btn-danger">Cancelar</a>
+                                <a href="#/projects/{project.id}" class="btn btn-danger">Cancelar</a>
                             </div>
                         </div>
                     </form>

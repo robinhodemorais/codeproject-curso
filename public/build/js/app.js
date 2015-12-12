@@ -11,12 +11,30 @@ angular.module('app.services',['ngResource']);
 app.provider('appConfig', function(){
     var config = {
         baseUrl: 'http://codeproject.dev:8000',
+       // baseUrl: 'http://127.0.0.1:8000',
         project: {
             status: [
                 {value: '1', label: 'Nao Iniciado'},
                 {value: '2', label: 'Iniciado'},
                 {value: '3', label: 'Concluido'}
             ]
+        },
+        utils: {
+            transformResponse: function (data,headers){
+                var headersGetter = headers();
+
+                if(headersGetter['content-type'] == 'application/json' ||
+                    headersGetter['content-type'] == 'text/json') {
+
+                    var dataJson = JSON.parse(data);
+
+                    if(dataJson.hasOwnProperty('data')){
+                        dataJson = dataJson.data;
+                    }
+                    return dataJson;
+                }
+                return data;
+            }
         }
     };
 
@@ -35,21 +53,7 @@ app.config(['$routeProvider','$httpProvider','OAuthProvider', 'OAuthTokenProvide
         //
         $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
         $httpProvider.defaults.headers.put['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
-        $httpProvider.defaults.transformResponse = function(data,headers) {
-            var headersGetter = headers();
-
-            if(headersGetter['content-type'] == 'application/json' ||
-               headersGetter['content-type'] == 'text/json') {
-
-                var dataJson = JSON.parse(data);
-
-                if(dataJson.hasOwnProperty('data')){
-                    dataJson = dataJson.data;
-                }
-                return dataJson;
-            }
-            return data;
-        };
+        $httpProvider.defaults.transformResponse = appConfigProvider.config.utils.transformResponse;
         $routeProvider
             .when('/login', {
                 templateUrl: 'build/views/login.html',

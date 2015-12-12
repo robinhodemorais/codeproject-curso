@@ -10,7 +10,7 @@ angular.module('app.controllers')
                 if($scope.form.$valid) {
                     $scope.project.owner_id = $cookies.getObject('user').id;
                     $scope.project.$save().then().then(function () {
-                        $location.path('/projects/');
+                        $location.path('/projects');
                     });
                 }
 
