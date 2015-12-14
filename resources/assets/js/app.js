@@ -93,7 +93,7 @@ app.config(['$routeProvider','$httpProvider','OAuthProvider', 'OAuthTokenProvide
             })
             .when('/projects/:id/remove', {
                 templateUrl: 'build/views/project/remove.html',
-                controller: 'ProjectNoteRemoveController'
+                controller: 'ProjectRemoveController'
             })
             .when('/project/:id/notes', {
                 templateUrl: 'build/views/project-note/list.html',
