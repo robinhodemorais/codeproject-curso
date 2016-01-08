@@ -35,7 +35,7 @@
                             <div class="col-md-6">
                                 <input class="form-control" type="text" name="client_id" ng_model="project.client_id"
                                        typeahead="o.id as o.name for o in getClients($viewValue)|limitTo:6"
-                                        typeahead-input-formatter="formatName($model)"/>
+                                       typeahead-input-formatter="formatName($model)"/>
                                 <!--
                                 |filter:$viewValue adiciona um filtro no que o usuário digita, o viewValue pega o que o usuário digita
                                 -->
