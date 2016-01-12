@@ -36,13 +36,16 @@
                                 <input class="form-control" type="text" name="client_id"
                                        ng_model="clientSelected"
                                        typeahead="o as o.name for o in getClients($viewValue)|limitTo:6"
-                                       typeahead-input-formatter="formatName($model)"/>
+                                       typeahead-input-formatter="formatName($model)"
+                                       typeahead-on-select="selectClient($item)"
+                                       typeahead-editable="false"
+                                       required/>
                                 <!--
                                 |filter:$viewValue adiciona um filtro no que o usuário digita, o viewValue pega o que o usuário digita
                                 -->
                                 <div ng-messages="form.client_id.$error" class="help-block" ng-show="form.client_id.$touched">
                                     <div ng-message="required">Client é Obrigatório</div>
-
+                                    <div ng-message="editable">Seleciona um cliente válido</div>
                                 </div>
                             </div>
                         </div>

@@ -3,8 +3,18 @@ angular.module('app.controllers')
     ['$scope', '$location','$cookies','Project','Client','appConfig',
         function($scope, $location, $cookies, Project, Client, appConfig){
             $scope.project = new Project();
-            $scope.clients = Client.query();
             $scope.status = appConfig.project.status;
+
+
+            $scope.due_date = {
+                status:{
+                    opened: false
+                }
+            };
+
+            $scope.open = function($event){
+              $scope.due_date.status.opened = true;
+            };
 
             $scope.save = function(){
                 if($scope.form.$valid) {
@@ -16,13 +26,9 @@ angular.module('app.controllers')
 
             };
 
-            $scope.formatName = function (id){
-                if(id){
-                    for(var i in $scope.clients) {
-                        if($scope.clients[i].id == id){
-                            return $scope.clients[i].name;
-                        }
-                    }
+            $scope.formatName = function (model){
+                if(model){
+                    return model.name;
                 }
                 return '';
             };
@@ -32,6 +38,10 @@ angular.module('app.controllers')
                     search: name,
                     searchFields: 'name:like'
                 }).$promise;
+            };
+
+            $scope.selectClient = function (item){
+                $scope.project.client_id = item.id;
             };
 
 

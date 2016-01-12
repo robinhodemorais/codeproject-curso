@@ -1,6 +1,6 @@
 var app = angular.module('app',[
     'ngRoute','angular-oauth2','app.controllers','app.services','app.filters',
-    'ui.bootstrap.typeahead', 'ui.bootstrap.tpls'
+    'ui.bootstrap.typeahead', 'ui.bootstrap.datepiker', 'ui.bootstrap.tpls'
 ]);
 
 //Ativa o ngMessages nos controllers porque somente eles que vão utilizar

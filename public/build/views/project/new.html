@@ -33,31 +33,25 @@
                         <div class="form-group" ng-class="{'has-error':!form.client_id.$valid && form.client_id.$touched}">
                             <label class="col-md-4 control-label">Client</label>
                             <div class="col-md-6">
-                                <input class="form-control" type="text" name="client_id" ng_model="project.client_id"
-                                       typeahead="o.id as o.name for o in getClients($viewValue)|limitTo:6"
-                                       typeahead-input-formatter="formatName($model)"/>
+                                <input class="form-control" type="text" name="client_id"
+                                       ng_model="clientSelected"
+                                       typeahead="o as o.name for o in getClients($viewValue)|limitTo:6"
+                                       typeahead-input-formatter="formatName($model)"
+                                       typeahead-on-select="selectClient($item)"
+                                       typeahead-editable="false"
+                                       required/>
                                 <!--
                                 |filter:$viewValue adiciona um filtro no que o usuário digita, o viewValue pega o que o usuário digita
                                 -->
                                 <div ng-messages="form.client_id.$error" class="help-block" ng-show="form.client_id.$touched">
                                     <div ng-message="required">Client é Obrigatório</div>
-
+                                    <div ng-message="editable">Seleciona um cliente válido</div>
                                 </div>
                             </div>
                         </div>
 
 
-                        <div class="form-group" ng-class="{'has-error':!form.due_date.$valid && form.due_date.$touched}">
-                            <label class="col-md-4 control-label">Due Date</label>
-
-                            <div class="col-md-6">
-                                <input type="date" class="form-control" name="due_date" ng-model="project.due_date" required>
-                                <div ng-messages="form.due_date.$error" class="help-block" ng-show="form.due_date.$touched">
-                                    <div ng-message="required">Data é Obrigatória</div>
-
-                                </div>
-                            </div>
-                        </div>
+                  
 
                         <div class="form-group" ng-class="{'has-error':!form.progress.$valid && form.progress.$touched}">
                             <label class="col-md-4 control-label">Progress (%)</label>

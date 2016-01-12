@@ -4,7 +4,7 @@ var elixir = require('laravel-elixir'),
     gulp = require('gulp');
 
 /*
-assets aponta onde está os assets
+assets aponta onde estï¿½ os assets
  */
 
 var config = {
@@ -112,5 +112,3 @@ gulp.task('watch-dev',['clear-build-folder'], function(){
    gulp.watch(config.assets_path + '/**',[
        'copy-styles','copy-scripts','copy-html']);
 });
-
-
