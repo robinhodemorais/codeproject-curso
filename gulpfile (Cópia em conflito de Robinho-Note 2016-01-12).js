@@ -4,7 +4,7 @@ var elixir = require('laravel-elixir'),
     gulp = require('gulp');
 
 /*
-assets aponta onde estï¿½ os assets
+assets aponta onde está os assets
  */
 
 var config = {
@@ -29,7 +29,6 @@ config.vendor_path_js = [
      config.bower_path + '/angular-cookies/angular-cookies.min.js',
      config.bower_path + '/query-string/query-string.js',
      config.bower_path + '/angular-oauth2/dist/angular-oauth2.min.js',
-     config.bower_path + '/ng-file-upload/ng-file-upload.min.js',
 ];
 
 config.build_path_css = config.build_path + '/css';
@@ -113,3 +112,5 @@ gulp.task('watch-dev',['clear-build-folder'], function(){
    gulp.watch(config.assets_path + '/**',[
        'copy-styles','copy-scripts','copy-html']);
 });
+
+

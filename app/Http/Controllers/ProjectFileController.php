@@ -2,6 +2,8 @@
 
 namespace CodeProject\Http\Controllers;
 
+use CodeProject\Entities\ProjectFile;
+use CodeProject\Entities\ProjectFileRepository;
 use CodeProject\Repositories\ProjectRepository;
 use CodeProject\Services\ProjectService;
 use CodeProject\Validators\ProjectFileValidator;
@@ -15,11 +17,11 @@ class ProjectFileController extends Controller
 {
 
     /**
-     * @var ProjectRepository
+     * @var ProjectFileRepository
      */
     private $repository;
     /**
-     * @var ProjectService
+     * @var ProjectFileService
      */
     private $service;
     /**
@@ -28,10 +30,10 @@ class ProjectFileController extends Controller
     private $validator;
 
     /**
-     * @param ProjectRepository $repository
-     * @param ProjectService $service
+     * @param ProjectFileRepository $repository
+     * @param ProjectFileService $service
      */
-    public function __construct(ProjectRepository $repository, ProjectService $service, ProjectFileValidator $validator, Filesystem $filesystem, Storage $storage){
+    public function __construct(ProjectFileRepository $repository, ProjectFileService $service, ProjectFileValidator $validator, Filesystem $filesystem, Storage $storage){
         $this->repository = $repository;
         $this->service = $service;
         $this->validator = $validator;
@@ -40,13 +42,12 @@ class ProjectFileController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param ProjectRepository $repository
+     *
      * @return Response
      */
-    public function index()
+    public function index($id)
     {
-        return $this->service->all();
-       // return $this->repository->skipPresenter()->all();
+        return $this->repository->findWhere(['project_id' => $id]);
     }
 
 
@@ -57,10 +58,20 @@ class ProjectFileController extends Controller
      * @return Response
      */
 
+    public function store(Request $request){
+        $file = $request->file('file');
+        $extension = $file->getClientOriginalExtension();
+
+        $data['file'] = $file;
+        $data['extension'] = $extension;
+        $data['name'] = $request->name;
+        $data['project_id'] = $request->project_id;
+        $data['description'] = $request->description;
+
+        $this->service->create($data);
+    }
+
     /*
-     * Vai armazer o arquivo no banco de dados e fazer o upload
-     *
-     */
     public function store(Request $request) {
 
             $rules = array('file' => 'required');
@@ -103,11 +114,40 @@ class ProjectFileController extends Controller
 
 
     }
+*/
+    public function showFile($id){
+        if ($this->service->checkProjectPermissions($id) == false) {
+            return ['error' => 'Access Forbidden'];
+        }
+
+        return reponse()->download($this->service->getFilePath($id));
+    }
 
 
-    public function destroy($idProject,$idFile)  {
+    public function show($id){
+        if ($this->service->checkProjectPermissions($id) == false) {
+            return ['error' => 'Access Forbidden'];
+        }
 
-        return $this->service->deleteFile($idProject,$idFile);
+        return $this->repository->find($id);
+    }
+
+
+    public function update(Request $request, $id){
+        if ($this->service->checkProjectOwner($id) == false) {
+            return ['error' => 'Access Forbidden'];
+        }
+
+        return $this->service->update($request->all(), $id);
+    }
+
+
+    public function destroy($id)  {
+
+        if ($this->service->checkProjectOwner($id) == false) {
+            return ['error' => 'Access Forbidden'];
+        }
+        return $this->repository->delete($id);
 
     }
 

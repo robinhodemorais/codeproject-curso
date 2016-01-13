@@ -5,6 +5,7 @@ angular.module('app.controllers')
             $scope.project = new Project();
             $scope.status = appConfig.project.status;
 
+
             $scope.due_date = {
                 status:{
                     opened: false

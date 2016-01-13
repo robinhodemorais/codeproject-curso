@@ -1,7 +1,10 @@
 var app = angular.module('app',[
     'ngRoute','angular-oauth2','app.controllers','app.services','app.filters',
-    'ui.bootstrap.typeahead', 'ui.bootstrap.datepiker', 'ui.bootstrap.tpls'
+    'ui.bootstrap.typeahead', 'ui.bootstrap.datepicker', 'ui.bootstrap.tpls',
+    'ngFileUpload'
 ]);
+
+//'ui.bootstrap.datepiker',
 
 //Ativa o ngMessages nos controllers porque somente eles que vão utilizar
 angular.module('app.controllers',['ngMessages','angular-oauth2']);
@@ -15,9 +18,9 @@ app.provider('appConfig', ['$httpParamSerializerProvider', function($httpParamSe
        // baseUrl: 'http://127.0.0.1:8000',
         project: {
             status: [
-                {value: '1', label: 'Nao Iniciado'},
-                {value: '2', label: 'Iniciado'},
-                {value: '3', label: 'Concluido'}
+                {value: 1, label: 'Nao Iniciado'},
+                {value: 2, label: 'Iniciado'},
+                {value: 3, label: 'Concluido'}
             ]
         },
         utils: {
@@ -123,6 +126,23 @@ app.config(['$routeProvider','$httpProvider','OAuthProvider', 'OAuthTokenProvide
             .when('/project/:id/notes/:noteId/remove', {
                 templateUrl: 'build/views/project-note/remove.html',
                 controller: 'ProjectNoteRemoveController'
+            })
+            .when('/project/:id/files', {
+                templateUrl: 'build/views/project-file/list.html',
+                controller: 'ProjectFileListController'
+            })
+            .when('/project/:id/files/new', {
+                templateUrl: 'build/views/project-file/new.html',
+                controller: 'ProjectFileNewController'
+            })
+            .when('/project/:id/files/:noteId/edit', {
+                templateUrl: 'build/views/project-file/edit.html',
+                controller: 'ProjectFileEditController'
+                //{id}/notes/{idNote}/edit
+            })
+            .when('/project/:id/files/:noteId/remove', {
+                templateUrl: 'build/views/project-file/remove.html',
+                controller: 'ProjectFileRemoveController'
             })
         ;
 
