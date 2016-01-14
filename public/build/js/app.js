@@ -15,13 +15,15 @@ angular.module('app.services',['ngResource']);
 app.provider('appConfig', ['$httpParamSerializerProvider', function($httpParamSerializerProvider){
     var config = {
         baseUrl: 'http://codeproject.dev:8000',
-       // baseUrl: 'http://127.0.0.1:8000',
         project: {
             status: [
                 {value: 1, label: 'Nao Iniciado'},
                 {value: 2, label: 'Iniciado'},
                 {value: 3, label: 'Concluido'}
             ]
+        },
+        urls: {
+          projectFile: '/project/{{id}}/file/{{idFile}}'
         },
         utils: {
             transformRequest: function (data){

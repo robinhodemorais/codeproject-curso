@@ -127,9 +127,9 @@ class ProjectFileService
     }
 
 
-    public function delete($idProject,$idFile)
+    public function delete($id)
     {
-        try {
+       // try {
 
 
            // $projectFile = $this->repository->skipPresenter()->with(['files'])->find($idFile);
@@ -137,8 +137,14 @@ class ProjectFileService
             /*
              * Busco o File do project e acesso o files que está relacionando no Project buscando o file
              */
-            $projectFile = $this->repository->skipPresenter()->find($idProject)->files()->find($idFile);
+            $projectFile = $this->repository->skipPresenter()->find($id);
+            if($this->storage->exists($projectFile->id.'.'.$projectFile->extension)){
+                $this->storage->delete($projectFile->id.'.'.$projectFile->extension);
+                return $projectFile->delete();
+            }
 
+
+            /*
             //pega no nome do arquivo e extensão para deletar da pasta
             $nomeFile = $idFile.".".$projectFile->extension;
 
@@ -169,6 +175,7 @@ class ProjectFileService
 
         }
 
+            */
 
     }
 
