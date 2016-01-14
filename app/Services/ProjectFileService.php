@@ -12,8 +12,6 @@ namespace CodeProject\Services;
 use CodeProject\Repositories\ProjectFileRepository;
 use CodeProject\Repositories\ProjectRepository;
 use CodeProject\Validators\ProjectFileValidator;
-use CodeProject\Validators\ProjectValidator;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Prettus\Validator\Exceptions\ValidatorException;
 
 use \Illuminate\Filesystem\Filesystem;
@@ -179,7 +177,7 @@ class ProjectFileService
 
     }
 
-    private function checkProjectOwner($projectFileId){
+    public function checkProjectOwner($projectFileId){
 
         $userId =  \Authorizer::getResourceOwnerId();
         $projectId = $this->repository->skipPresenter()->find($projectFileId)->project_id;
@@ -189,7 +187,7 @@ class ProjectFileService
     }
 
 
-    private function checkProjectMember($projectFileId){
+    public function checkProjectMember($projectFileId){
 
         $userId =  \Authorizer::getResourceOwnerId();
         $projectId = $this->repository->skipPresenter()->find($projectFileId)->project_id;
@@ -199,7 +197,7 @@ class ProjectFileService
     }
 
     //verifica se o usuário está no projeto para poder visualizar ele
-    private function checkProjectPermissions($projectFileId){
+    public function checkProjectPermissions($projectFileId){
         if ($this->checkProjectOwner($projectFileId) or $this->checkProjectMember($projectFileId)){
             return true;
         }

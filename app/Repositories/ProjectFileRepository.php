@@ -5,10 +5,10 @@ namespace CodeProject\Repositories;
 use Prettus\Repository\Contracts\RepositoryInterface;
 
 /**
- * Interface ProjectFileRepositoryRepository
+ * Interface ProjectFileRepository
  * @package namespace CodeProject\Repositories;
  */
-interface ProjectFileRepositoryRepository extends RepositoryInterface
+interface ProjectFileRepository extends RepositoryInterface
 {
     //
 }

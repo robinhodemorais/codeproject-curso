@@ -22,7 +22,7 @@
                         <div class="form-group" ng-class="{'has-error':!form.description.$valid && form.description.$touched}">
                             <label class="col-md-4 control-label">Note</label>
                             <div class="col-md-6">
-                                <textarea class="form-control" name="note" ng-model="projectFile.description" required></textarea>
+                                <textarea class="form-control" name="description" ng-model="projectFile.description" required></textarea>
                                 <div ng-messages="form.description.$error" class="help-block" ng-show="form.description.$touched">
                                     <div ng-message="required">Descrição é Obrigatória</div>
 
@@ -35,11 +35,12 @@
                             <label class="col-md-4 control-label">File</label>
 
                             <div class="col-md-6">
-                                <div class="btn btn-primary" ngf-select ng-model="projectFile" name="file">Select</div>
+                                <div class="btn btn-primary" ngf-select ng-model="projectFile.file" name="file">Select</div>
                                 <div ng-messages="form.file.$error" class="help-block" ng-show="form.file.$touched">
                                     <div ng-message="required">Arquivo é Obrigatório</div>
 
                                 </div>
+                            </div>
                         </div>
 
                         <div class="form-group">

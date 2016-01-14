@@ -2,16 +2,12 @@
 
 namespace CodeProject\Http\Controllers;
 
-use CodeProject\Entities\ProjectFile;
 use CodeProject\Entities\ProjectFileRepository;
-use CodeProject\Repositories\ProjectRepository;
-use CodeProject\Services\ProjectService;
+use CodeProject\Services\ProjectFileService;
 use CodeProject\Validators\ProjectFileValidator;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Validator;
-use Prettus\Validator\Exceptions\ValidatorException;
 
 class ProjectFileController extends Controller
 {

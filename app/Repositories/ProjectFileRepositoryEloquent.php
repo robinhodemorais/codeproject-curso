@@ -4,14 +4,14 @@ namespace CodeProject\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use CodeProject\Repositories\ProjectFileRepositoryRepository;
-use CodeProject\Entities\ProjectFileRepository;
+use CodeProject\Repositories\ProjectFileRepository;
+
 
 /**
- * Class ProjectFileRepositoryRepositoryEloquent
+ * Class ProjectFileRepositoryEloquent
  * @package namespace CodeProject\Repositories;
  */
-class ProjectFileRepositoryRepositoryEloquent extends BaseRepository implements ProjectFileRepositoryRepository
+class ProjectFileRepositoryEloquent extends BaseRepository implements ProjectFileRepository
 {
     /**
      * Specify Model class name
