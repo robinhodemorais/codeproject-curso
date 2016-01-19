@@ -20,19 +20,16 @@ class ProjectFileController extends Controller
      * @var ProjectFileService
      */
     private $service;
-    /**
-     * @var ProjectFileValidator
-     */
-    private $validator;
+
 
     /**
      * @param ProjectFileRepository $repository
      * @param ProjectFileService $service
      */
-    public function __construct(ProjectFileRepository $repository, ProjectFileService $service, ProjectFileValidator $validator, Filesystem $filesystem, Storage $storage){
+    public function __construct(ProjectFileRepository $repository, ProjectFileService $service){
         $this->repository = $repository;
         $this->service = $service;
-        $this->validator = $validator;
+
     }
 
     /**
@@ -79,7 +76,7 @@ class ProjectFileController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'error' => true,
-                'message' => "Arquivo não selecionado"
+                'message' => "Arquivo nï¿½o selecionado"
             ]);
         } elseif($validator->passes()) {
 

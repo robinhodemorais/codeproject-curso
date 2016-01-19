@@ -6,15 +6,15 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Code Project</title>
 
-	<!--Verifica as configurações, atraves da facade do laravel config
-	assim conseguimos saber se a aplicação está em modo debug e ect -->
+	<!--Verifica as configuraï¿½ï¿½es, atraves da facade do laravel config
+	assim conseguimos saber se a aplicaï¿½ï¿½o estï¿½ em modo debug e ect -->
 	@if(Config::get('app.debug'))
 		<link href="{{asset('build/css/app.css')}}" rel="stylesheet"/>
 		<link href="{{asset('build/css/components.css')}}" rel="stylesheet"/>
 		<link href="{{asset('build/css/flaticon.css')}}" rel="stylesheet"/>
 		<link href="{{asset('build/css/font-awesome.css')}}" rel="stylesheet"/>
 	@else
-		<!-- caso não seja debug pega o css/all.css e utiliza o Elixir para realizar versionamento
+		<!-- caso nï¿½o seja debug pega o css/all.css e utiliza o Elixir para realizar versionamento
 		-->
 		<link href="{{elixir('css/all.css')}}" rel="stylesheet"/>
 	@endif
@@ -68,7 +68,7 @@
 		</div>
 	</nav>
 
-	<!--só podemos ter 1 ng-view-->
+	<!--sï¿½ podemos ter 1 ng-view-->
 	<div ng-view>
 
 	</div>
@@ -123,6 +123,7 @@
 		<script src="{{asset('build/js/services/client.js')}}"></script>
 		<script src="{{asset('build/js/services/project.js')}}"></script>
 		<script src="{{asset('build/js/services/projectNote.js')}}"></script>
+		<script src="{{asset('build/js/services/projectFile.js')}}"></script>
 		<script src="{{asset('build/js/services/user.js')}}"></script>
 
 	@else

@@ -2,9 +2,10 @@
 
 namespace CodeProject\Repositories;
 
+use CodeProject\Entities\ProjectFile;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use CodeProject\Repositories\ProjectFileRepository;
+
 
 
 /**
@@ -20,7 +21,7 @@ class ProjectFileRepositoryEloquent extends BaseRepository implements ProjectFil
      */
     public function model()
     {
-        return ProjectFileRepository::class;
+        return ProjectFile::class;
     }
 
     /**
