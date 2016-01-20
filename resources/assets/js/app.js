@@ -1,15 +1,16 @@
 var app = angular.module('app',[
-    'ngRoute','angular-oauth2','app.controllers','app.services','app.filters',
+    'ngRoute','angular-oauth2','app.controllers','app.services','app.filters','app.directives',
     'ui.bootstrap.typeahead', 'ui.bootstrap.datepicker', 'ui.bootstrap.tpls',
     'ngFileUpload'
 ]);
 
 //'ui.bootstrap.datepiker',
 
-//Ativa o ngMessages nos controllers porque somente eles que vão utilizar
+//Ativa o ngMessages nos controllers porque somente eles que vï¿½o utilizar
 angular.module('app.controllers',['ngMessages','angular-oauth2']);
 //modulo para servicos
 angular.module('app.filters',[]);
+angular.module('app.directives',[]);
 angular.module('app.services',['ngResource']);
 
 app.provider('appConfig', ['$httpParamSerializerProvider', function($httpParamSerializerProvider){
@@ -61,7 +62,7 @@ app.provider('appConfig', ['$httpParamSerializerProvider', function($httpParamSe
 app.config(['$routeProvider','$httpProvider','OAuthProvider', 'OAuthTokenProvider', 'appConfigProvider',
     function($routeProvider,$httpProvider,
              OAuthProvider, OAuthTokenProvider, appConfigProvider){
-        //Adicionamos no cabeçalho padrão o metodo post que pode ter um form url econder, para enviar os dados
+        //Adicionamos no cabeï¿½alho padrï¿½o o metodo post que pode ter um form url econder, para enviar os dados
         //
         $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
         $httpProvider.defaults.headers.put['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
