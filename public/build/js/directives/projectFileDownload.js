@@ -7,8 +7,22 @@ angular.module('app.directives')
             link: function(scope, element, attr){
 
             },
-            controller: ['$scope','$attrs', function($scope,$attrs){
-
+            /*
+            $element = Serviço que permite ter acesso na diretiva
+            var anchor = $element.children()[0]; = pega o elemento da ancora, como
+                                                   temos somente 1 elemento então colocamos 0, pois ele é
+                                                   o elemento zero
+            */
+            controller: ['$scope','$element','$attrs',
+                function($scope,$element,$attrs){
+                    /*
+                      desabilita o botão para o download do arquivo
+                    */
+                    $scope.downloadFile = function (){
+                        var anchor = $element.children()[0];
+                        $(anchor).addClass('disabled');
+                        $(anchor).text('Loading...');
+                    }
             }]
         };
     }
