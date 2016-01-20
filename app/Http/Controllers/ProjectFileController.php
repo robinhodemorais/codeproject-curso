@@ -2,12 +2,8 @@
 
 namespace CodeProject\Http\Controllers;
 
-use CodeProject\Entities\ProjectFileRepository;
+use CodeProject\Repositories\ProjectFileRepository;
 use CodeProject\Services\ProjectFileService;
-use CodeProject\Validators\ProjectFileValidator;
-use Illuminate\Filesystem\Filesystem;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class ProjectFileController extends Controller
 {
@@ -109,11 +105,11 @@ class ProjectFileController extends Controller
     }
 */
     public function showFile($id){
-        if ($this->service->checkProjectPermissions($id) == false) {
+      /*  if ($this->service->checkProjectPermissions($id) == false) {
             return ['error' => 'Access Forbidden'];
         }
-
-        return reponse()->download($this->service->getFilePath($id));
+        */
+        return response()->download($this->service->getFilePath($id));
     }
 
 

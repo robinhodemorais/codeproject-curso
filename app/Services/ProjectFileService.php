@@ -121,6 +121,7 @@ class ProjectFileService
             case 'local':
                 return $this->storage->getDriver()->getAdapter()->getPathPrefix()
                     .'/'. $projectFile->id . '.' . $projectFile->extension;
+            break;
         }
     }
 
@@ -133,7 +134,7 @@ class ProjectFileService
            // $projectFile = $this->repository->skipPresenter()->with(['files'])->find($idFile);
 
             /*
-             * Busco o File do project e acesso o files que está relacionando no Project buscando o file
+             * Busco o File do project e acesso o files que estï¿½ relacionando no Project buscando o file
              */
             $projectFile = $this->repository->skipPresenter()->find($id);
             if($this->storage->exists($projectFile->id.'.'.$projectFile->extension)){
@@ -143,7 +144,7 @@ class ProjectFileService
 
 
             /*
-            //pega no nome do arquivo e extensão para deletar da pasta
+            //pega no nome do arquivo e extensï¿½o para deletar da pasta
             $nomeFile = $idFile.".".$projectFile->extension;
 
             //deleta da pasta
@@ -196,7 +197,7 @@ class ProjectFileService
 
     }
 
-    //verifica se o usuário está no projeto para poder visualizar ele
+    //verifica se o usuï¿½rio estï¿½ no projeto para poder visualizar ele
     public function checkProjectPermissions($projectFileId){
         if ($this->checkProjectOwner($projectFileId) or $this->checkProjectMember($projectFileId)){
             return true;
