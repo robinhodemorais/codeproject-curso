@@ -13,8 +13,8 @@ angular.module('app.directives')
                                                    temos somente 1 elemento então colocamos 0, pois ele é
                                                    o elemento zero
             */
-            controller: ['$scope','$element','$attrs',
-                function($scope,$element,$attrs){
+            controller: ['$scope','$element','$attrs','$timeout',
+                function($scope,$element,$attrs,$timeout){
                     /*
                       desabilita o botão para o download do arquivo
                     */
@@ -34,6 +34,17 @@ angular.module('app.directives')
                             $(anchor).attr({
                                 href: 'data:application-octet-stream;base64,'+ data.file,
                                 download: data.name
+                            });
+                            /*TimeOut para dar um leg de segundo para não apresentar erro*/
+                            $timeout(function(){
+
+                                 /* após executar a primeira vez, irá limpar o $scope.downloadFile para
+                                    não ficar num loop */
+                                $scope.downloadFile = function (){
+
+                                };
+                                /*irá pegar a ancora e chamar o metodo de click para clicar em download e já baixar o arquivo*/
+                                $(anchor)[0].click();
                             });
                         });
                     }
