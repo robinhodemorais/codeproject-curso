@@ -22,8 +22,9 @@
                             <td>{{o.description | limitTo: 25}}</td> <!-- Limita a quantidade de caracteres-->
                             <td>
                                 <!-- Chama a diretiva project-file-download
+                                     id-file é um parametro
                                 -->
-                                <project-file-download></project-file-download>
+                                <project-file-download id-file="{{o.id}}"></project-file-download>
                                <!-- <a class="btn btn-default" href="/project/file/{{o.id}}/download" target="_blank">
                                     Download
                                 </a>-->
