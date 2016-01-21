@@ -117,7 +117,7 @@ class ProjectFileService
 
     public function getFileName($id){
         $projectFile = $this->repository->skipPresenter()->find($id);
-        return $projectFile->getFileName;
+        return $projectFile->getFileName();
     }
 
 

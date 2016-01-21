@@ -22,8 +22,19 @@ angular.module('app.directives')
                         var anchor = $element.children()[0];
                         $(anchor).addClass('disabled');
                         $(anchor).text('Loading...');
-                        ProjectFile.download({id: null, idFile: $attrs.idFile}, function(data){
 
+                        ProjectFile.download({id: null, idFile: $attrs.idFile}, function(data){
+                            $(anchor).removeClass('disabled');
+                            $(anchor).text('Save File');
+
+                            /*
+                              Indica que temos um dado binário no href e indica que está com o base64
+                              */
+
+                            $(anchor).attr({
+                                href: 'data:application-octet-stream;base64,'+ data.file,
+                                download: data.name
+                            });
                         });
                     }
             }]
