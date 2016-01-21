@@ -76,7 +76,7 @@ class ProjectFileService
 
             //Storeage facede que executa o metodo put, cria o arquivo com o nome e extensiion
             //File face que faz upload
-            $this->storage->put($projectFile->id . "." . $data['extension'], $this->filesystem->get($data['file']));
+            $this->storage->put($projectFile->getFileName(), $this->filesystem->get($data['file']));
 
            /* if ($this->storage->exists($projectFile->id . "." . $data['extension'])) {
                 return response()->json($projectFile->name . " up success !!");
@@ -115,12 +115,17 @@ class ProjectFileService
         return $this->getBaseUrl($projectFile);
     }
 
+    public function getFileName($id){
+        $projectFile = $this->repository->skipPresenter()->find($id);
+        return $projectFile->getFileName;
+    }
+
 
     public function getBaseURL($projectFile){
         switch ($this->storage->getDefaultDriver()) {
             case 'local':
                 return $this->storage->getDriver()->getAdapter()->getPathPrefix()
-                    .'/'. $projectFile->id . '.' . $projectFile->extension;
+                    .'/'. $projectFile->getFileName();
             break;
         }
     }
@@ -137,8 +142,8 @@ class ProjectFileService
              * Busco o File do project e acesso o files que est� relacionando no Project buscando o file
              */
             $projectFile = $this->repository->skipPresenter()->find($id);
-            if($this->storage->exists($projectFile->id.'.'.$projectFile->extension)){
-                $this->storage->delete($projectFile->id.'.'.$projectFile->extension);
+            if($this->storage->exists($projectFile->getFileName())){
+                $this->storage->delete($projectFile->getFileName());
                 return $projectFile->delete();
             }
 

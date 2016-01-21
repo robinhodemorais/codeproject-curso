@@ -105,11 +105,23 @@ class ProjectFileController extends Controller
     }
 */
     public function showFile($id){
-      /*  if ($this->service->checkProjectPermissions($id) == false) {
+        if ($this->service->checkProjectPermissions($id) == false) {
             return ['error' => 'Access Forbidden'];
         }
-        */
-        return response()->download($this->service->getFilePath($id));
+
+        //pega o caminho do arquivo
+        $filePath = $this->service->getFilePath($id);
+        //passa o caminho do arquivo para pegar os dados dele
+        $fileContent = file_get_contents($filePath);
+        //codifica o arquivo
+        $file64 = base64_encode($fileContent);
+
+
+        return [
+            'file' => $file64,
+            'size' => filesize($filePath),
+            'name' => $this->service->getFileName($id)
+        ]; //response()->download($this->service->getFilePath($id));
     }
 
 
