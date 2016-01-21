@@ -124,7 +124,6 @@ app.config(['$routeProvider','$httpProvider','OAuthProvider', 'OAuthTokenProvide
             .when('/project/:id/notes/:noteId/edit', {
                 templateUrl: 'build/views/project-note/edit.html',
                 controller: 'ProjectNoteEditController'
-                //{id}/notes/{idNote}/edit
             })
             .when('/project/:id/notes/:noteId/remove', {
                 templateUrl: 'build/views/project-note/remove.html',
@@ -138,10 +137,9 @@ app.config(['$routeProvider','$httpProvider','OAuthProvider', 'OAuthTokenProvide
                 templateUrl: 'build/views/project-file/new.html',
                 controller: 'ProjectFileNewController'
             })
-            .when('/project/:id/files/:noteId/edit', {
+            .when('/project/:id/files/:idFile/edit', {
                 templateUrl: 'build/views/project-file/edit.html',
                 controller: 'ProjectFileEditController'
-                //{id}/notes/{idNote}/edit
             })
             .when('/project/:id/files/:noteId/remove', {
                 templateUrl: 'build/views/project-file/remove.html',
