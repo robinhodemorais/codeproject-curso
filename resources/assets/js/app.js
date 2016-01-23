@@ -141,7 +141,7 @@ app.config(['$routeProvider','$httpProvider','OAuthProvider', 'OAuthTokenProvide
                 templateUrl: 'build/views/project-file/edit.html',
                 controller: 'ProjectFileEditController'
             })
-            .when('/project/:id/files/:noteId/remove', {
+            .when('/project/:id/files/:idFile/remove', {
                 templateUrl: 'build/views/project-file/remove.html',
                 controller: 'ProjectFileRemoveController'
             })
