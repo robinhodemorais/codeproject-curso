@@ -18,7 +18,7 @@ class ProjectFileValidator  extends LaravelValidator {
         ValidatorInterface::RULE_CREATE => [
             'project_id' => 'required',
             'name' => 'required',
-            'file' => 'required|mines:jpeg,jpg,png,gif,pdf,zip',
+            'file' => 'required|mimes:jpeg,jpg,png,gif,pdf,zip',
             'description' => 'required',
         ],
         ValidatorInterface::RULE_UPDATE => [
