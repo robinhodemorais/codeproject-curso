@@ -4,20 +4,21 @@ namespace CodeProject\Http\Middleware;
 
 use Closure;
 use CodeProject\Repositories\ProjectRepository;
+use CodeProject\Services\ProjectService;
 
 class CheckProjectOwner
 {
     /**
-     * @var ProjectRepository
+     * @var ProjectService
      */
-    private $repository;
+    private $service;
 
     /**
-     * @param ProjectRepository $repository
+     * @param ProjectService $service
      */
-    public function __construct(ProjectRepository $repository){
+    public function __construct(ProjectService $service){
 
-        $this->repository = $repository;
+        $this->service = $service;
     }
     /**
      * Handle an incoming request.
@@ -29,12 +30,12 @@ class CheckProjectOwner
     public function handle($request, Closure $next)
     {
 
-        //retorna o ID do usuário na tela para verificar se é o correto
+        //retorna o ID do usuï¿½rio na tela para verificar se ï¿½ o correto
         // return ['userId'=> \Authorizer::getResourceOwnerId()];
 
 
-        //pega o usuário logado de acordo com o access token
-        $userId =  \Authorizer::getResourceOwnerId();
+        //pega o usuï¿½rio logado de acordo com o access token
+        //$userId =  \Authorizer::getResourceOwnerId();
 
         //rodando o php artisan route:list, podemos ver que o resource criou um parametro
         //no caso do project criou como {project}, conforme abaixo
@@ -43,9 +44,11 @@ class CheckProjectOwner
          *|        | GET|HEAD | project/{project}                | project.show          | CodeProject\Http\Controllers\ProjectController@show         | oauth      |
          */
 
-        $projectId = $request->project;
+       // $projectId = $request->project;
 
-        if ($this->repository->isOwner($projectId,$userId) == false) {
+        $projectId = $request->route('id') ? $request->route('id') : $request->route('project');
+
+        if ($this->service->checkProjectOwner($projectId) == false) {
             return ['error' => 'Access forbidden'];
         }
 

@@ -37,6 +37,7 @@ class ProjectNoteController extends Controller
     {
 
         return $this->service->all($id);
+
     }
 
 
@@ -46,27 +47,28 @@ class ProjectNoteController extends Controller
      * @param  Request  $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-
-
-        return $this->service->create($request->all());
+        $data = $request->all();
+        $data['project_id']  = $id;
+        //return $this->service->create($request->all());
+        return $this->service->create($data);
     }
 
     /**
      * Display the specified resource.
      *
      * @param  int $id
-     * @param $noteid
+     * @param $idNote
      * @return Response
      */
-    public function show($id, $noteid)
+    public function show($id, $idNote)
     {
 
 
        // return $this->service->read($id,$noteid);
 
-        $result = $this->repository->findWhere(['project_id'=>$id, 'id'=>$noteid]);
+        $result = $this->repository->findWhere(['project_id'=>$id, 'id'=>$idNote]);
 
 
         if (isset($result['data']) && count($result['data']) == 1){
@@ -89,10 +91,14 @@ class ProjectNoteController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id, $idNote)
     {
+        $data = $request->all();
+        $data['project_id']  = $id;
+        //return $this->service->update($request->all(),$id);
+        return $this->service->update($data,$idNote);
 
-        return $this->service->update($request->all(),$id);
+
     }
 
     /**
@@ -101,11 +107,12 @@ class ProjectNoteController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function destroy($id)
+    public function destroy($id, $idNote)
     {
 
 
-        return $this->service->delete($id);
+        //return $this->service->delete($id);
+        return $this->repository->delete($idNote);
     }
 
 }

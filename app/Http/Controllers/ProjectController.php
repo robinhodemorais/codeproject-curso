@@ -26,6 +26,8 @@ class ProjectController extends Controller
     public function __construct(ProjectRepository $repository, ProjectService $service){
         $this->repository = $repository;
         $this->service = $service;
+        $this->middleware('check.project.owner', ['except' => ['store', 'show', 'index']]);
+        $this->middleware('check.project.permission', ['except' => ['index', 'store', 'update', 'destroy']]);
     }
 
     /**
@@ -36,7 +38,9 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        return $this->service->all();
+       // return $this->service->all();
+
+        return $this->repository->findWithOwnerAndMember(\Authorizer::getResourceOwnerId());
     }
 
 
@@ -181,7 +185,7 @@ class ProjectController extends Controller
 
     }
 
-    //verifica se o usuário está no projeto para poder visualizar ele
+    //verifica se o usuï¿½rio estï¿½ no projeto para poder visualizar ele
     private function checkProjectPermissions($projectId){
         if ($this->checkProjectOwner($projectId) or $this->checkProjectMember($projectId)){
             return true;

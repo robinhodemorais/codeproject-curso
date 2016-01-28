@@ -32,30 +32,39 @@ class ProjectRepositoryEloquent extends BaseRepository implements ProjectReposit
     }
 
     /*
-     * Metodo para verificar se o usuário é dono do projeto, se ele pode alterar
+     * Metodo para verificar se o usuï¿½rio ï¿½ dono do projeto, se ele pode alterar
      */
     public function isOwner($projectid, $userid){
 
 
-        if(count($this->findWhere(['id'=>$projectid, 'owner_id'=>$userid]))){
+        if(count($this->skipPresenter()->findWhere(['id' => $projectid, 'owner_id' => $userid]))) {
             return true;
         }
 
         return false;
     }
 
-    //verifica se o membro é do projeto
+    //verifica se o membro ï¿½ do projeto
     public function hasMember($projectId, $memberId){
-        $project = $this->find($projectId);
+        $project = $this->skipPresenter()->find($projectId);
 
         foreach($project->members as $member){
-            if($member->id == $memberId){
+            if($member->id == $memberId) {
                 return true;
             }
-
         }
 
         return false;
+    }
+
+
+    public function findWithOwnerAndMember($userId){
+        return $this->scopeQuery(function($query) use ($userId) {
+            return $query->select('projects.*')
+                ->leftJoin('project_members','project_members.project_id','=','projects.id')
+                ->where('project_members.user_id','=',$userId)
+                ->union($this->model->query()->getQuery()->where('owner_id', '=', $userId));
+        })->all();
     }
 
     /*

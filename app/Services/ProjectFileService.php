@@ -184,32 +184,5 @@ class ProjectFileService
 
     }
 
-    public function checkProjectOwner($projectFileId){
-
-        $userId =  \Authorizer::getResourceOwnerId();
-        $projectId = $this->repository->skipPresenter()->find($projectFileId)->project_id;
-
-        return $this->projectRepository->isOwner($projectId,$userId);
-
-    }
-
-
-    public function checkProjectMember($projectFileId){
-
-        $userId =  \Authorizer::getResourceOwnerId();
-        $projectId = $this->repository->skipPresenter()->find($projectFileId)->project_id;
-
-        return $this->projectRepository->hasMember($projectId,$userId);
-
-    }
-
-    //verifica se o usu�rio est� no projeto para poder visualizar ele
-    public function checkProjectPermissions($projectFileId){
-        if ($this->checkProjectOwner($projectFileId) or $this->checkProjectMember($projectFileId)){
-            return true;
-        }
-
-        return false;
-    }
 
 }

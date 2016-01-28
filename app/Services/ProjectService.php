@@ -9,7 +9,6 @@
 namespace CodeProject\Services;
 
 
-use CodeProject\Repositories\ProjectFileRepository;
 use CodeProject\Repositories\ProjectRepository;
 use CodeProject\Validators\ProjectFileValidator;
 use CodeProject\Validators\ProjectValidator;
@@ -63,7 +62,7 @@ class ProjectService
     public function all()
     {
         //return response()->json($this->repository->with(['owner', 'client', 'notes', 'members', 'tasks'])->all());
-        //passa o Authorizer para verificar se o usuário tem acesso a ver
+        //passa o Authorizer para verificar se o usuï¿½rio tem acesso a ver
        // return $this->repository->skipPresenter()->with(['owner', 'client', 'notes', 'members', 'tasks'])->findWhere(['owner_id' => \Authorizer::getResourceOwnerId()]);
         return $this->repository->with(['owner', 'client', 'notes', 'members', 'tasks'])->findWhere(['owner_id' => \Authorizer::getResourceOwnerId()]);
     }
@@ -217,6 +216,36 @@ class ProjectService
         }
     }
 
+
+
+    public function checkProjectOwner($projectFileId){
+
+        $userId =  \Authorizer::getResourceOwnerId();
+        $projectId = $this->repository->skipPresenter()->find($projectFileId)->project_id;
+
+        return $this->projectRepository->isOwner($projectId,$userId);
+
+    }
+
+
+    public function checkProjectMember($projectFileId){
+
+        $userId =  \Authorizer::getResourceOwnerId();
+        $projectId = $this->repository->skipPresenter()->find($projectFileId)->project_id;
+
+        return $this->projectRepository->hasMember($projectId,$userId);
+
+    }
+
+    //verifica se o usuï¿½rio estï¿½ no projeto para poder visualizar ele
+    public function checkProjectPermissions($projectFileId){
+        if ($this->checkProjectOwner($projectFileId) or $this->checkProjectMember($projectFileId)){
+            return true;
+        }
+
+        return false;
+    }
+
     /*
      * Cria o novo arquivo no sistema
      */
@@ -261,11 +290,11 @@ class ProjectService
            // $projectFile = $this->repository->skipPresenter()->with(['files'])->find($idFile);
 
             /*
-             * Busco o File do project e acesso o files que está relacionando no Project buscando o file
+             * Busco o File do project e acesso o files que estï¿½ relacionando no Project buscando o file
              */
             $projectFile = $this->repository->skipPresenter()->find($idProject)->files()->find($idFile);
 
-            //pega no nome do arquivo e extensão para deletar da pasta
+            //pega no nome do arquivo e extensï¿½o para deletar da pasta
             $nomeFile = $idFile.".".$projectFile->extension;
 
             //deleta da pasta
