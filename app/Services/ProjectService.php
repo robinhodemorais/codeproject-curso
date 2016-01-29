@@ -10,13 +10,9 @@ namespace CodeProject\Services;
 
 
 use CodeProject\Repositories\ProjectRepository;
-use CodeProject\Validators\ProjectFileValidator;
 use CodeProject\Validators\ProjectValidator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Prettus\Validator\Exceptions\ValidatorException;
-
-use \Illuminate\Filesystem\Filesystem;
-use \Illuminate\Contracts\Filesystem\Factory as Storage;
 
 
 
@@ -30,32 +26,16 @@ class ProjectService
      * @var ProjectValidator
      */
     private $validator;
-    /**
-     * @var Filesystem
-     */
-    private $filesystem;
-    /**
-     * @var Storage
-     */
-    private $storage;
-    /**
-     * @var ProjectFileValidator
-     */
-    private $fileValidator;
 
     /**
      * @param ProjectRepository $repository
      * @param ProjectValidator $validator
      */
-    public function __construct(ProjectRepository $repository, ProjectValidator $validator,
-                                ProjectFileValidator $fileValidator, Filesystem $filesystem,
-                                Storage $storage)
+    public function __construct(ProjectRepository $repository, ProjectValidator $validator
+                                )
     {
         $this->repository = $repository;
         $this->validator = $validator;
-        $this->filesystem = $filesystem;
-        $this->storage = $storage;
-        $this->fileValidator = $fileValidator;
     }
 
 

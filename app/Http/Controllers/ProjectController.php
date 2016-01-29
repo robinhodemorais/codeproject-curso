@@ -26,7 +26,7 @@ class ProjectController extends Controller
     public function __construct(ProjectRepository $repository, ProjectService $service){
         $this->repository = $repository;
         $this->service = $service;
-        $this->middleware('check.project.owner', ['except' => ['store', 'show', 'index']]);
+        $this->middleware('check.project.owner', ['except' => ['index', 'store', 'show' ]]);
         $this->middleware('check.project.permission', ['except' => ['index', 'store', 'update', 'destroy']]);
     }
 
