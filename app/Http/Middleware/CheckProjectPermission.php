@@ -30,7 +30,7 @@ class CheckProjectPermission
     public function handle($request, Closure $next)
     {
 
-        $projectId = $request->route('id') ? $request->route('id') : $request->route('project');
+        $projectId = $request->route('id') ? $request->route('id') : $request->route('projects');
 
        // dd($projectId);
 

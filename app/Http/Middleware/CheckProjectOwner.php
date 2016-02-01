@@ -46,7 +46,7 @@ class CheckProjectOwner
 
        // $projectId = $request->project;
 
-        $projectId = $request->route('id') ? $request->route('id') : $request->route('project');
+        $projectId = $request->route('id') ? $request->route('id') : $request->route('projects');
 
         if ($this->service->checkProjectOwner($projectId) == false) {
             return ['error' => 'Access forbidden'];
