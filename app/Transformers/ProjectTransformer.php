@@ -15,7 +15,7 @@ class ProjectTransformer extends TransformerAbstract
 {
 
     /*
-     * Transformer, transforma as informações da maneira que vc queira apresentar
+     * Transformer, transforma as informaï¿½ï¿½es da maneira que vc queira apresentar
      *
      */
 
@@ -35,12 +35,13 @@ class ProjectTransformer extends TransformerAbstract
             'progress' => (int) $project->progress,
             'status' => $project->status,
             'due_date' => $project->due_date,
+            'is_member' => $project->owner_id != \Authorizer::getResourceOwnerId()
         ];
     }
 
     public function includeMembers(Project $project){
         //na hora de exibir os membros, receber o transformer dos membros para apresentar,
-        //porém para mostrar tem que utilizar o atributo protegido $defaultIncludes para
+        //porï¿½m para mostrar tem que utilizar o atributo protegido $defaultIncludes para
         //poder mostrar
         return  $this->collection($project->members, new ProjectMemberTransformer());
     }
