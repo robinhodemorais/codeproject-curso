@@ -4,6 +4,7 @@ namespace CodeProject\Http\Controllers;
 
 use CodeProject\Repositories\ProjectFileRepository;
 use CodeProject\Services\ProjectFileService;
+use CodeProject\Services\ProjectService;
 use Illuminate\Http\Request;
 
 class ProjectFileController extends Controller
@@ -17,16 +18,21 @@ class ProjectFileController extends Controller
      * @var ProjectFileService
      */
     private $service;
+    /**
+     * @var ProjectService
+     */
+    private $projectService;
 
 
     /**
      * @param ProjectFileRepository $repository
      * @param ProjectFileService $service
      */
-    public function __construct(ProjectFileRepository $repository, ProjectFileService $service){
+    public function __construct(ProjectFileRepository $repository, ProjectFileService $service, ProjectService $projectService){
         $this->repository = $repository;
         $this->service = $service;
 
+        $this->projectService = $projectService;
     }
 
     /**
@@ -106,7 +112,7 @@ class ProjectFileController extends Controller
     }
 */
     public function showFile($id){
-        if ($this->service->checkProjectPermissions($id) == false) {
+        if ($this->projectService->checkProjectPermissions($id) == false) {
             return ['error' => 'Access Forbidden'];
         }
 
@@ -127,7 +133,7 @@ class ProjectFileController extends Controller
 
 
     public function show($id){
-        if ($this->service->checkProjectPermissions($id) == false) {
+        if ($this->projectService->checkProjectPermissions($id) == false) {
             return ['error' => 'Access Forbidden'];
         }
 
@@ -136,7 +142,7 @@ class ProjectFileController extends Controller
 
 
     public function update(Request $request, $id){
-        if ($this->service->checkProjectOwner($id) == false) {
+        if ($this->projectService->checkProjectOwner($id) == false) {
             return ['error' => 'Access Forbidden'];
         }
 
@@ -146,7 +152,7 @@ class ProjectFileController extends Controller
 
     public function destroy($id)  {
 
-        if ($this->service->checkProjectOwner($id) == false) {
+        if ($this->projectService->checkProjectOwner($id) == false) {
             return ['error' => 'Access Forbidden'];
         }
         $this->service->delete($id);
