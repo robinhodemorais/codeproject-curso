@@ -9,6 +9,7 @@
 namespace CodeProject\Services;
 
 
+use CodeProject\Repositories\ProjectRepository;
 use CodeProject\Repositories\ProjectTasksRepository;
 use CodeProject\Validators\ProjectTasksValidator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -21,12 +22,20 @@ class ProjectTasksService {
      * @var
      */
     private $validator;
+    /**
+     * @var ProjectRepository
+     */
+    private $projectRepository;
 
-    public function __construct(ProjectTasksRepository $repository, ProjectTasksValidator $validator){
+    public function __construct(ProjectTasksRepository $repository,
+                                ProjectRepository $projectRepository,
+                                ProjectTasksValidator $validator){
         $this->repository = $repository;
         $this->validator = $validator;
+        $this->projectRepository = $projectRepository;
     }
 
+    /*
     public function all($id){
         return response()->json($this->repository->findWhere(['project_id' => $id]));
     }
@@ -43,12 +52,17 @@ class ProjectTasksService {
         }
     }
 
-
+*/
     public function create(array $data){
 
         try{
             $this->validator->with($data)->passesOrFail();
-            return $this->repository->create($data);
+
+            $project = $this->projectRepository->skipPresenter()->find($data['project_id']);
+            $projectTask = $project->tasks()->create($data);
+
+            return $projectTask;
+
         } catch (ValidatorException $e) {
             return response()->json([
                 'error' => true,
@@ -64,8 +78,10 @@ class ProjectTasksService {
     public function update(array $data, $id){
 
         try{
+
             $this->validator->with($data)->passesOrFail();
             return $this->repository->update($data, $id);
+
         } catch (ValidatorException $e) {
             return response()->json([
                 'error' => true,
@@ -87,8 +103,12 @@ class ProjectTasksService {
     public function delete($id){
 
         try {
-            $this->repository->delete($id);
-            return response()->json(['error' => false,'message' => "ProjectTask {$id} deleted"]);
+
+            //$this->repository->delete($id);
+            //return response()->json(['error' => false,'message' => "ProjectTask {$id} deleted"]);
+            $projectTask = $this->repository->skipPresenter()->find($id);
+            return $projectTask->delete();
+
         } catch (ModelNotFoundException $e) {
             return response()->json([
                 'error' => false,

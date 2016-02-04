@@ -111,8 +111,8 @@ class ProjectNoteController extends Controller
     {
 
 
-        //return $this->service->delete($id);
-        return $this->repository->delete($idNote);
+        return $this->service->delete($idNote);
+        //return $this->repository->delete($idNote);
     }
 
 }

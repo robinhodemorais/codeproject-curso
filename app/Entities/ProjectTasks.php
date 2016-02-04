@@ -19,7 +19,8 @@ class ProjectTasks extends Model implements Transformable
     ];
 
     public function project(){
-        return $this->belongsTo('project');
+        //return $this->belongsTo('project');
+        return $this->belongsTo(Project::class);
     }
 
 }

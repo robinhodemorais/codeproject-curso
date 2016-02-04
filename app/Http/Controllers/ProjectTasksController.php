@@ -36,7 +36,8 @@ class ProjectTasksController extends Controller
     public function index($id)
     {
 
-        return $this->service->all($id);
+       // return $this->service->all($id);
+        return $this->repository->findWhere(['project_id' => $id]);
     }
 
 
@@ -46,10 +47,12 @@ class ProjectTasksController extends Controller
      * @param  Request  $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
+        $data = $request->all();
+        $data['project_id'] = $id;
 
-        return $this->service->create($request->all());
+        return $this->service->create($data);
     }
 
     /**
@@ -59,11 +62,9 @@ class ProjectTasksController extends Controller
      * @param $tasksid
      * @return Response
      */
-    public function show($id, $tasksid)
+    public function show($id, $idTask)
     {
-
-        return $this->service->read($id,$tasksid);
-
+        return $this->repository->find($idTask);
     }
 
 
@@ -75,10 +76,13 @@ class ProjectTasksController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update(Request $request, $id, $tasksid)
+    public function update(Request $request, $id, $idTask)
     {
 
-        return $this->service->update($request->all(),$tasksid);
+        $data = $request->all();
+        $data['project'] = $id;
+
+        return $this->service->update($data,$idTask);
     }
 
     /**
@@ -87,10 +91,10 @@ class ProjectTasksController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function destroy($id)
+    public function destroy($id, $idTask)
     {
 
-       return $this->service->delete($id);
+       return $this->service->delete($idTask);
     }
 
 
