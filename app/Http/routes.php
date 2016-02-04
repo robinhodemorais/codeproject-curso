@@ -36,10 +36,10 @@ Route::group(['middleware'=>'oauth'], function () {
 
 
         Route::get('/{id}/task', 'ProjectTasksController@index');
+        Route::get('/{id}/task/{taskId}', 'ProjectTasksController@show');
         Route::post('/{id}/task', 'ProjectTasksController@store');
-        Route::get('/{id}/task/{tasksId}', 'ProjectTasksController@show');
-        Route::put('/{id}/task/{tasksId}', 'ProjectTasksController@update');
-        Route::delete('/{id}/task/{tasksId}', 'ProjectTasksController@destroy');
+        Route::put('/{id}/task/{taskId}', 'ProjectTasksController@update');
+        Route::delete('/{id}/task/{taskId}', 'ProjectTasksController@destroy');
 
 
         Route::get('{id}/file','ProjectFileController@index');

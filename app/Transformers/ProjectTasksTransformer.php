@@ -16,13 +16,14 @@ class ProjectTasksTransformer extends TransformerAbstract
 {
 
     /*
-     * Transformer, transforma as informações da maneira que vc queira apresentar
+     * Transformer, transforma as informaï¿½ï¿½es da maneira que vc queira apresentar
      *
      */
 
     public function transform(ProjectTasks $projectTasks){
         return [
-            'task_id' => $projectTasks->id,
+            'id' => $projectTasks->id,
+            'name' => $projectTasks->name,
             'project_id' => $projectTasks->project_id,
             'start_date' => $projectTasks->start_date,
             'due_date' => $projectTasks->due_date,

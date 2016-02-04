@@ -1,22 +1,45 @@
 angular.module('app.controllers')
-    .controller('ProjectFileEditController',
-    ['$scope', '$location','$routeParams', 'ProjectFile',
-        function($scope, $location, $routeParams, ProjectFile){
-            $scope.projectFile = ProjectFile.get({
+    .controller('ProjectTaskEditController',
+    ['$scope', '$location','$routeParams', 'appConfig','ProjectTask',
+        function($scope, $location, $routeParams, appConfig, ProjectTask){
+            $scope.projectTask = ProjectTask.get({
                 id: $routeParams.id,
-                idFile: $routeParams.idFile
+                idTask: $routeParams.idTask
             });
 
-           // console.log($scope.projectNote);
+            $scope.status = appConfig.projectTask.status;
+
+            $scope.start_date = {
+                status:{
+                    opened: false
+                }
+            };
+
+            $scope.due_date = {
+                status:{
+                    opened: false
+                }
+            };
+
+            $scope.openStartDatePicker = function ($event){
+                $scope.start_date.status.opened = true;
+            };
+
+            $scope.openDueDatePicker = function ($event){
+                $scope.due_date.status.opened = true;
+            };
+
 
             $scope.save = function(){
                 if($scope.form.$valid) {
-                    ProjectFile.update({
+                    ProjectTask.update({
                         id: $routeParams.id,
-                        idFile: $scope.projectFile.id
-                    }, $scope.projectFile, function(){
-                        $location.path('/project/' + $routeParams.id + '/files');
+                        idTask: $scope.projectTask.id},
+                        $scope.projectTask, function () {
+                        $location.path('/project/' + $routeParams.id + '/tasks');
                     });
+
+
                 }
 
             }

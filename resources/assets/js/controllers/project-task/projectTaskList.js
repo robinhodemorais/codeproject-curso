@@ -22,11 +22,13 @@ angular.module('app.controllers')
             //aqui faz a ordenação configurada no repository
             //faz o carregamento das tasks
         $scope.loadTask=function(){
-            $scope.projectTask = ProjectTask.query({
+            $scope.projectTasks = ProjectTask.query({
                id: $routeParams.id,
                 orderBy: 'id',
                 sortedBy: 'desc'
             });
+
+            console.log($scope.projectTasks);
         };
 
             $scope.loadTask();
