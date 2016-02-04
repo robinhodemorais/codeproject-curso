@@ -147,7 +147,7 @@ app.config(['$routeProvider','$httpProvider','OAuthProvider', 'OAuthTokenProvide
                 templateUrl: 'build/views/project-task/edit.html',
                 controller: 'ProjectTaskEditController'
             })
-            .when('/project/:id/tasks/:idTask/remove', {
+            .when('/project/:id/task/:idTask/remove', {
                 templateUrl: 'build/views/project-task/remove.html',
                 controller: 'ProjectTaskRemoveController'
             })

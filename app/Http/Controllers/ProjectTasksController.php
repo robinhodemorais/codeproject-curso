@@ -94,7 +94,7 @@ class ProjectTasksController extends Controller
     public function destroy($id, $idTask)
     {
 
-       return $this->service->delete($idTask);
+       $this->service->delete($idTask);
     }
 
 
