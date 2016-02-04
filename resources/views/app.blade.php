@@ -114,6 +114,11 @@
 		<script src="{{asset('build/js/controllers/project-file/projectFileEdit.js')}}"></script>
 		<script src="{{asset('build/js/controllers/project-file/projectFileRemove.js')}}"></script>
 
+		<script src="{{asset('build/js/controllers/project-task/projectTaskList.js')}}"></script>
+		<script src="{{asset('build/js/controllers/project-task/projectTaskNew.js')}}"></script>
+		<script src="{{asset('build/js/controllers/project-task/projectTaskEdit.js')}}"></script>
+		<script src="{{asset('build/js/controllers/project-task/projectTaskRemove.js')}}"></script>
+
 
 		<!-- Directives -->
 		<script src="{{asset('build/js/directives/projectFileDownload.js')}}"></script>
@@ -129,6 +134,7 @@
 		<script src="{{asset('build/js/services/project.js')}}"></script>
 		<script src="{{asset('build/js/services/projectNote.js')}}"></script>
 		<script src="{{asset('build/js/services/projectFile.js')}}"></script>
+		<script src="{{asset('build/js/services/projectTask.js')}}"></script>
 		<script src="{{asset('build/js/services/user.js')}}"></script>
 
 	@else
