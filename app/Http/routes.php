@@ -24,6 +24,7 @@ Route::group(['middleware'=>'oauth'], function () {
 
     Route::resource('client','ClientController', ['except' => ['create','edit']]);
     Route::resource('projects','ProjectController', ['except' => ['create','edit']]);
+    Route::resource('project.member','ProjectMemberController', ['except' => ['create','edit', 'update']]);
 
     Route::group(['middleware' => 'check.project.permission','prefix'=>'project'], function() {
 
@@ -52,11 +53,12 @@ Route::group(['middleware'=>'oauth'], function () {
 
     });
 
+    /*
     Route::get('/{id}/members', 'ProjectController@showMembers');
     Route::get('/member/add/{memberId}', ['as' => 'project.member.add', 'uses' => 'ProjectController@addMember']);
     Route::get('/member/remove/{memberId}',['as' => 'project.member.remove','uses' => 'ProjectController@removeMember']);
     Route::get('/tasks/{id}', ['as' => 'project.tasks.show', 'uses' => 'ProjectController@showTasks']);
-
+*/
 
     Route::get('/user/authenticated', 'UserController@authenticated');
 

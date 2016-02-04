@@ -27,6 +27,8 @@ class ProjectMembersController extends Controller
     public function __construct(ProjectMembersRepository $repository, ProjectMembersService $service){
         $this->repository = $repository;
         $this->service = $service;
+        $this->middleware('check.project.owner', ['except' => ['index', 'show' ]]);
+        $this->middleware('check.project.permission', ['except' => ['index', 'destroy']]);
     }
 
     /**
@@ -43,9 +45,26 @@ class ProjectMembersController extends Controller
      * @param  Request  $request
      * @return Response
      */
-    public function store(Request $request){
-        return $this->service->create($request->all());
+
+    public function index($id){
+        return $this->repository->findWhere(['project_id' => $id]);
     }
 
+
+    public function store(Request $request, $id){
+        $data = $request->all();
+        $data['project_id'] = $id;
+
+
+        return $this->service->create($data);
+    }
+
+    public function show($id, $idProjectMember){
+        return $this->repository->find($idProjectMember);
+    }
+
+    public function destroy($id, $idProjectMember){
+        return $this->service->delete($idProjectMember);
+    }
 
 }

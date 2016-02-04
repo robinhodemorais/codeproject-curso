@@ -11,6 +11,7 @@ namespace CodeProject\Services;
 
 use CodeProject\Repositories\ProjectMembersRepository;
 use CodeProject\Validators\ProjectMembersValidator;
+use Illuminate\Contracts\Validation\ValidationException;
 
 
 class ProjectMembersService {
@@ -25,10 +26,23 @@ class ProjectMembersService {
         $this->validator = $validator;
     }
 
-    public function all($id){
-        return response()->json($this->repository->findWhere(['project_id' => $id]));
+    public function create(array $data){
+        try {
+            $this->validator->with($data)->passesOrFail();
+
+            return $this->repository->create($data);
+        } catch (ValidationException $e) {
+            return [
+                'error', true,
+                'message' => $e->getMessage()
+            ];
+        }
     }
 
+    public function delete($id){
+        $projectMember = $this->repository->skipPresenter()->find($id);
+        return $projectMember->delete();
+    }
 
 
 
