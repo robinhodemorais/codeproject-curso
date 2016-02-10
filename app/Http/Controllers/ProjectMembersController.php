@@ -28,7 +28,7 @@ class ProjectMembersController extends Controller
         $this->repository = $repository;
         $this->service = $service;
         $this->middleware('check.project.owner', ['except' => ['index', 'show' ]]);
-        $this->middleware('check.project.permission', ['except' => ['index', 'destroy']]);
+        $this->middleware('check.project.permission', ['except' => ['store', 'destroy']]);
     }
 
     /**
@@ -64,7 +64,7 @@ class ProjectMembersController extends Controller
     }
 
     public function destroy($id, $idProjectMember){
-        return $this->service->delete($idProjectMember);
+        $this->service->delete($idProjectMember);
     }
 
 }

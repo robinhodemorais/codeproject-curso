@@ -39,7 +39,7 @@ angular.module('app.services')
 
                     }
 
-                    return 0;
+                    return o;
                 }
             },
             save: {

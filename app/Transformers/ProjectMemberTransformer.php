@@ -10,8 +10,8 @@ namespace CodeProject\Transformers;
 
 use CodeProject\Entities\Project;
 use CodeProject\Entities\ProjectMembers;
-
 use League\Fractal\TransformerAbstract;
+
 
 class ProjectMemberTransformer extends TransformerAbstract
 {
@@ -32,7 +32,7 @@ class ProjectMemberTransformer extends TransformerAbstract
     }
 
     public function includeUser(Project $member){
-        return $this->item($member,new MemberTransformer());
+        return $this->item($member->member,new MemberTransformer());
     }
 
 

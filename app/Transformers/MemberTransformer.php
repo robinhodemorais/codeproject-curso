@@ -11,6 +11,7 @@ namespace CodeProject\Transformers;
 use CodeProject\Entities\User;
 use League\Fractal\TransformerAbstract;
 
+
 class MemberTransformer extends TransformerAbstract
 {
 

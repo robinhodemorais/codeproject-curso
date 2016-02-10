@@ -167,6 +167,14 @@ app.config(['$routeProvider','$httpProvider','OAuthProvider', 'OAuthTokenProvide
                 templateUrl: 'build/views/project-file/remove.html',
                 controller: 'ProjectFileRemoveController'
             })
+            .when('/project/:id/members', {
+                templateUrl: 'build/views/project-member/list.html',
+                controller: 'ProjectMemberListController'
+            })
+            .when('/project/:id/members/:idProjectMember/remove', {
+                templateUrl: 'build/views/project-member/remove.html',
+                controller: 'ProjectMemberRemoveController'
+            })
 
         ;
 

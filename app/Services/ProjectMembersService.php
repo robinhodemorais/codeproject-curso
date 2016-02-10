@@ -34,7 +34,7 @@ class ProjectMembersService {
         } catch (ValidationException $e) {
             return [
                 'error', true,
-                'message' => $e->getMessage()
+                'message' => $e->getMessageBag()
             ];
         }
     }
