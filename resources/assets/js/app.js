@@ -194,7 +194,20 @@ app.config(['$routeProvider','$httpProvider','OAuthProvider', 'OAuthTokenProvide
 
     }]);
 
-app.run(['$rootScope', '$window', 'OAuth', function($rootScope, $window, OAuth) {
+app.run(['$rootScope', '$location', '$window', 'OAuth', function($rootScope, $location, $window, OAuth) {
+
+    //recebe o evento atual, a proxima rota e a rota corrent
+    $rootScope.$on('$routeChangeStart', function (event, next, current) {
+        //acessa as informações da rota
+        if(next.$$route.originalPath != '/login'){
+            //se a autenticação for falso, vamos redirecionar para o login
+            //isAuthenticated verifica se existe o token
+            if(!OAuth.isAuthenticated()){
+                $location.path('login');
+            }
+        }
+    });
+
     $rootScope.$on('oauth:error', function (event, rejection) {
         // Ignore `invalid_grant` error - should be catched on `LoginController`.
         if ('invalid_grant' === rejection.data.error) {
