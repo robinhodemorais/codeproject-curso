@@ -14,10 +14,12 @@ angular.module('app.controllers')
 
             //fecha o model
             $scope.$on('event:auth-loginConfirmed', function(){
+                $rootScope.loginModalOpened = false;
                 $modalInstance.close();
             });
 
             $scope.$on('$routeChangeStart', function(){
+                $rootScope.loginModalOpened = false;
                 $modalInstance.dismiss('cancel');
             });
 
