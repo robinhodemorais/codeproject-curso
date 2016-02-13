@@ -205,7 +205,7 @@ app.config(['$routeProvider','$httpProvider','OAuthProvider', 'OAuthTokenProvide
 
     }]);
 
-app.run(['$rootScope', '$location', 'OAuth', function($rootScope, $location, OAuth) {
+app.run(['$rootScope', '$location','$http' ,'OAuth', function($rootScope, $location, $http, OAuth) {
 
     //recebe o evento atual, a proxima rota e a rota corrent
     $rootScope.$on('$routeChangeStart', function (event, next, current) {
@@ -219,15 +219,19 @@ app.run(['$rootScope', '$location', 'OAuth', function($rootScope, $location, OAu
         }
     });
 
-    $rootScope.$on('oauth:error', function (event, rejection) {
+    $rootScope.$on('oauth:error', function (event, data) {
         // Ignore `invalid_grant` error - should be catched on `LoginController`.
-        if ('invalid_grant' === rejection.data.error) {
+        if ('invalid_grant' === data.rejection.data.error) {
             return;
         }
 
         // Refresh token when a `invalid_token` error occurs.
-        if ('access_denied' === rejection.data.error) {
-            return OAuth.getRefreshToken();
+        if ('access_denied' === data.rejection.data.error) {
+            return OAuth.getRefreshToken().then(function (data){
+                $http(data.rejection.config).then(function(){
+                    return data.deferred.resolve(data);
+                })
+            });
         }
 
         // Redirect to `/login` with the `error_reason`.
