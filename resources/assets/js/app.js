@@ -241,6 +241,8 @@ app.run(['$rootScope', '$location','$http','$modal' ,'httpBuffer','OAuth',
                 });
 
                 $rootScope.loginModalOpened = true;
+
+                return;
             }
 
         }
