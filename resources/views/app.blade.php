@@ -93,7 +93,9 @@
 
 		<!-- Controller -->
 		<script src="{{asset('build/js/controllers/login.js')}}"></script>
+		<script src="{{asset('build/js/controllers/loginModal.js')}}"></script>
 		<script src="{{asset('build/js/controllers/home.js')}}"></script>
+
 		<script src="{{asset('build/js/controllers/client/clientList.js')}}"></script>
 		<script src="{{asset('build/js/controllers/client/clientNew.js')}}"></script>
 		<script src="{{asset('build/js/controllers/client/clientEdit.js')}}"></script>
