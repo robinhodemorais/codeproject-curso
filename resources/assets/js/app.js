@@ -205,7 +205,7 @@ app.config(['$routeProvider','$httpProvider','OAuthProvider', 'OAuthTokenProvide
 
     }]);
 
-app.run(['$rootScope', '$location', '$window', 'OAuth', function($rootScope, $location, OAuth) {
+app.run(['$rootScope', '$location', 'OAuth', function($rootScope, $location, OAuth) {
 
     //recebe o evento atual, a proxima rota e a rota corrent
     $rootScope.$on('$routeChangeStart', function (event, next, current) {
