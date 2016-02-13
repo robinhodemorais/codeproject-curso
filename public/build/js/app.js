@@ -201,6 +201,7 @@ app.config(['$routeProvider','$httpProvider','OAuthProvider', 'OAuthTokenProvide
             grantPath: 'oauth/access_token'
         });
 
+
         OAuthTokenProvider.configure({
             name: 'token',
             options: {
