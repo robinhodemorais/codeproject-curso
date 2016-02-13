@@ -29,7 +29,10 @@
                                            datepicker-popup="dd/MM/yyyy"
                                            ng-model="projectTask.start_date"
                                            is-open="start_date.status.opened"
-                                           close-text="Close"
+                                           current-text="Hoje"
+                                           clear-text="Limpar"
+                                           close-text="Fechar"
+
                                     />
                                             <span class="input-group-btn">
                                                 <button type="button" class="btn btn-default" ng-click="openStartDatePicker($event)">
@@ -58,8 +61,10 @@
                                            name="due_date"
                                            datepicker-popup="dd/MM/yyyy"
                                            ng-model="projectTask.due_date"
+                                           current-text="Hoje"
+                                           clear-text="Limpar"
+                                           close-text="Fechar"
                                            is-open="due_date.status.opened"
-                                           close-text="Close"
                                     />
                                             <span class="input-group-btn">
                                                 <button type="button" class="btn btn-default" ng-click="openDueDatePicker($event)">

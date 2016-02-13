@@ -74,6 +74,11 @@ app.config(['$routeProvider','$httpProvider','OAuthProvider', 'OAuthTokenProvide
         $httpProvider.defaults.headers.put['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
         $httpProvider.defaults.transformRequest = appConfigProvider.config.utils.transformRequest;
         $httpProvider.defaults.transformResponse = appConfigProvider.config.utils.transformResponse;
+
+        //remove os modulos de http e interceptor para incluir o nosso
+        $httpProvider.interceptors.splice(0,1);
+        $httpProvider.interceptors.splice(0,1);
+
         //registra o interceptador para tratar o access_denied do oauth
         $httpProvider.interceptors.push('oauthFixInterceptor');
 
