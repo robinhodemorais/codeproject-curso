@@ -54,8 +54,6 @@ class ProjectMembersController extends Controller
     public function store(Request $request, $id){
         $data = $request->all();
         $data['project_id'] = $id;
-
-
         return $this->service->create($data);
     }
 

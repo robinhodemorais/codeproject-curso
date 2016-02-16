@@ -39,7 +39,7 @@ class Project extends Model implements Transformable
 
     public function members(){
         //belongsToMany pertence h� muitos, passa a tabelas que faz o relacionamento
-        return $this->belongsToMany(User::class,'project_members');
+        return $this->belongsToMany(User::class,'project_members','project_id', 'user_id');
     }
 
     public function files(){
