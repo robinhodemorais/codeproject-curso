@@ -40,7 +40,11 @@ class ProjectController extends Controller
     {
        // return $this->service->all();
 
-        return $this->repository->findWithOwnerAndMember(\Authorizer::getResourceOwnerId());
+        /*
+         * PEGA O USER ID : \Authorizer::getResourceOwnerId()
+         */
+
+        return $this->repository->findOwner(\Authorizer::getResourceOwnerId());//findWithOwnerAndMember(\Authorizer::getResourceOwnerId());
     }
 
 
