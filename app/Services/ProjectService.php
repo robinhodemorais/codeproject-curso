@@ -132,7 +132,8 @@ class ProjectService
     public function showMembers($id)
     {
         try {
-            return response()->json($this->repository->with(['members'])->find($id));
+           // return response()->json($this->repository->with(['members'])->find($id));
+           return $this->repository->find($id)->members()->attach($memberId);
         } catch(ModelNotFoundException $ex) {
             return $this->notFound($id);
         }
@@ -140,7 +141,8 @@ class ProjectService
     public function addMember($id, $memberId)
     {
         try {
-            $this->repository->find($id)->members()->attach($memberId);
+           // $this->repository->find($id)->members()->attach($memberId);
+            $this->repository->with(['members'])->find($id)->detach($memberId);
             return response()->json([
                 'error' => false,
                 'message' => [

@@ -8,9 +8,8 @@
 
 namespace CodeProject\Repositories;
 
-use CodeProject\Entities\Client;
 use CodeProject\Entities\User;
-use CodeProject\Presenters\ClientPresenter;
+use CodeProject\Presenters\UserPresenter;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Prettus\Repository\Eloquent\BaseRepository;
 
@@ -31,6 +30,9 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository {
        $this->pushCriteria(app(RequestCriteria::class));
     }
 
-
+    public function presenter()
+    {
+        return UserPresenter::class;
+    }
 
 }

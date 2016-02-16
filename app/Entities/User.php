@@ -37,7 +37,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function projects()
     {
        // return $this->hasMany(Project::class);
-        return$this->belongsToMany(Project::class,'project_members', 'user_id', 'project_id');
+        return$this->belongsToMany(Project::class,'project_members', 'member_id', 'project_id');
     }
 
    /* public function members(){

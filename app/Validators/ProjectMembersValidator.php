@@ -14,6 +14,6 @@ use Prettus\Validator\LaravelValidator;
 class ProjectMembersValidator  extends LaravelValidator {
     protected $rules = [
         'project_id' => 'required',
-        'user_id' => 'required',
+        'member_id' => 'required',
     ];
 }

@@ -22,7 +22,7 @@ class UserController extends Controller
     }
 
     /*
-     * Função para pegar o usuário autenticado
+     * Funï¿½ï¿½o para pegar o usuï¿½rio autenticado
      */
     public function authenticated(){
         $userId = Authorizer::getResourceOwnerId();
@@ -36,7 +36,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        return $this->repository->all();
     }
 
     /**
