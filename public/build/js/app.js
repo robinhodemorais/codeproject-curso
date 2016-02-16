@@ -44,7 +44,7 @@ app.provider('appConfig', ['$httpParamSerializerProvider', function($httpParamSe
                 if(headersGetter['content-type'] == 'application/json' ||
                     headersGetter['content-type'] == 'text/json') {
                     var dataJson = JSON.parse(data);
-                    if(dataJson.hasOwnProperty('data')){
+                    if(dataJson.hasOwnProperty('data') && Object.keys(dataJson).length == 1){
                         dataJson = dataJson.data;
                     }
                     return dataJson;

@@ -6,7 +6,7 @@ angular.module('app.controllers')
 
             $scope.projects = [];
             $scope.totalProjects = 0;
-            $scope.projectsPerPage = 15;
+            $scope.projectsPerPage = 5;
 
             $scope.pagination = {
                 current: 1
@@ -22,17 +22,15 @@ angular.module('app.controllers')
              */
             function getResultsPage(pageNumber) {
 
-                Project.query({}, function(data){
-                    $scope.projects = data;
+                Project.query({
+                    page: pageNumber,
+                    limit: $scope.projectsPerPage
+                }, function(data){
+                    $scope.projects = data.data;
+                    $scope.totalProjects = data.meta.pagination.total;
                 });
 
-               /* // this is just an example, in reality this stuff should be in a service
-                $http.get('path/to/api/users?page=' + pageNumber)
-                    .then(function(result) {
-                        $scope.users = result.data.Items;
-                        $scope.totalUsers = result.data.Count
-                    });
-                */
+
             }
 
             //chama a função na primeira pagina

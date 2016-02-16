@@ -36,15 +36,16 @@ class ProjectController extends Controller
      * @param ProjectRepository $repository
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
        // return $this->service->all();
 
         /*
          * PEGA O USER ID : \Authorizer::getResourceOwnerId()
+         * PASSANDO O REQUEST, PEGAMOS O LIMITE ATRIBUIDO NO PROJECTLIST
          */
 
-        return $this->repository->findOwner(\Authorizer::getResourceOwnerId());//findWithOwnerAndMember(\Authorizer::getResourceOwnerId());
+        return $this->repository->findOwner(\Authorizer::getResourceOwnerId(),$request->query->get('limit'));//findWithOwnerAndMember(\Authorizer::getResourceOwnerId());
     }
 
 
