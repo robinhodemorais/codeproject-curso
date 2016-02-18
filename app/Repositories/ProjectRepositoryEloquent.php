@@ -18,6 +18,9 @@ class ProjectRepositoryEloquent extends BaseRepository implements ProjectReposit
      *
      * @return string
      */
+
+   // protected $skipCriteria = true;
+
     public function model()
     {
         return Project::class;
@@ -34,13 +37,19 @@ class ProjectRepositoryEloquent extends BaseRepository implements ProjectReposit
     /*
      * Metodo para verificar se o usu�rio � dono do projeto, se ele pode alterar
      */
-    public function isOwner($projectid, $userid){
+    public function isOwner($projectId, $userId){
 
-
-        if(count($this->skipPresenter()->findWhere(['id' => $projectid, 'owner_id' => $userid]))) {
+/*
+        if(count($this->skipPresenter()->findWhere(['id' => $projectId, 'owner_id' => $userId]))) {
             return true;
         }
 
+        return false;*/
+
+        $result = $this->skipPresenter()->findWhere(['id' => $projectId, 'owner_id' => $userId]);
+        if (count($result)) {
+            return true;
+        }
         return false;
     }
 

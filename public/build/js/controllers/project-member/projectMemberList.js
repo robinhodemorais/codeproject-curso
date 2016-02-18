@@ -1,6 +1,7 @@
 angular.module('app.controllers')
     .controller('ProjectMemberListController',[
-        '$scope','$routeParams' , 'ProjectMember','User', function($scope, $routeParams, ProjectMember, User){
+        '$scope','$routeParams' , 'ProjectMember','User',
+        function($scope, $routeParams, ProjectMember, User){
             //armazena os dados do ProjectMember
             $scope.projectMember = new ProjectMember();
 
@@ -15,7 +16,7 @@ angular.module('app.controllers')
         };
 
         $scope.loadMember=function(){
-            $scope.projectMember = ProjectMember.query({
+            $scope.projectMembers = ProjectMember.query({
                id: $routeParams.id,
                 orderBy: 'id',
                 sortedBy: 'desc'
@@ -34,7 +35,7 @@ angular.module('app.controllers')
             $scope.getUser = function(name){
                 return User.query({
                     search: name,
-                    searcheFields: 'name:like'
+                    searchFields: 'name:like'
                 }).$promise;
             }
 

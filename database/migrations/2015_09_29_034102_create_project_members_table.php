@@ -13,6 +13,7 @@ class CreateProjectMembersTable extends Migration
     public function up()
     {
         Schema::create('project_members', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('project_id', false, true);
             $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
             $table->integer('member_id', false, true);

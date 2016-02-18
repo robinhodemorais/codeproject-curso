@@ -27,6 +27,7 @@ class ProjectMembersService {
     }
 
     public function create(array $data){
+
         try {
             $this->validator->with($data)->passesOrFail();
 

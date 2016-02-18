@@ -32,10 +32,9 @@ class ProjectMemberTransformer extends TransformerAbstract
         ];
     }
 
-    public function includeUser(Project $member){
+    public function includeUser(ProjectMembers $member){
         return $this->item($member->member,new MemberTransformer());
+
     }
-
-
 
 }
