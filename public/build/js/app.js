@@ -66,6 +66,7 @@ app.provider('appConfig', ['$httpParamSerializerProvider', function($httpParamSe
 app.config(['$routeProvider','$httpProvider','OAuthProvider', 'OAuthTokenProvider', 'appConfigProvider',
     function($routeProvider,$httpProvider,
              OAuthProvider, OAuthTokenProvider, appConfigProvider){
+
         //Adicionamos no cabe�alho padr�o o metodo post que pode ter um form url econder, para enviar os dados
         //
         $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
