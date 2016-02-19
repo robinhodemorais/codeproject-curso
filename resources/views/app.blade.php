@@ -62,6 +62,7 @@
 		<script src="{{asset('build/js/controllers/home.js')}}"></script>
 		<script src="{{asset('build/js/controllers/menu.js')}}"></script>
 
+		<script src="{{asset('build/js/controllers/client/clientDashboard.js')}}"></script>
 		<script src="{{asset('build/js/controllers/client/clientList.js')}}"></script>
 		<script src="{{asset('build/js/controllers/client/clientNew.js')}}"></script>
 		<script src="{{asset('build/js/controllers/client/clientEdit.js')}}"></script>

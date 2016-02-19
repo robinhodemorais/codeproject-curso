@@ -98,6 +98,11 @@ app.config(['$routeProvider','$httpProvider','OAuthProvider', 'OAuthTokenProvide
                 templateUrl: 'build/views/home.html',
                 controller: 'HomeController'
             })
+            .when('/clients/dashboards', {
+                templateUrl: 'build/views/client/dashboard.html',
+                controller: 'ClientDashboardController',
+                title: 'Clients'
+            })
             .when('/clients', {
                 templateUrl: 'build/views/client/list.html',
                 controller: 'ClientListController',
