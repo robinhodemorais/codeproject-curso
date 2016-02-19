@@ -32,7 +32,7 @@ angular.module('app.controllers')
              return '';
          };
 
-            $scope.getUser = function(name){
+            $scope.getUsers = function(name){
                 return User.query({
                     search: name,
                     searchFields: 'name:like'
