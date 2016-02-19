@@ -100,35 +100,43 @@ app.config(['$routeProvider','$httpProvider','OAuthProvider', 'OAuthTokenProvide
             })
             .when('/clients', {
                 templateUrl: 'build/views/client/list.html',
-                controller: 'ClientListController'
+                controller: 'ClientListController',
+                title: 'Clients'
             })
             .when('/clients/new', {
                 templateUrl: 'build/views/client/new.html',
-                controller: 'ClientNewController'
+                controller: 'ClientNewController',
+                title: 'Clients'
             })
             .when('/clients/:id/edit', {
                 templateUrl: 'build/views/client/edit.html',
-                controller: 'ClientEditController'
+                controller: 'ClientEditController',
+                title: 'Clients'
             })
             .when('/clients/:id/remove', {
                 templateUrl: 'build/views/client/remove.html',
-                controller: 'ClientRemoveController'
+                controller: 'ClientRemoveController',
+                title: 'Clients'
             })
             .when('/projects', {
                 templateUrl: 'build/views/project/list.html',
-                controller: 'ProjectListController'
+                controller: 'ProjectListController',
+                title: 'Projects'
             })
             .when('/projects/new', {
                 templateUrl: 'build/views/project/new.html',
-                controller: 'ProjectNewController'
+                controller: 'ProjectNewController',
+                title: 'Projects'
             })
             .when('/projects/:id/edit', {
                 templateUrl: 'build/views/project/edit.html',
-                controller: 'ProjectEditController'
+                controller: 'ProjectEditController',
+                title: 'Projects'
             })
             .when('/projects/:id/remove', {
                 templateUrl: 'build/views/project/remove.html',
-                controller: 'ProjectRemoveController'
+                controller: 'ProjectRemoveController',
+                title: 'Projects'
             })
             .when('/project/:id/notes', {
                 templateUrl: 'build/views/project-note/list.html',
@@ -224,6 +232,12 @@ app.run(['$rootScope', '$location','$http','$modal' ,'httpBuffer','OAuth',
             }
         }
     });
+
+     $rootScope.$on('$routeChangeSuccess',function (event, current, previous){
+         //current.$$route.title conseguimos pegar variaveis configuradas nas rotas
+         //o title está configurado em todas as rotas acima.
+        $rootScope.pageTitle = current.$$route.title;
+     });
 
     $rootScope.$on('oauth:error', function (event, data) {
         // Ignore `invalid_grant` error - should be catched on `LoginController`.

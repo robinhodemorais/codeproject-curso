@@ -1,4 +1,4 @@
-<header class="header-global">
+<header class="header-global" ng-controller="MenuController">
     <div class="top">
         <div class="container">
             <div class="row">
@@ -27,18 +27,14 @@
                         </li>
                     </menu> <!-- /menu -->
                 </div>
-                <div class="col-sm-2">
-                    <form action="" class="form-inline" role="form">
-                        <input type="text" name="q" placeholder="Busca" />
-                        <button type="submit">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </form> <!-- /form-search -->
-                </div>
-                <div class="col-sm-2">
-                    <a href="" class="userinfo">
+
+                <div class="col-sm-3">
+                    <a ng-href="" class="userinfo">
                         <i class="avatar flaticon-user7"></i>
                         Olá, {{user.name}}
+                    </a>
+                    <a ng-href="#/logout" class="userinfo" >
+                        Sair
                     </a>
                 </div>
             </div>
@@ -48,6 +44,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
+                    <!-- Mostra a rota que esta sendo escolhida pelo usuário
+                         rota global, configurada no app.js-->
                     <h1 class="h3">{{ pageTitle }}</h1>
                 </div>
             </div>

@@ -66,7 +66,6 @@ app.provider('appConfig', ['$httpParamSerializerProvider', function($httpParamSe
 app.config(['$routeProvider','$httpProvider','OAuthProvider', 'OAuthTokenProvider', 'appConfigProvider',
     function($routeProvider,$httpProvider,
              OAuthProvider, OAuthTokenProvider, appConfigProvider){
-
         //Adicionamos no cabe�alho padr�o o metodo post que pode ter um form url econder, para enviar os dados
         //
         $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
@@ -100,43 +99,35 @@ app.config(['$routeProvider','$httpProvider','OAuthProvider', 'OAuthTokenProvide
             })
             .when('/clients', {
                 templateUrl: 'build/views/client/list.html',
-                controller: 'ClientListController',
-                title: 'Clients'
+                controller: 'ClientListController'
             })
             .when('/clients/new', {
                 templateUrl: 'build/views/client/new.html',
-                controller: 'ClientNewController',
-                title: 'Clients'
+                controller: 'ClientNewController'
             })
             .when('/clients/:id/edit', {
                 templateUrl: 'build/views/client/edit.html',
-                controller: 'ClientEditController',
-                title: 'Clients'
+                controller: 'ClientEditController'
             })
             .when('/clients/:id/remove', {
                 templateUrl: 'build/views/client/remove.html',
-                controller: 'ClientRemoveController',
-                title: 'Clients'
+                controller: 'ClientRemoveController'
             })
             .when('/projects', {
                 templateUrl: 'build/views/project/list.html',
-                controller: 'ProjectListController',
-                title: 'Projects'
+                controller: 'ProjectListController'
             })
             .when('/projects/new', {
                 templateUrl: 'build/views/project/new.html',
-                controller: 'ProjectNewController',
-                title: 'Projects'
+                controller: 'ProjectNewController'
             })
             .when('/projects/:id/edit', {
                 templateUrl: 'build/views/project/edit.html',
-                controller: 'ProjectEditController',
-                title: 'Projects'
+                controller: 'ProjectEditController'
             })
             .when('/projects/:id/remove', {
                 templateUrl: 'build/views/project/remove.html',
-                controller: 'ProjectRemoveController',
-                title: 'Projects'
+                controller: 'ProjectRemoveController'
             })
             .when('/project/:id/notes', {
                 templateUrl: 'build/views/project-note/list.html',
@@ -232,12 +223,6 @@ app.run(['$rootScope', '$location','$http','$modal' ,'httpBuffer','OAuth',
             }
         }
     });
-
-     $rootScope.$on('$routeChangeSuccess',function (event, current, previous){
-         //current.$$route.title conseguimos pegar variaveis configuradas nas rotas
-         //o title está configurado em todas as rotas acima.
-        $rootScope.pageTitle = current.$$route.title;
-     });
 
     $rootScope.$on('oauth:error', function (event, data) {
         // Ignore `invalid_grant` error - should be catched on `LoginController`.
