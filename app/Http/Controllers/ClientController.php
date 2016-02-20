@@ -33,10 +33,12 @@ class ClientController extends Controller
      * @param ClientRepository $repository
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return $this->service->all();
+        //return $this->service->all();
         //$projectFile = $this->repository->skipPresenter()->find($idProject)->files()->find($idFile);
+        $limit = $request->query->get('limit',15);
+        return $this->repository->paginate($limit);
     }
 
 

@@ -15,22 +15,36 @@ class ClientTransformer extends TransformerAbstract
 {
 
     /*
-     * Transformer, transforma as informações da maneira que vc queira apresentar
+     * Transformer, transforma as informaï¿½ï¿½es da maneira que vc queira apresentar
      *
      */
 
+    protected $defaultIncludes = ['projects'];
+
+
     public function transform(Client $client){
         return [
-            'id' => $client->id,
+            'id' => (int)$client->id,
             'name' => $client->name,
             'responsible' => $client->responsible,
             'email' => $client->email,
             'phone' => $client->phone,
             'address' => $client->address,
             'obs' => $client->obs,
+            'created_at' => date_format($client->created_at, "Y-m-d h:m:s"),
+            'updated_at' => date_format($client->updated_at, "Y-m-d h:m:s"),
         ];
     }
 
+
+    public function includeProjects(Client $client){
+        //Setamos o default includes para vazio para nÃ£o criar um loop
+        //no transformer Project e Client
+        $transformer = new ProjectTransformer();
+        $transformer->setDefaultIncludes([]);
+
+        return  $this->collection($client->projects, $transformer);
+    }
 
 
 }
