@@ -38,6 +38,7 @@ class ProjectMembersService {
                 'message' => $e->getMessageBag()
             ];
         }
+
     }
 
     public function delete($id){
