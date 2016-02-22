@@ -45,7 +45,8 @@ class ProjectController extends Controller
          * PASSANDO O REQUEST, PEGAMOS O LIMITE ATRIBUIDO NO PROJECTLIST
          */
 
-        return $this->repository->findOwner(\Authorizer::getResourceOwnerId(),$request->query->get('limit'));//findWithOwnerAndMember(\Authorizer::getResourceOwnerId());
+        return $this->repository
+            ->findOwner(\Authorizer::getResourceOwnerId(),$request->query->get('limit'));//findWithOwnerAndMember(\Authorizer::getResourceOwnerId());
     }
 
 

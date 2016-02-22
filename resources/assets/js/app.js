@@ -2,7 +2,7 @@ var app = angular.module('app',[
     'ngRoute','angular-oauth2','app.controllers','app.services','app.filters','app.directives',
     'ui.bootstrap.typeahead', 'ui.bootstrap.datepicker', 'ui.bootstrap.tpls', 'ui.bootstrap.modal',
     'ngFileUpload', 'http-auth-interceptor', 'angularUtils.directives.dirPagination',
-    'mgcrea.ngStrap.navbar','ui.bootstrap.dropdown'
+    'mgcrea.ngStrap.navbar','ui.bootstrap.dropdown','ui.bootstrap.tabs'
 ]);
 
 //'ui.bootstrap.datepiker',
@@ -122,6 +122,11 @@ app.config(['$routeProvider','$httpProvider','OAuthProvider', 'OAuthTokenProvide
                 templateUrl: 'build/views/client/remove.html',
                 controller: 'ClientRemoveController',
                 title: 'Clients'
+            })
+            .when('/projects/dashboard', {
+                templateUrl: 'build/views/project/dashboard.html',
+                controller: 'ProjectDashboardController',
+                title: 'Projects'
             })
             .when('/projects', {
                 templateUrl: 'build/views/project/list.html',
