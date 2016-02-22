@@ -9,10 +9,14 @@ angular.module('app.directives')
                     //pega qual é o elemento que tem a classe tab.content
                     var tabContent = $(element).parent().find('.tab-content'),
                         a = $(this);
+                    //pegando a acora que esta ativa e remove
+                    $(element).find('.active').removeClass('active');
                     //pegando, procura-se qual esta ativa e remove a classe dela.
                     tabContent.find('.active').removeClass('active');
                     //procura qual aba que tem o id, baseado na ancora " a = $(this);" acima
                     tabContent.find("[id="+ a.attr('aria-controls')+"]").addClass('active');
+                    //pega a ancora e coloca o active nela
+                    a.addClass('active');
                 });
             }
         }
