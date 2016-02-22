@@ -11,7 +11,11 @@
 |
 */
 
-$factory->define(CodeProject\Entities\User::class, function (Faker\Generator $faker) {
+$faker = Faker\Factory::create('pt_BR');
+
+
+//$factory->define(CodeProject\Entities\User::class, function (Faker\Generator $faker) {
+$factory->define(CodeProject\Entities\User::class, function () use($faker){
     return [
         'name' => $faker->name,
         'email' => $faker->email,
@@ -21,7 +25,8 @@ $factory->define(CodeProject\Entities\User::class, function (Faker\Generator $fa
 });
 
 
-$factory->define(CodeProject\Entities\Client::class, function (Faker\Generator $faker) {
+//$factory->define(CodeProject\Entities\Client::class, function (Faker\Generator $faker) {
+$factory->define(CodeProject\Entities\Client::class, function () use($faker) {
     return [
         'name' => $faker->name,
         'responsible' => $faker->name,
@@ -33,7 +38,9 @@ $factory->define(CodeProject\Entities\Client::class, function (Faker\Generator $
 });
 
 
-$factory->define(CodeProject\Entities\Project::class, function (Faker\Generator $faker) {
+
+//$factory->define(CodeProject\Entities\Project::class, function (Faker\Generator $faker) {
+$factory->define(CodeProject\Entities\Project::class, function () use($faker) {
     return [
         'owner_id' => rand(1,10),
         'client_id' => rand(1,10),
@@ -45,7 +52,8 @@ $factory->define(CodeProject\Entities\Project::class, function (Faker\Generator 
     ];
 });
 
-$factory->define(CodeProject\Entities\ProjectNote::class, function (Faker\Generator $faker) {
+//$factory->define(CodeProject\Entities\ProjectNote::class, function (Faker\Generator $faker) {
+$factory->define(CodeProject\Entities\ProjectNote::class, function () use($faker) {
     return [
         'project_id' => rand(1,10),
         'title' => $faker->word,
@@ -53,7 +61,8 @@ $factory->define(CodeProject\Entities\ProjectNote::class, function (Faker\Genera
     ];
 });
 
-$factory->define(CodeProject\Entities\ProjectTasks::class, function (Faker\Generator $faker) {
+//$factory->define(CodeProject\Entities\ProjectTasks::class, function (Faker\Generator $faker) {
+$factory->define(CodeProject\Entities\ProjectTasks::class, function () use($faker) {
     return [
         'name' => $faker->word,
         'start_date' => $faker->dateTime('now'),
@@ -65,7 +74,8 @@ $factory->define(CodeProject\Entities\ProjectTasks::class, function (Faker\Gener
 });
 
 
-$factory->define(CodeProject\Entities\ProjectMembers::class, function (Faker\Generator $faker) {
+//$factory->define(CodeProject\Entities\ProjectMembers::class, function (Faker\Generator $faker) {
+$factory->define(CodeProject\Entities\ProjectMembers::class, function () use($faker) {
     return [
         'project_id' => rand(1,10),
         'member_id' => rand(1,10),
@@ -73,7 +83,8 @@ $factory->define(CodeProject\Entities\ProjectMembers::class, function (Faker\Gen
 });
 
 
-$factory->define(CodeProject\Entities\OauthClients::class, function (Faker\Generator $faker) {
+//$factory->define(CodeProject\Entities\OauthClients::class, function (Faker\Generator $faker) {
+$factory->define(CodeProject\Entities\OauthClients::class, function () use($faker) {
     return [
         'id' => rand(1,10),
         'secret' => $faker->word,

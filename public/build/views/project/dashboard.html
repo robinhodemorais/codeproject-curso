@@ -103,9 +103,9 @@
                                 </div>
                                 <div role="tabpanel" class="tab-pane" id="arquivos">
                                     <div class="files-list-blocks">
-                                        <project-file-donwload
+                                        <project-file-download
                                                 id-project="{{o.project_id}}" id-file="{{o.id}}" ng-repeat="o in project.files.data">
-                                        </project-file-donwload>
+                                        </project-file-download>
 
                                         <a href="">
                                             <img src="build/images/icons/ico-ai.png" alt="" />
@@ -215,9 +215,9 @@
                                 </li>
                                 <li class="text-center text-silver">{{project.due_date | dateBr}}</li>
                                 <li class="list-styled-header text-upper text-center">
-                                    Tarefas (12)
+                                    Tarefas {{project.tasks_count}}
                                 </li>
-                                <li class="text-center text-silver">9 terefas em aberto</li>
+                                <li class="text-center text-silver"> {{project.tasks_opened}} terefas em aberto</li>
                             </ul>
                         </div>
                     </div>
