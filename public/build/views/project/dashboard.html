@@ -10,30 +10,21 @@
                                     Projetos
 
                                     <div class="btn-group pull-right">
-                                        <a href="" class="btn btn-primary btn-sm text-upper">
+                                        <a ng-href="#/projects" class="btn btn-primary btn-sm text-upper">
                                             <small>Ver todos</small>
                                         </a>
-                                        <a href="" class="btn btn-default btn-sm">
+                                        <a ng-href="#/projects/new" class="btn btn-default btn-sm">
                                             <i class="fa fa-plus"></i>
                                         </a>
                                     </div>
                                 </h3>
-                            </li>
-                            <li class="boxed-manager-menu-nav-item">
-                                <a href="" class="actived">
-                                    <header>
-                                        <h4 class="h4 text-boulder">Nome do projeto</h4>
-                                        <small class="text-upper text-silver">Cliente empresa</small>
-                                    </header>
-
-                                </a>
                             </li>
 
                             <li class="boxed-manager-menu-nav-item" ng-repeat="o in projects">
                                 <a href="javascript:void(0)" ng-click="showProject(o)">
                                     <header>
                                         <h4 class="h4 text-boulder">{{o.description}}</h4>
-                                        <small class="text-upper text-silver">{{o.client}}</small>
+                                        <small class="text-upper text-silver">{{o.client.data.name}}</small>
                                     </header>
                                     <p class="text-danger status">
                                         <i class="fa fa-circle"></i> Atrasado
@@ -47,42 +38,42 @@
                     <div class="boxed-manager-main arrow">
                         <div class="boxed-manager-main-header">
                             <h4 class="h4">
-                                Nome do projeto <small>(90%)</small>
+                                {{project.description}} <small>(90%)</small>
 
                                 <div class="btn-group pull-right">
-                                    <a href="" class="btn btn-default btn-xs" title="Editar">
+                                    <a ng-href="#/projects/{{project.id}}/edit"  class="btn btn-default btn-xs" title="Editar">
                                         <i class="fa fa-pencil"></i>
                                     </a>
-                                    <a href="" class="btn btn-danger btn-xs" title="Apagar">
+                                    <a ng-href="#/projects/{{project.id}}/remove" class="btn btn-danger btn-xs" title="Apagar">
                                         <i class="fa fa-trash"></i>
                                     </a>
                                 </div>
                             </h4>
                         </div>
                         <div class="boxed-manager-main-body">
-                            <div class="btn-group" role="tablist">
-                                <a href="#detalhes"
+                            <div class="btn-group" role="tablist" tab-project>
+                                <a href=""
                                    aria-controls="detalhes"
                                    role="tab"
                                    data-toggle="tab"
                                    class="btn btn-default active">
                                     Detalhes
                                 </a>
-                                <a href="#tarefas"
+                                <a href=""
                                    aria-controls="tarefas"
                                    role="tab"
                                    data-toggle="tab"
                                    class="btn btn-default">
                                     Tarefas
                                 </a>
-                                <a href="#arquivos"
+                                <a href=""
                                    aria-controls="arquivos"
                                    role="tab"
                                    data-toggle="tab"
                                    class="btn btn-default">
                                     Arquivos
                                 </a>
-                                <a href="#anotacoes"
+                                <a href=""
                                    aria-controls="anotacoes"
                                    role="tab"
                                    data-toggle="tab"
@@ -90,39 +81,12 @@
                                     Anotações
                                 </a>
                             </div>
-
                             <br/>
                             <br/>
-
-                            <tabset type="pills">
-                                <tab heading="Detalhes">
-                                    {{project.description}}
-                                </tab>
-                                <tab heading="Tarefas">
-                                    {{}}
-                                </tab>
-                                <tab heading="Arquivos">
-                                    {{}}
-                                </tab>
-                                <tab heading="Anotações">
-                                    {{}}
-                                </tab>
-                            </tabset>
-
                             <div class="tab-content">
                                 <div role="tabpanel" class="tab-pane active" id="detalhes">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                        Debitis eius et illo quaerat quasi sit voluptatibus.
-                                        A autem debitis doloremque exercitationem mollitia neque
-                                        quasi quidem ratione vitae voluptate? Architecto at odit
-                                        quia? Aperiam nihil omnis pariatur quae quia recusandae
-                                        rem? Aperiam dolore, exercitationem fuga illo ipsa nemo
-                                        repudiandae similique soluta!</p>
+                                    <p>{{project.description}}</p>
 
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                        Accusantium libero magni maxime perspiciatis provident
-                                        qui rem similique sit ut vero! Beatae deleniti eum eveniet,
-                                        iure magnam necessitatibus possimus sit tempora.</p>
                                 </div>
                                 <div role="tabpanel" class="tab-pane" id="tarefas">
                                     <div class="task-list">
@@ -178,46 +142,46 @@
                                 <div role="tabpanel" class="tab-pane" id="arquivos">
                                     <div class="files-list-blocks">
                                         <a href="">
-                                            <img src="images/icons/ico-ai.png" alt="" />
+                                            <img src="build/images/icons/ico-ai.png" alt="" />
                                         </a>
                                         <a href="">
-                                            <img src="images/icons/ico-css.png" alt="" />
+                                            <img src="build/images/icons/ico-css.png" alt="" />
                                         </a>
                                         <a href="">
-                                            <img src="images/icons/ico-doc.png" alt="" />
+                                            <img src="build/images/icons/ico-doc.png" alt="" />
                                         </a>
                                         <a href="">
-                                            <img src="images/icons/ico-eps.png" alt="" />
+                                            <img src="build/images/icons/ico-eps.png" alt="" />
                                         </a>
                                         <a href="">
-                                            <img src="images/icons/ico-flash.png" alt="" />
+                                            <img src="build/images/icons/ico-flash.png" alt="" />
                                         </a>
                                         <a href="">
-                                            <img src="images/icons/ico-html.png" alt="" />
+                                            <img src="build/images/icons/ico-html.png" alt="" />
                                         </a>
                                         <a href="">
-                                            <img src="images/icons/ico-jpg.png" alt="" />
+                                            <img src="build/images/icons/ico-jpg.png" alt="" />
                                         </a>
                                         <a href="">
-                                            <img src="images/icons/ico-mp3.png" alt="" />
+                                            <img src="build/images/icons/ico-mp3.png" alt="" />
                                         </a>
                                         <a href="">
-                                            <img src="images/icons/ico-mp4.png" alt="" />
+                                            <img src="build/images/icons/ico-mp4.png" alt="" />
                                         </a>
                                         <a href="">
-                                            <img src="images/icons/ico-pdf.png" alt="" />
+                                            <img src="build/images/icons/ico-pdf.png" alt="" />
                                         </a>
                                         <a href="">
-                                            <img src="images/icons/ico-php.png" alt="" />
+                                            <img src="build/images/icons/ico-php.png" alt="" />
                                         </a>
                                         <a href="">
-                                            <img src="images/icons/ico-png.png" alt="" />
+                                            <img src="build/images/icons/ico-png.png" alt="" />
                                         </a>
                                         <a href="">
-                                            <img src="images/icons/ico-txt.png" alt="" />
+                                            <img src="build/images/icons/ico-txt.png" alt="" />
                                         </a>
                                         <a href="">
-                                            <img src="images/icons/ico-xml.png" alt="" />
+                                            <img src="build/images/icons/ico-xml.png" alt="" />
                                         </a>
                                     </div>
                                 </div>
@@ -294,7 +258,7 @@
                         </div>
                         <div class="boxed-manager-info-body">
                             <div class="boxed-manager-info-body-chart text-center">
-                                <div class="radial-progress radial-progress-lg radial-progress-danger" data-progress="90">
+                                <div class="radial-progress radial-progress-lg radial-progress-danger" data-progress="{{project.progress}}">
                                     <div class="circle">
                                         <div class="mask full">
                                             <div class="fill"></div>
@@ -307,7 +271,7 @@
                                     </div>
                                     <div class="inset">
                                         <div class="percentage">
-                                            <div class="numbers">90%</div>
+                                            <div class="numbers">{{project.progress}}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -318,11 +282,11 @@
                                 <li class="list-styled-header text-upper text-center">
                                     Cliente
                                 </li>
-                                <li class="text-center text-silver">Nome do cliente</li>
+                                <li class="text-center text-silver">{{project.client.data.name}}</li>
                                 <li class="list-styled-header text-upper text-center">
                                     Data de entrega
                                 </li>
-                                <li class="text-center text-silver">20/09/2015</li>
+                                <li class="text-center text-silver">{{project.due_date | dateBr}}</li>
                                 <li class="list-styled-header text-upper text-center">
                                     Tarefas (12)
                                 </li>
