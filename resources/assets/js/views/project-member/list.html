@@ -15,7 +15,7 @@
                                            ng-model="userSelected"
                                            typeahead="o as o.name for o in getUsers($viewValue)|limitTo:10"
                                            typeahead-input-formatter="formatName($model)"
-                                           typeahead-on-selected="selectUser($item)"
+                                           typeahead-on-select="selectUser($item)"
                                            typeahead-editable="false"
                                            required>
                                 </div>
