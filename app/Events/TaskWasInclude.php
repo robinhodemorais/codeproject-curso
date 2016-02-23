@@ -13,8 +13,8 @@ class TaskWasInclude extends Event implements ShouldBroadcast{
 
     public $task;
 
-    public function __construct(ProjectTasks $tasks){
-        $this->task = $tasks;
+    public function __construct(ProjectTasks $task){
+        $this->task = $task;
     }
 
     /**

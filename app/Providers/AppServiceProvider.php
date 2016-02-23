@@ -4,6 +4,7 @@ namespace CodeProject\Providers;
 
 use CodeProject\Entities\ProjectTasks;
 use CodeProject\Events\TaskWasInclude;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -16,7 +17,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //verifica quando cria a task, ele faz um push
-        ProjectTasks::create(function ($task){
+        ProjectTasks::created(function ($task){
            Event::fire(new TaskWasInclude($task));
         });
     }
