@@ -121,6 +121,7 @@
 	@else
 		<script src="{{elixir('js/all.js')}}"></script>
 	@endif
+<!--
 <script type="text/javascript">
 	//api que criamos no site do pusher
 	var socket = new Pusher('f0da6b6359bbcd91d58f');
@@ -131,5 +132,6 @@
 			}
 	);
 </script>
+-->
 </body>
 </html>
