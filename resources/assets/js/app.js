@@ -257,7 +257,13 @@ app.run(['$rootScope', '$location','$http','$modal' ,'$cookies','httpBuffer','OA
         });
 
         $rootScope.$on('pusher-destroy', function (event, data) {
-
+            if(data.next.$$route.originalPath != '/login'){
+                //caso o window existe, desconecta
+                if(window.client) {
+                    window.client.disconnect();
+                    window.client = null;
+                }
+            }
         });
 
     //recebe o evento atual, a proxima rota e a rota corrent
