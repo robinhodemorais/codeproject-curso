@@ -2,7 +2,7 @@ var app = angular.module('app',[
     'ngRoute','angular-oauth2','app.controllers','app.services','app.filters','app.directives',
     'ui.bootstrap.typeahead', 'ui.bootstrap.datepicker', 'ui.bootstrap.tpls', 'ui.bootstrap.modal',
     'ngFileUpload', 'http-auth-interceptor', 'angularUtils.directives.dirPagination',
-    'mgcrea.ngStrap.navbar','ui.bootstrap.dropdown','pusher-angular','ui-notification'
+    'mgcrea.ngStrap.navbar','ui.bootstrap.dropdown','pusher-angular'
 ]);
 
 //'ui.bootstrap.datepiker',
@@ -17,7 +17,6 @@ angular.module('app.services',['ngResource']);
 app.provider('appConfig', ['$httpParamSerializerProvider', function($httpParamSerializerProvider){
     var config = {
         baseUrl: 'http://codeproject.dev:8000',
-        pusherKey: 'f0da6b6359bbcd91d58f',
         project: {
             status: [
                 {value: 1, label: 'Nao Iniciado'},
@@ -229,42 +228,8 @@ app.config(['$routeProvider','$httpProvider','OAuthProvider', 'OAuthTokenProvide
 
     }]);
 
-app.run(['$rootScope', '$location','$http','$modal' ,'$cookies','httpBuffer','OAuth','appConfig',
-    function($rootScope, $location, $http, $modal, $cookies, httpBuffer,OAuth,appConfig) {
-
-        //push global
-        $rootScope.$on('pusher-build', function (event, data) {
-            //se a rota for diferente de login
-            if(data.next.$$route.originalPath != '/login'){
-                //se o usuário estiver autenticado
-                if(OAuth.isAuthenticated()){
-                    if (!window.client) {
-                        window.client = new Pusher(appConfig.pusherKey);
-                        var pusher = $pusher(window.client);
-                        //pega o id do usuário logado no cookies
-                        //$cookies.getObject('user').id
-                        var channel = pusher.subscribe('user.' + $cookies.getObject('user').id);
-                        channel.bind('CodeProject\\Events\\TaskWasInclude',
-                            function (data) {
-                                console.log(data);
-                            }
-                        );
-                    }
-                }
-
-            }
-
-        });
-
-        $rootScope.$on('pusher-destroy', function (event, data) {
-            if(data.next.$$route.originalPath != '/login'){
-                //caso o window existe, desconecta
-                if(window.client) {
-                    window.client.disconnect();
-                    window.client = null;
-                }
-            }
-        });
+app.run(['$rootScope', '$location','$http','$modal' ,'httpBuffer','OAuth',
+    function($rootScope, $location, $http, $modal, httpBuffer,OAuth) {
 
     //recebe o evento atual, a proxima rota e a rota corrent
     $rootScope.$on('$routeChangeStart', function (event, next, current) {
@@ -276,10 +241,7 @@ app.run(['$rootScope', '$location','$http','$modal' ,'$cookies','httpBuffer','OA
                 $location.path('login');
             }
         }
-        $rootScope.$emit('pusher-build',{next: next});
-        $rootScope.$emit('pusher-destroy',{next: next});
     });
-
 
      $rootScope.$on('$routeChangeSuccess',function (event, current, previous){
          //current.$$route.title conseguimos pegar variaveis configuradas nas rotas
