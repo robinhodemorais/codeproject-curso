@@ -10,7 +10,7 @@ controller('HomeController',['$scope','$cookies','$timeout','$pusher',function($
             }
             $timeout(function(){
                 $scope.tasks.unshift(data.tasks);
-            },300);
+            },1000);
 
         }
     );
