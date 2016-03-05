@@ -28,7 +28,7 @@ angular.module('app.controllers')
                 sortedBy: 'desc'
             });
 
-            console.log($scope.projectTasks);
+           // console.log($scope.projectTasks);
         };
 
             $scope.loadTask();

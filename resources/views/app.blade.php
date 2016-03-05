@@ -54,8 +54,8 @@
 		<script src="{{asset('build/js/vendor/ng-file-upload.min.js')}}"></script>
 		<script src="{{asset('build/js/vendor/http-auth-interceptor.js')}}"></script>
 		<script src="{{asset('build/js/vendor/dirPagination.js')}}"></script>
-		<script src="{{asset('build/js/vendor/pusher-angular.min.js')}}"></script>
 		<script src="{{asset('build/js/vendor/pusher.min.js')}}"></script>
+		<script src="{{asset('build/js/vendor/pusher-angular.min.js')}}"></script>
 		<script src="{{asset('build/js/vendor/angular-ui-notification.min.js')}}"></script>
 
 

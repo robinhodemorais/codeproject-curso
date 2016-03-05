@@ -2,7 +2,7 @@ var app = angular.module('app',[
     'ngRoute','angular-oauth2','app.controllers','app.services','app.filters','app.directives',
     'ui.bootstrap.typeahead', 'ui.bootstrap.datepicker', 'ui.bootstrap.tpls', 'ui.bootstrap.modal',
     'ngFileUpload', 'http-auth-interceptor', 'angularUtils.directives.dirPagination',
-    'mgcrea.ngStrap.navbar','ui.bootstrap.dropdown','pusher-angular','ui-notification'
+    'ui.bootstrap.dropdown','pusher-angular','ui-notification'
 ]);
 
 //'ui.bootstrap.datepiker',
@@ -229,8 +229,10 @@ app.config(['$routeProvider','$httpProvider','OAuthProvider', 'OAuthTokenProvide
 
     }]);
 
-app.run(['$rootScope', '$location','$http','$modal' ,'$cookies','httpBuffer','OAuth','appConfig',
-    function($rootScope, $location, $http, $modal, $cookies, httpBuffer,OAuth,appConfig) {
+app.run(['$rootScope', '$location','$http','$modal' ,
+    '$cookies','$pusher','httpBuffer','OAuth','appConfig','Notification',
+    function($rootScope, $location, $http, $modal,
+             $cookies, $pusher,httpBuffer,OAuth,appConfig,Notification) {
 
         //push global
         $rootScope.$on('pusher-build', function (event, data) {
@@ -244,9 +246,11 @@ app.run(['$rootScope', '$location','$http','$modal' ,'$cookies','httpBuffer','OA
                         //pega o id do usuário logado no cookies
                         //$cookies.getObject('user').id
                         var channel = pusher.subscribe('user.' + $cookies.getObject('user').id);
-                        channel.bind('CodeProject\\Events\\TaskWasInclude',
+                        channel.bind('CodeProject\\Events\\TaskWasIncluded',
                             function (data) {
-                                console.log(data);
+                                //console.log(data);
+                               var name = data.task.name;
+                                Notification.success('Tarefa ' + name+ ' foi incluída!');
                             }
                         );
                     }
@@ -257,7 +261,7 @@ app.run(['$rootScope', '$location','$http','$modal' ,'$cookies','httpBuffer','OA
         });
 
         $rootScope.$on('pusher-destroy', function (event, data) {
-            if(data.next.$$route.originalPath != '/login'){
+            if(data.next.$$route.originalPath == '/login'){
                 //caso o window existe, desconecta
                 if(window.client) {
                     window.client.disconnect();
@@ -276,6 +280,7 @@ app.run(['$rootScope', '$location','$http','$modal' ,'$cookies','httpBuffer','OA
                 $location.path('login');
             }
         }
+
         $rootScope.$emit('pusher-build',{next: next});
         $rootScope.$emit('pusher-destroy',{next: next});
     });
