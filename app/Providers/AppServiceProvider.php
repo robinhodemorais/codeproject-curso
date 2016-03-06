@@ -17,8 +17,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //verifica quando cria a task, ele faz um push
-        ProjectTasks::created(function ($task){
-           Event::fire(new TaskWasIncluded($task));
+        ProjectTasks::created(function ($tasks){
+           Event::fire(new TaskWasIncluded($tasks));
         });
     }
 
