@@ -5,6 +5,7 @@ namespace CodeProject\Http\Controllers;
 use CodeProject\Repositories\ProjectFileRepository;
 use CodeProject\Services\ProjectFileService;
 use CodeProject\Services\ProjectService;
+use Illuminate\Contracts\Filesystem\Factory;
 use Illuminate\Http\Request;
 
 class ProjectFileController extends Controller
@@ -23,14 +24,21 @@ class ProjectFileController extends Controller
      */
     private $projectService;
 
+    /**
+     * @var \Illuminate\Contracts\Filesystem\Factory
+     */
+    private  $storage;
+
 
     /**
      * @param ProjectFileRepository $repository
      * @param ProjectFileService $service
      */
-    public function __construct(ProjectFileRepository $repository, ProjectFileService $service, ProjectService $projectService){
+    public function __construct(ProjectFileRepository $repository, ProjectFileService $service, ProjectService $projectService,
+                                Factory $storage){
         $this->repository = $repository;
         $this->service = $service;
+        $this->storage = $storage;
 
         $this->projectService = $projectService;
     }
@@ -111,11 +119,13 @@ class ProjectFileController extends Controller
 
     }
 */
-    public function showFile($id){
-        if ($this->projectService->checkProjectPermissions($id) == false) {
+    public function showFile($id, $idFile){
+
+        if($this->projectService->checkProjectPermissions($id) == false){
             return ['error' => 'Access Forbidden'];
         }
 
+        $model = $this->repository->skipPresenter()->find($idFile);
         //pega o caminho do arquivo
         $filePath = $this->service->getFilePath($id);
         //passa o caminho do arquivo para pegar os dados dele
@@ -127,7 +137,8 @@ class ProjectFileController extends Controller
         return [
             'file' => $file64,
             'size' => filesize($filePath),
-            'name' => $this->service->getFileName($id)
+            'name' => $this->service->getFileName($id),
+            'mine_type' =>$this->storage->mimeType($model->getFileName())
         ]; //response()->download($this->service->getFilePath($id));
     }
 

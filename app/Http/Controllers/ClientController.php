@@ -52,9 +52,6 @@ class ClientController extends Controller
     {
 
         return $this->service->create($request->all());
-
-
-
     }
 
     /**
@@ -93,6 +90,7 @@ class ClientController extends Controller
     public function destroy($id)
     {
        // Client::find($id)->delete();
-       return $this->service->delete($id);
+        $this->service->delete($id);
+       return response("",204);
     }
 }

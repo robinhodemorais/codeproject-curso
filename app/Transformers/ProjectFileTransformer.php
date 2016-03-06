@@ -9,12 +9,13 @@
 namespace CodeProject\Transformers;
 
 use CodeProject\Entities\Project;
+use CodeProject\Entities\ProjectFile;
 use League\Fractal\TransformerAbstract;
 
 class ProjectFileTransformer extends TransformerAbstract
 {
 
-    public function transform(Project $o){
+    public function transform(ProjectFile $o){
         return [
             'id' => $o->id,
             'name' => $o->name,
@@ -22,6 +23,7 @@ class ProjectFileTransformer extends TransformerAbstract
             'description' => $o->description,
             'project_id' => $o->project_id
         ];
+
     }
 
 

@@ -1,6 +1,6 @@
 angular.module('app.directives')
     .directive('projectFileDownload',
-    ['$timeout','appConfig', 'ProjectFile',  function($timeout,appConfig,ProjectFile){
+    ['$timeout','$window','appConfig', 'ProjectFile',  function($timeout,$window,appConfig,ProjectFile){
         return {
             restrict: 'E',
             templateUrl: appConfig.baseUrl + '/build/views/templates/projectFileDownload.html',
@@ -11,15 +11,15 @@ angular.module('app.directives')
 
                      $(anchor).removeClass('disabled');
                      $(anchor).text('Save File');
+                     blobUtil.base64StringToBlob(data.file).then(function (blob) {
+                        /*Indica que temos um dado binário no href e indica que está com o base64*/
+                         $(anchor).attr({
+                            href: $window.URL.createObjectURL(blob,data.mime_type),
+                            download: data.name
+                         });
 
-                     /*
-                     Indica que temos um dado binário no href e indica que está com o base64
-                     */
-
-                     $(anchor).attr({
-                        href: 'data:application-octet-stream;base64,'+ data.file,
-                        download: data.name
                      });
+
 
                      /*TimeOut para dar um leg de segundo para não apresentar erro*/
                      $timeout(function(){
