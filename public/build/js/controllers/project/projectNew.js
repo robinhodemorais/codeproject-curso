@@ -1,11 +1,11 @@
 angular.module('app.controllers')
     .controller('ProjectNewController',
-    ['$scope', '$location','$cookies','Project','Client','appConfig',
-        function($scope, $location, $cookies, Project, Client, appConfig){
+    ['$scope', '$location','$cookies','$q','Project','Client','appConfig',
+        function($scope, $location, $cookies,$q, Project, Client, appConfig){
             $scope.project = new Project();
             $scope.status = appConfig.project.status;
-            $scope.project.client_id = 1;
-            $scope.clientSelected ={id:1, name: "teste" };
+            //$scope.project.client_id = 1;
+           // $scope.clientSelected ={id:1, name: "teste" };
 
             $scope.due_date = {
                 status:{
@@ -35,10 +35,18 @@ angular.module('app.controllers')
             };
 
             $scope.getClients = function (name){
-                return Client.query({
+                //para protelar a selecionar para retornar em array
+                var deffered = $q.defer();
+                Client.query({
                     search: name,
                     searchFields: 'name:like'
-                }).$promise;
+                }, function (data) {
+                    deffered.resolve(data.data);
+                },function (error){
+                    deffered.reject(error);
+                });
+
+                return deffered.promise;
             };
 
             $scope.selectClient = function (item){
