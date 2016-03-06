@@ -3,7 +3,8 @@
 
     <div class="col-md-6">
         <input type="text" class="form-control" name="name" ng-model="project.name" required>
-        <div ng-messages="form.name.$error" class="help-block" ng-show="form.name.$touched">
+        <div ng-messages="form.name.$error" class="help-block"
+             ng-show="form.name.$touched && form.name.$invalid">
             <div ng-message="required">Name é Obrigatório</div>
 
         </div>
