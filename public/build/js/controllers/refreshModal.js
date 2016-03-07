@@ -1,8 +1,9 @@
 angular.module('app.controllers')
     .controller('RefreshModalController',
-        ['$rootScope', '$scope', '$location','$modalInstance','authService' ,'User', 'OAuth','OAuthToken',
-        function($rootScope, $scope, $location,
-                 $modalInstance,authService, User, OAuth, OAuthToken){
+        ['$rootScope', '$scope', '$location','$interval','$modalInstance',
+            'authService' ,'User', 'OAuth','OAuthToken',
+        function($rootScope, $scope, $location,$interval,$modalInstance,
+                 authService, User, OAuth, OAuthToken){
 
             //fecha o model
             $scope.$on('event:auth-loginConfirmed', function(){
@@ -25,7 +26,10 @@ angular.module('app.controllers')
             }
 
             OAuth.getRefreshToken().then(function(){
+                //para dar um delay na atualização do token
+                $interval(function(){
                     authService.loginConfirmed();
+                },10000);
             },function(data){
                 $scope.cancel();
             });
