@@ -33,6 +33,7 @@
     "pusher": "~3.0.0",
     "pusher-angular": "~0.1.9",
     "angular-ui-notification": "~0.1.0",
-    "blob-util": "~1.2.0"
+    "blob-util": "~1.2.0",
+    "moment": "~2.12.0"
   }
 }

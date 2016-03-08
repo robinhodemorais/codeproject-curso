@@ -8,10 +8,10 @@ var app = angular.module('app',[
 //'ui.bootstrap.datepiker',
 
 //Ativa o ngMessages nos controllers porque somente eles que v�o utilizar
-angular.module('app.controllers',['ngMessages','angular-oauth2']);
-//modulo para servicos
+angular.module('app.controllers',['ngMessages']);
 angular.module('app.filters',[]);
 angular.module('app.directives',[]);
+//modulo para servicos
 angular.module('app.services',['ngResource']);
 
 app.provider('appConfig', ['$httpParamSerializerProvider', function($httpParamSerializerProvider){
