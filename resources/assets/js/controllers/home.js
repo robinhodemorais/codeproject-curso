@@ -12,7 +12,7 @@ controller('HomeController',
                         $scope.tasks.splice($scope.tasks.length-1,1)
                     }
                     $timeout(function(){
-                        $scope.tasks.unshift(data.tasks);
+                        $scope.tasks.unshift(data.task);
                     },1000);
 
                 }
