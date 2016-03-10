@@ -127,7 +127,7 @@ class ProjectFileController extends Controller
 
         $model = $this->repository->skipPresenter()->find($idFile);
         //pega o caminho do arquivo
-        $filePath = $this->service->getFilePath($id);
+        $filePath = $this->service->getFilePath($idFile);
         //passa o caminho do arquivo para pegar os dados dele
         $fileContent = file_get_contents($filePath);
         //codifica o arquivo
@@ -137,7 +137,7 @@ class ProjectFileController extends Controller
         return [
             'file' => $file64,
             'size' => filesize($filePath),
-            'name' => $this->service->getFileName($id),
+            'name' => $this->service->getFileName($idFile),
             'mine_type' =>$this->storage->mimeType($model->getFileName())
         ]; //response()->download($this->service->getFilePath($id));
     }
