@@ -27,8 +27,10 @@ app.provider('appConfig', ['$httpParamSerializerProvider', function($httpParamSe
         },
         projectTask:{
             status: [
-                {value: 1, label: 'Incompleta'},
-                {value: 2, label: 'Completa'}
+                {value: 1, label: 'Nao Iniciado'},
+                {value: 2, label: 'Iniciado'},
+                {value: 3, label: 'Cancelada'},
+                {value: 4, label: 'Completa'}
             ]
         },
         urls: {

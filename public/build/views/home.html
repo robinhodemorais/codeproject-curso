@@ -97,9 +97,20 @@
                                 </ul> <!-- /panel-list-unstyled -->
                             </div> <!-- /panel-body -->
                             <div class="panel-footer panel-footer-xs no-border-top sazerac text-info font-bold">
-                                <i class="fa fa-circle"></i> Não iniciou
+                                <p class="text-danger status" ng-show="o.statusProject==0">
+                                    <i class="fa fa-circle"></i> Atrasado
+                                </p>
+                                <p class="text-info status" ng-show="o.statusProject==1">
+                                    <i class="fa fa-circle"></i> Não Iniciou
+                                </p>
+                                <p class="text-success status" ng-show="o.statusProject==2">
+                                    <i class="fa fa-circle"></i> Iniciou
+                                </p>
+                                <p class="text-success status" ng-show="o.statusProject==3">
+                                    <i class="fa fa-circle"></i> Concluido
+                                </p>
                                 <span class="pull-right">+0</span>
-                            </div> <!-- /panel-footer panel-footer-xs sazerac -->
+                            </div> <!-- /panel-footer panel-footer-xs sazerac-->
                         </div> <!-- /panel.panel-default -->
                     </div>
 

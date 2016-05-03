@@ -60,10 +60,28 @@ class ProjectService
         }
     }
 
+    public function calculatePercentageCompleted(Project $project) {
+        $count = 0;
+        $countTotal = 0;
+        foreach ($project->tasks as $task){
+            if ($task->status == 1 or $task->status == 2){
+                $count++;
+            }
+
+            if ($task->status != 3){
+                $countTotal++;
+            }
+
+        }
+        $calc = ($count / $countTotal) * 100;
+        //return $calc;
+
+        return [ 'percentage' => $calc, 'countTasks' => $countTotal ];
+    }
+
 
     public function create(array $data)
     {
-
         try {
             $this->validator->with($data)->passesOrFail();
             return $this->repository->create($data);

@@ -9,10 +9,16 @@
 namespace CodeProject\Transformers;
 
 use CodeProject\Entities\Project;
+use CodeProject\Services\ProjectService;
 use League\Fractal\TransformerAbstract;
 
 class ProjectTransformer extends TransformerAbstract
 {
+    private $projectService;
+
+    public function __construct(ProjectService $projectService){
+        $this->projectService = $projectService;
+    }
 
     /*
      * Transformer, transforma as informa��es da maneira que vc queira apresentar
@@ -29,6 +35,9 @@ class ProjectTransformer extends TransformerAbstract
 
 
     public function transform(Project $project){
+
+        $array = $this->projectService->calculatePercentageCompleted($project);
+
         return [
             'id' => $project->id,
             'client_id' => $project->client_id,
@@ -41,8 +50,9 @@ class ProjectTransformer extends TransformerAbstract
             'is_member' => $project->owner_id != \Authorizer::getResourceOwnerId(),
             //conta a quantidade de tasks, para exebir no front
             'tasks_count' => $project->tasks->count(),
-            //
-            'tasks_opened' =>$this->countTasksOpened($project)
+            'tasks_opened' =>$this->countTasksOpened($project),
+            'percentageCompleted' => $array[0],
+            'countTasks' => $array[1]
         ];
     }
 
@@ -75,16 +85,13 @@ class ProjectTransformer extends TransformerAbstract
 
     public function countTasksOpened(Project $project){
         $count = 0;
-
         foreach($project->tasks as $o) {
             //verifica se o status é igual para contar
             if ($o->status == 1) {
                 $count++;
             }
         }
-
         return $count;
-
     }
 
 }

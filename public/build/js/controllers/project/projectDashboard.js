@@ -10,7 +10,7 @@ angular.module('app.controllers')
             Project.query({
                 orderBy: 'created_at',
                 sortedBy: 'desc',
-                limit: 5
+                limit: 15
             }, function(response){
                 $scope.projects = response.data;
             });
@@ -19,4 +19,7 @@ angular.module('app.controllers')
             $scope.project = project;
         }
 
+          //  console.log($scope.projects);
+
     }]);
+
