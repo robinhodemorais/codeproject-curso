@@ -14,12 +14,6 @@ use League\Fractal\TransformerAbstract;
 
 class ProjectTransformer extends TransformerAbstract
 {
-    private $projectService;
-
-    public function __construct(ProjectService $projectService){
-        $this->projectService = $projectService;
-    }
-
     /*
      * Transformer, transforma as informa��es da maneira que vc queira apresentar
      *
@@ -36,7 +30,7 @@ class ProjectTransformer extends TransformerAbstract
 
     public function transform(Project $project){
 
-        $array = $this->projectService->calculatePercentageCompleted($project);
+        $array = $project->calculatePercentageCompleted();
 
         return [
             'id' => $project->id,
@@ -51,8 +45,8 @@ class ProjectTransformer extends TransformerAbstract
             //conta a quantidade de tasks, para exebir no front
             'tasks_count' => $project->tasks->count(),
             'tasks_opened' =>$this->countTasksOpened($project),
-            'percentageCompleted' => $array[0],
-            'countTasks' => $array[1]
+            'percentageCompleted' => $array['percentage'],
+            'countTasks' => $array['countTasks']
         ];
     }
 

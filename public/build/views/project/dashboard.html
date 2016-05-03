@@ -185,7 +185,7 @@
                         </div>
                         <div class="boxed-manager-info-body">
                             <div class="boxed-manager-info-body-chart text-center">
-                                <div class="radial-progress radial-progress-lg radial-progress-danger" data-progress="{{project.progress}}">
+                                <div class="radial-progress radial-progress-lg radial-progress-danger" data-progress="{{project.percentageCompleted}}">
                                     <div class="circle">
                                         <div class="mask full">
                                             <div class="fill"></div>
@@ -198,12 +198,12 @@
                                     </div>
                                     <div class="inset">
                                         <div class="percentage">
-                                            <div class="numbers">{{project.progress}}</div>
+                                            <div class="numbers">{{project.percentageCompleted}}</div>
                                         </div>
                                     </div>
                                 </div>
 
-                                Progresso esperado: 100%
+                                Progresso esperado: {{project.percentageCompleted}}%
                             </div>
                             <ul class="list-styled">
                                 <li class="list-styled-header text-upper text-center">
